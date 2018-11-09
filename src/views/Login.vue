@@ -32,25 +32,31 @@ export default {
         position: absolute;
         height:100%;
         width:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
     }
     #login{
         display:flex;
         flex-direction:column;
         align-items:center;
         position:relative;
-        top:45%;
+        top:12%;
+        width:33%;
     }
     #login h2, #login div{
-        margin: 10px;
+        margin: 2%;
     }
     #login h2{
         font-size: 2.5em;
     }
     #login h1{
-        margin-bottom:40px;
-        font-size: 4.5em;
+        font-size: 2.8em;
+        margin-bottom:8%;
+        width:100%;
+        text-align:center;
     }
-    input{
-        width:500px;
+    #login div{
+        width:100%;
     }
 </style>
