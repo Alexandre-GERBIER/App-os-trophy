@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// TODO : popup pour sélectionner les groupes concernés
 export default {
 
 }

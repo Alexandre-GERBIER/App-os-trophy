@@ -18,7 +18,6 @@ import StudModule from '@/views/student/Module'
 import TeachHome from '@/views/teacher/Home'
 import TeachProfile from '@/views/teacher/Profile'
 import TeachTrophy from '@/views/teacher/Trophy'
-import TeachNewTrophy from '@/views/teacher/CreateTrophy'
 import TeachModules from '@/views/teacher/Modules'
 import TeachModule from '@/views/teacher/Module'
 
@@ -72,10 +71,6 @@ let router = new Router({
         {
           path: 'trophy/:id',
           component: TeachTrophy
-        },
-        {
-          path: 'trophy/new',
-          component: TeachNewTrophy
         },
         {
           path: 'module/:id',
