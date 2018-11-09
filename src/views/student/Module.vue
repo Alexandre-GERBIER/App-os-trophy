@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 is="sui-header">Module</h2>
+        <h2 is="sui-header">Module id:{{ $route.params.id }}</h2>
     </div>
 </template>
 

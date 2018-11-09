@@ -7,7 +7,7 @@
 
       <sui-dropdown item icon="content" position="right" class=" top right">
         <sui-dropdown-menu>
-          <router-link is="sui-dropdown-item" to="profile">
+          <router-link is="sui-dropdown-item" to="/student/profile">
               <sui-icon name="user"/>
               <span>Mon Compte</span>
           </router-link>
@@ -30,9 +30,9 @@ export default {
   data () {
     return {
       sections: [
-        ['Mes trophées', 'trophy'],
-        ['Mes modules', 'module'],
-        ['Classement', 'ranking']
+        ['Mes trophées', '/student/trophy'],
+        ['Mes modules', '/student/module'],
+        ['Classement', '/student/ranking']
       ]
     }
   }
