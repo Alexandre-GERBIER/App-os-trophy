@@ -3,14 +3,14 @@
     <sui-menu>
       <sui-menu-item is="sui-header">App'Os Trophy - étudiant</sui-menu-item>
 
-      <a is="sui-menu-item" v-for="item in sections" :key="item">{{ item }}</a>
+      <router-link is="sui-menu-item" v-for="item in sections" :key="item[0]" :to="item[1]">{{ item[0] }}</router-link>
 
       <sui-dropdown item icon="content" position="right" class=" top right">
         <sui-dropdown-menu>
-          <a is="sui-dropdown-item">
+          <router-link is="sui-dropdown-item" to="profile">
               <sui-icon name="user"/>
               <span>Mon Compte</span>
-            </a>
+          </router-link>
           <a is="sui-dropdown-item">
             <sui-icon name="sign-out" class="red"/>
             <span>Déconnexion</span>
@@ -30,9 +30,9 @@ export default {
   data () {
     return {
       sections: [
-        'Mes trophées',
-        'Mes modules',
-        'Classement'
+        ['Mes trophées', 'trophy'],
+        ['Mes modules', 'module'],
+        ['Classement', 'ranking']
       ]
     }
   }

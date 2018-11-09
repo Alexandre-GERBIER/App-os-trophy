@@ -4,6 +4,9 @@
         <router-link to="/student/profile">
             <sui-button>Login</sui-button>
         </router-link>
+        <router-link to="/teacher/profile">
+            <sui-button>Login</sui-button>
+        </router-link>
     </div>
 </template>
 
