@@ -25,6 +25,11 @@ export default {
 </script>
 
 <style scoped>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     #background{
         background-image:url("/static/images/2.jpg");
         background-size:cover;
