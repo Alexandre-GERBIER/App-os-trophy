@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2 is="sui-header">Modules</h2>
-        <ModalCreateModule></ModalCreateModule>
+        <ModalCreateModule v-if="open"/>
     </div>
 </template>
 
@@ -11,7 +11,11 @@ import CreateModule from '@/components/CreateModule'
 Vue.component('ModalCreateModule', CreateModule)
 
 export default {
-
+  data () {
+    return {
+      open: true
+    }
+  }
 }
 </script>
 

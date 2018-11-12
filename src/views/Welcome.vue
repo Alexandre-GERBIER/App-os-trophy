@@ -41,6 +41,7 @@ p {
     background-position: center;
     height: 100%;
     position: absolute;
+    background-attachment:local;
 }
 #parent {
     display:flex;
