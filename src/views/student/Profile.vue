@@ -2,7 +2,8 @@
     <div>
         <div id="infoProfil">
 
-            <sui-divider hidden />
+            <sui-divider hidden/>
+            <sui-divider hidden/>
 
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
@@ -39,7 +40,6 @@
             <ChangePassword/>
         </div>
 
-        <sui-divider hidden />
         <sui-divider hidden />
         <sui-divider hidden />
 
@@ -83,7 +83,6 @@
 
         <sui-divider hidden />
         <sui-divider hidden />
-        <sui-divider hidden />
 
         <div>
             <div>
@@ -125,7 +124,7 @@ export default {
       textProfil: [
         ['Identifiant', '(API) id', 'Groupe', '(API) groupe'],
         ['Nom', '(API) nom', 'Institution', '(API) intitution'],
-        ['Prénom', '(API) prenom', 'Statut', '(API) staut']
+        ['Prénom', '(API) prenom', 'Statut', '(API) statut']
       ],
       textStat: [
         ['Niveau'],
