@@ -18,11 +18,11 @@
         </sui-dropdown-menu>
       </sui-dropdown>
     </sui-menu>
-    
+
     <sui-divider hidden/>
     <sui-divider hidden/>
     <sui-divider hidden/>
-    
+
     <router-view></router-view>
   </div>
 </template>
