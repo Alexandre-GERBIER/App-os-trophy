@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 is="sui-header">Trophies list</h2>
+        <h2 is="sui-header">Mes trophées :</h2>
         <sui-container>
             <sui-table unstackable>
                 <sui-table-header>
@@ -15,8 +15,8 @@
                     <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                         <sui-table-cell>{{trophy.nom}}</sui-table-cell>
                         <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
-                        <sui-table-cell v-if="!trophy.vote"><vote/></sui-table-cell>
-                        <sui-table-cell v-if="trophy.obtenu"><i class="check icon"></i></sui-table-cell>
+                        <sui-table-cell><vote v-if="trophy.vote"/></sui-table-cell>
+                        <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
             </sui-table>
@@ -47,6 +47,12 @@ export default {
           valeur: 'or',
           vote: true,
           obtenu: false
+        },
+        {
+          nom: 'Toujours prêt',
+          valeur: 'or',
+          vote: true,
+          obtenu: true
         }
       ]
     }

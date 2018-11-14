@@ -4,12 +4,17 @@
         <sui-modal v-model="open">
             <sui-modal-header>Voter</sui-modal-header>
             <sui-modal-content>
-                <select name="thelist">
-                    <option v-for="personne in listePersonnes" :key="personne[0]">{{personne}}</option>
-                </select>
+                <sui-dropdown
+                  fluid
+                  :options="skills"
+                  placeholder="Etudiant"
+                  search
+                  selection
+                  v-model="current"
+                />
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Confirmer (Envoi serveur)</sui-button>
+                <sui-button positive>Confirmer (Envoi au serveur)</sui-button>
                 <sui-button negative @click="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
@@ -21,24 +26,12 @@ export default {
   name: 'vote',
   data () {
     return {
+      current: null,
       open: false,
-      listePersonnes: [
-        {
-          nom: 'rety',
-          prenom: 'Joe'
-        },
-        {
-          nom: 'ytry',
-          prenom: 'Paul'
-        },
-        {
-          nom: 'sfs',
-          prenom: 'Bob'
-        },
-        {
-          nom: 'ghdtgh',
-          prenom: 'Jean'
-        }
+      skills: [
+        { key: 'BO', value: 'BO', text: 'Bob fterz' },
+        { key: 'JE', value: 'JE', text: 'Jean fgsfgs' },
+        { key: 'TO', value: 'TO', text: 'Toto grtdgr' }
       ]
     }
   },
