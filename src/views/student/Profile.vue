@@ -56,10 +56,10 @@
                 </sui-grid-column>
             </sui-grid>
 
-            <sui-grid class="centered">
+            <sui-grid stackable class="centered">
                 <sui-grid-row>
                 <sui-grid-column>
-                    <label>Niveau</label>
+                    <label id="texteProfil">Niveau</label>
                 </sui-grid-column>
 
                 <sui-grid-column>
@@ -67,7 +67,7 @@
                 </sui-grid-column>
 
                 <sui-grid-column :width="4">
-                <sui-progress
+                <sui-progress id="barre"
                     state="active"
                     indicating
                     :percent="percent"
@@ -100,9 +100,7 @@
                     <sui-grid-column>
                         <sui-image id="imageTrophee" :src="item[0]" size="small"/>
                         <br/>
-                        <label id="texteProfil">
-                            {{ item[1]}}
-                        </label>
+                        <label>{{ item[1]}}</label>
                     </sui-grid-column>
                 </label>
             </sui-grid>
