@@ -13,10 +13,10 @@
         </sui-table-header>
         <sui-table-body>
           <sui-table-row v-for="module in modules" :key="module.name">
-            <sui-table-cell>{{module.name}}</sui-table-cell>
+            <sui-table-cell>{{module.id}} - {{module.name}}</sui-table-cell>
             <sui-table-cell>{{module.level}}</sui-table-cell>
             <sui-table-cell>{{module.trophies}} / {{module.max_trophies}}</sui-table-cell>
-            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.name">voir les détails du module</router-link></sui-table-cell>
+            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.id">voir les détails du module</router-link></sui-table-cell>
           </sui-table-row>
         </sui-table-body>
       </sui-table>
@@ -30,19 +30,22 @@ export default {
     return {
       modules: [
         {
-          name: 'M3101',
+          id: 'M3101',
+          name: 'Bases de données avancées',
           level: '1',
           trophies: '3',
           max_trophies: '10'
         },
         {
-          name: 'M3202',
+          id: 'M3202',
+          name: 'GPI',
           level: '5',
           trophies: '10',
           max_trophies: '15'
         },
         {
-          name: 'M3104',
+          id: 'M3104',
+          name: 'Programmation serveur web',
           level: '2',
           trophies: '4',
           max_trophies: '30'
