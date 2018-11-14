@@ -14,7 +14,7 @@
                 />
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Confirmer (Envoi serveur)</sui-button>
+                <sui-button positive>Confirmer (Envoi au serveur)</sui-button>
                 <sui-button negative @click="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
