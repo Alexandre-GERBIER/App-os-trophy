@@ -49,25 +49,22 @@
                 </sui-grid-row>
             </label>
         </sui-grid>
-
-
     </div>
 </template>
 
 <script>
 // TODO : popup qui affiche les infos d'un étudiant en cliquant dessus
 export default {
-
-    data () {
-        return {
-            open: false,
-            classement: [
-                ['1', '2', '3', '4'],
-                ['jean', 'paul', 'patrick', 'louis'],
-                ['14', '12', '11', '6']
-            ]
-        }
+  data () {
+    return {
+      open: false,
+      classement: [
+        ['1', '2', '3', '4'],
+        ['jean', 'paul', 'patrick', 'louis'],
+        ['14', '12', '11', '6']
+      ]
     }
+  }
 }
 </script>
 
