@@ -1,7 +1,7 @@
 <template>
   <div>
-    <h2 is="sui-header">Modules</h2>
     <sui-container>
+      <h2 is="sui-header">Mes modules</h2>
       <sui-table unstackable>
         <sui-table-header>
           <sui-table-row>
