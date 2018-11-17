@@ -4,12 +4,12 @@
         <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
-                    <p>Enseignant responsable : {{ teacher }}</p>
-
+                    <p>Enseignant responsable : <b>{{ teacher }}</b></p>
+                    <p>Nombre d'étudiants inscrits au module : <b>{calculer}</b></p>
                     <sui-divider hidden/>
                     <sui-divider hidden/>
 
-                    <h3 is="sui-header">Trophées</h3>
+                    <h3 is="sui-header">Trophées ( {calculer} disponibles )</h3>
                     <sui-container>
                     <sui-table unstackable>
                       <sui-table-header>
@@ -18,14 +18,16 @@
                               <sui-table-header-cell>Valeur</sui-table-header-cell>
                               <sui-table-header-cell>Votes</sui-table-header-cell>
                               <sui-table-header-cell>Obtenu</sui-table-header-cell>
+                              <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
                           </sui-table-row>
                       </sui-table-header>
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                               <sui-table-cell>{{trophy.nom}}</sui-table-cell>
                               <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
-                              <sui-table-cell v-if="!trophy.vote"><vote/></sui-table-cell>
-                              <sui-table-cell v-if="trophy.obtenu"><i class="check icon"></i></sui-table-cell>
+                              <sui-table-cell ><vote class="check icon" v-if="!trophy.vote" /></sui-table-cell>
+                              <sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>
+                              <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.id">voir les détails du trophée</router-link></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>
