@@ -10,7 +10,7 @@
           <router-link is="sui-dropdown-item" to="/teacher/profile">
               <sui-icon name="user"/>
               <span>Mon Compte</span>
-            </router-link>
+          </router-link>
           <a is="sui-dropdown-item">
             <sui-icon name="sign-out" class="red"/>
             <span>Déconnexion</span>
@@ -22,6 +22,7 @@
     <sui-divider hidden/>
     <sui-divider hidden/>
     <sui-divider hidden/>
+    <sui-divider hidden />
 
     <router-view></router-view>
   </div>

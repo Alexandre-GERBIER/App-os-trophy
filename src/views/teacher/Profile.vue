@@ -2,8 +2,6 @@
     <div>
         <div id="infoProfil">
 
-            <sui-divider hidden />
-
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
