@@ -1,54 +1,68 @@
 <template>
     <div>
         <h1 is="sui-header">Classement</h1>
-
-        <div id="boutonChoix">
-            <sui-container>
-            <sui-button-group size="medium">
-                <sui-button content="Global" fluid/>
-                <sui-buttonfluid>
-                    <sui-dropdown text="Module" button pointing fluid>
-                        <sui-dropdown-menu>
-                            <sui-dropdown-item>Math</sui-dropdown-item>
-                            <sui-dropdown-item>WebServ</sui-dropdown-item>
-                            <sui-dropdown-item>ProbaStat</sui-dropdown-item>
-                        </sui-dropdown-menu>
-                    </sui-dropdown>
-
-                </sui-buttonfluid>
-            </sui-button-group>
-            </sui-container>
+        <div id="classementP">
+            <sui-tab>
+                <sui-tab-pane title="Global">
+                    <sui-table unstackable celled>
+                        <sui-table-header>
+                            <sui-table-row>
+                                <sui-table-header-cell>Rang</sui-table-header-cell>
+                                <sui-table-header-cell>Etudiant</sui-table-header-cell>
+                                <sui-table-header-cell>Niveau</sui-table-header-cell>
+                            </sui-table-row>
+                        </sui-table-header>
+                        <sui-table-body>
+                            <sui-table-row v-for="item in classementGeneral" :key="item[0]">
+                                    <sui-table-cell>{{item[0]}}</sui-table-cell>
+                                    <sui-table-cell>{{item[1]}}</sui-table-cell>
+                                    <sui-table-cell>{{item[2]}}</sui-table-cell>
+                            </sui-table-row>
+                        </sui-table-body>
+                    </sui-table>
+                </sui-tab-pane>
+                <sui-tab-pane title="Module">
+                    <sui-tab  :menu="{ secondary: true }">
+                        <sui-tab-pane title="Math">
+                            <sui-table unstackable celled>
+                                <sui-table-header>
+                                    <sui-table-row>
+                                        <sui-table-header-cell>Rang</sui-table-header-cell>
+                                        <sui-table-header-cell>Etudiant</sui-table-header-cell>
+                                        <sui-table-header-cell>Niveau</sui-table-header-cell>
+                                    </sui-table-row>
+                                </sui-table-header>
+                                <sui-table-body>
+                                    <sui-table-row v-for="item in classementModuleMath" :key="item[0]">
+                                            <sui-table-cell>{{item[0]}}</sui-table-cell>
+                                            <sui-table-cell>{{item[1]}}</sui-table-cell>
+                                            <sui-table-cell>{{item[2]}}</sui-table-cell>
+                                    </sui-table-row>
+                                </sui-table-body>
+                            </sui-table>
+                        </sui-tab-pane>
+                        <sui-tab-pane title="Probas">
+                            <sui-table unstackable celled>
+                                <sui-table-header>
+                                    <sui-table-row>
+                                        <sui-table-header-cell>Rang</sui-table-header-cell>
+                                        <sui-table-header-cell>Etudiant</sui-table-header-cell>
+                                        <sui-table-header-cell>Niveau</sui-table-header-cell>
+                                    </sui-table-row>
+                                </sui-table-header>
+                                <sui-table-body>
+                                    <sui-table-row v-for="item in classementModuleProbas" :key="item[0]">
+                                            <sui-table-cell>{{item[0]}}</sui-table-cell>
+                                            <sui-table-cell>{{item[1]}}</sui-table-cell>
+                                            <sui-table-cell>{{item[2]}}</sui-table-cell>
+                                    </sui-table-row>
+                                </sui-table-body>
+                            </sui-table>
+                        </sui-tab-pane>
+                    </sui-tab>
+                </sui-tab-pane>
+            </sui-tab>
         </div>
-
-        <sui-grid stackable class="centered">
-            <sui-grid-row>
-                <sui-grid-column>
-                    Rang
-                </sui-grid-column>
-                <sui-grid-column>
-                    Etudiant
-                </sui-grid-column>
-                <sui-grid-column>
-                    Niveau
-                </sui-grid-column>
-            </sui-grid-row>
-            <label v-for="item in classement" :key="item[0]">
-                <sui-grid-row>
-                    <sui-grid-column>
-                        {{item[0]}}
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        {{item[1]}}
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        {{item[2]}}
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        {{item[3]}}
-                    </sui-grid-column>
-                </sui-grid-row>
-            </label>
-        </sui-grid>
     </div>
 </template>
 
@@ -58,11 +72,25 @@ export default {
   data () {
     return {
       open: false,
-      classement: [
-        ['1', '2', '3', '4'],
-        ['jean', 'paul', 'patrick', 'louis'],
-        ['14', '12', '11', '6']
+      classementGeneral: [
+        ['1', 'jean', '14'],
+        ['2', 'paul', '11'],
+        ['3', 'patrick', '8'],
+        ['4', 'louis', '7']
+      ],
+      classementModuleMath: [
+        ['1', 'paul', '4'],
+        ['2', 'jean', '4'],
+        ['3', 'patrick', '3'],
+        ['4', 'louis', '2']
+      ],
+      classementModuleProbas: [
+        ['1', 'jean', '10'],
+        ['2', 'paul', '7'],
+        ['3', 'louis', '5'],
+        ['4', 'patrick', '5']
       ]
+
     }
   }
 }
@@ -74,9 +102,8 @@ h1 {
     text-align: center
 }
 
-#boutonChoix {
-    position: relative;
-    left: 18%;
+#classementP {
+    text-align: center
 }
 
 </style>
