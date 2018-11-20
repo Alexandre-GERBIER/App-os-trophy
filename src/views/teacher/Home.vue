@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sui-menu>
+    <sui-menu class="fixed">
       <sui-menu-item is="sui-header">App'Os Trophy - enseignant</sui-menu-item>
 
       <router-link is="sui-menu-item" v-for="item in sections" :key="item[0]" :to="item[1]">{{ item[0] }}</router-link>
@@ -10,7 +10,7 @@
           <router-link is="sui-dropdown-item" to="/teacher/profile">
               <sui-icon name="user"/>
               <span>Mon Compte</span>
-            </router-link>
+          </router-link>
           <a is="sui-dropdown-item">
             <sui-icon name="sign-out" class="red"/>
             <span>Déconnexion</span>
@@ -18,6 +18,11 @@
         </sui-dropdown-menu>
       </sui-dropdown>
     </sui-menu>
+
+    <sui-divider hidden/>
+    <sui-divider hidden/>
+    <sui-divider hidden/>
+    <sui-divider hidden />
 
     <router-view></router-view>
   </div>
@@ -39,5 +44,4 @@ export default {
 </script>
 
 <style>
-
 </style>

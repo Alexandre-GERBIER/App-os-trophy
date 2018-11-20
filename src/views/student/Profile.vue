@@ -2,29 +2,26 @@
     <div>
         <div id="infoProfil">
 
-            <sui-divider hidden/>
-            <sui-divider hidden/>
-
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
 
             <sui-grid class="centered">
-                <sui-grid-column :width="6">
+                <sui-grid-column :width="8">
                     <sui-divider fitted/>
                 </sui-grid-column>
             </sui-grid>
 
             <label v-for="item in textProfil" :key="item[0]">
-                 <sui-grid class="centered">
+                 <sui-grid stackable class="centered">
                     <sui-grid-row id="texteProfil">
-                        <sui-grid-column id="texteGras" :width="1">
+                        <sui-grid-column id="texteGras" :width="2">
                                 {{ item[0]}}
                         </sui-grid-column>
                         <sui-grid-column :width="2">
                                 {{ item[1]}}
                         </sui-grid-column>
-                        <sui-grid-column id="texteGras" :width="1">
+                        <sui-grid-column id="texteGras" :width="2">
                                 {{ item[2]}}
                         </sui-grid-column>
                         <sui-grid-column :width="2">
@@ -42,6 +39,7 @@
 
         <sui-divider hidden />
         <sui-divider hidden />
+        <sui-divider hidden />
 
         <div>
             <div>
@@ -56,10 +54,10 @@
                 </sui-grid-column>
             </sui-grid>
 
-            <sui-grid class="centered">
+            <sui-grid stackable class="centered">
                 <sui-grid-row>
                 <sui-grid-column>
-                    <label>Niveau</label>
+                    <label id="texteProfil">Niveau</label>
                 </sui-grid-column>
 
                 <sui-grid-column>
@@ -67,7 +65,7 @@
                 </sui-grid-column>
 
                 <sui-grid-column :width="4">
-                <sui-progress
+                <sui-progress id="barre"
                     state="active"
                     indicating
                     :percent="percent"
@@ -81,6 +79,7 @@
             </sui-grid>
         </div>
 
+        <sui-divider hidden />
         <sui-divider hidden />
         <sui-divider hidden />
 
@@ -99,9 +98,7 @@
                     <sui-grid-column>
                         <sui-image id="imageTrophee" :src="item[0]" size="small"/>
                         <br/>
-                        <label id="texteProfil">
-                            {{ item[1]}}
-                        </label>
+                        <label>{{ item[1]}}</label>
                     </sui-grid-column>
                 </label>
             </sui-grid>
