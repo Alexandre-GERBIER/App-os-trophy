@@ -1,6 +1,7 @@
-<template>
+    <template>
     <div>
-        <h3 is="sui-header">View Trophy and Vote {{ $route.params.id }}</h3>
+        <h3 is="sui-header">View Trophy and Vote {{ $route.params.id}} appel a l'api</h3>
+        <p>INFOS</p>
     </div>
 </template>
 
@@ -9,6 +10,9 @@
 // TODO : popup pour modifier le mot de passe
 export default {
 
+  data () {
+
+  }
 }
 </script>
 
