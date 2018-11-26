@@ -27,7 +27,7 @@
                               <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
                               <sui-table-cell ><DeliverTrophy/></sui-table-cell>
-                              <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.id">éditer le trophée</router-link></sui-table-cell>
+                              <sui-table-cell text-align="right"><EditTrophy/></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>
@@ -40,10 +40,11 @@
 <script>
 
 import DeliverTrophy from '@/components/DeliverTrophy'
+import EditTrophy from '@/components/EditTrophy'
 
 export default {
 
-  components: {DeliverTrophy},
+  components: {DeliverTrophy, EditTrophy},
 
   data () {
     return {
