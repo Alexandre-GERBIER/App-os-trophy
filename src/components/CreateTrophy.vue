@@ -15,15 +15,19 @@
           </div>
           <div class="four wide column">
               <label>  Valeur du trophée :</label>
+              <br>
               <sui-form-field>
                 <sui-checkbox name="TrophyValue" label="platine" radio value="platine" v-model="TrophyValue"/>
               </sui-form-field>
+              <br>
               <sui-form-field>
                 <sui-checkbox name="TrophyValue" label="or" radio value="or" v-model="TrophyValue"/>
               </sui-form-field>
+              <br>
               <sui-form-field>
                 <sui-checkbox name="TrophyValue" label="argent" radio value="argent" v-model="TrophyValue"/>
               </sui-form-field>
+              <br>
               <sui-form-field>
                 <sui-checkbox name="TrophyValue" label="bronze" radio value="bronze" v-model="TrophyValue"/>
               </sui-form-field>
@@ -46,7 +50,7 @@
 
               <div v-show="vote">
                 <!--v-model="state.date"-->
-                <datepicker monday-first="true" :language="fr" full-month-name="true"></datepicker>
+                <datepicker :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
               </div>
           </div>
           <div class="six wide column"></div><!-- remplissage de la grille pour centrer le boutton -->
@@ -83,7 +87,7 @@ export default {
       TrophyName: '',
       TrophyValue: '',
       textModule: [
-        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths' },
+        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
         {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
         {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
       ],
