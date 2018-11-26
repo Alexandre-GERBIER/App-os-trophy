@@ -5,8 +5,8 @@
             <sui-table unstackable>
                 <sui-table-header>
                     <sui-table-row>
-                        <sui-table-header-cell>Nom <i class="sort Descending icon" @click="sorted_nom"></i></sui-table-header-cell>
-                        <sui-table-header-cell>Module <i class="sort Descending icon"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort Descending icon"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_module">Module <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell>Date <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell>Valeur <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell>Votes <i class="sort Descending icon"></i></sui-table-header-cell>
@@ -41,6 +41,12 @@ export default {
 
   data () {
     return {
+      ordreNom: false,
+      ordreModule: false,
+      ordreDate: false,
+      ordreValeur: false,
+      ordreVote: false,
+      ordreObtenu: false,
       trophies: [
         {
           nom: 'Toujours présent',
@@ -71,9 +77,30 @@ export default {
   },
   methods: {
     sorted_nom () {
-      return this.trophies.sort((ta, tb) => {
-        return tb.nom - ta.nom
-      })
+      if (this.ordreNom === false) {
+        this.trophies.sort((a, b) => {
+          return a.nom.localeCompare(b.nom)
+        })
+        this.ordreNom = true
+      } else {
+        this.trophies.sort((a, b) => {
+          return b.nom.localeCompare(a.nom)
+        })
+        this.ordreNom = false
+      }
+    },
+    sorted_module () {
+      if (this.ordreModule === false) {
+        this.trophies.sort((a, b) => {
+          return a.module.localeCompare(b.module)
+        })
+        this.ordreModule = true
+      } else {
+        this.trophies.sort((a, b) => {
+          return b.module.localeCompare(a.module)
+        })
+        this.ordreModule = false
+      }
     }
   }
 
