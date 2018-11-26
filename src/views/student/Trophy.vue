@@ -10,9 +10,6 @@
 // TODO : popup pour modifier le mot de passe
 export default {
 
-  data () {
-
-  }
 }
 </script>
 

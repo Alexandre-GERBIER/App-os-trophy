@@ -4,15 +4,15 @@
         <h1 is="sui-header" class="inverted">App'Os Trophy</h1>
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
-            <input placeholder="Identifiant" type="text">
+            <input placeholder="Identifiant" type="text" name="ide" v-model="ide">
             <i class="user icon"></i>
         </div>
         <div class="ui lock left icon input">
             <input placeholder="Mot de passe" type="password">
             <i class="lock icon"></i>
         </div>
-        <router-link to="/student/profile">
-            <button class="ui icon sign in right labeled button green"><i class="sign in icon"></i>Login</button>
+        <router-link :to="rlink">
+            <button class="ui icon sign in right labeled button green" v-on:click="routage"><i class="sign in icon"></i>Login</button>
         </router-link>
     </form>
 </div>
@@ -21,6 +21,21 @@
 <script>
 export default {
 
+  data () {
+    return {
+      ide: '',
+      rlink: ''
+    }
+  },
+  methods: {
+    routage () {
+      if (this.ide === '') {
+        this.rlink = '/student/profile'
+      } else {
+        this.rlink = '/teacher/profile'
+      }
+    }
+  }
 }
 </script>
 
