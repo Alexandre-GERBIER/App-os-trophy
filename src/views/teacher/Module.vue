@@ -2,7 +2,6 @@
     <div>
         <h2 is="sui-header">Module {{ $route.params.id }} - {{name}} </h2>
         <sui-grid class="centered">
-                <h2 is="sui-header">Module {{ $route.params.id }} - {{name}} </h2>
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
                     <p>Enseignant responsable : <b>{{ teacher }}</b></p>
@@ -27,7 +26,7 @@
                               <sui-table-cell>{{trophy.nom}}</sui-table-cell>
                               <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
-                              <sui-table-cell ><sui-button sucess>délivrer</sui-button></sui-table-cell>
+                              <sui-table-cell ><DeliverTrophy/></sui-table-cell>
                               <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.id">éditer le trophée</router-link></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
@@ -40,7 +39,11 @@
 
 <script>
 
+import DeliverTrophy from '@/components/DeliverTrophy'
+
 export default {
+
+  components: {DeliverTrophy},
 
   data () {
     return {
