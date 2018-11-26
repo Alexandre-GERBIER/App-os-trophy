@@ -22,16 +22,19 @@
         </sui-table>
 
         <ModalCreateModule/>
+        <CreateTrophy/>
       </sui-container>
     </div>
 </template>
 
 <script>
 import Vue from 'vue'
+import CreateTrophy from '@/components/CreateTrophy'
 import CreateModule from '@/components/CreateModule'
 Vue.component('ModalCreateModule', CreateModule)
 
 export default {
+  components: { CreateTrophy },
   data () {
     return {
       modules: [
