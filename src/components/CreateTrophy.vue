@@ -39,21 +39,16 @@
           <div class="six wide column">
               <sui-checkbox label="Visible" toggle v-model="visible"/>
               <br> <br>
+              <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+              <br> <br>
               <sui-checkbox label="vote" toggle v-model="vote"/>
+              <!--v-model="state.date"-->
+              <br> <br>
+              <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
           </div>
-          <div class="four wide column">
-               <p class="hidden"></p>
+          <div class="six wide column">
                <!-- remplissage de la grille pour aligner les composants -->
           </div>
-          <div class="six wide column"></div>
-          <div class="six wide column">
-
-              <div v-show="vote">
-                <!--v-model="state.date"-->
-                <datepicker :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
-              </div>
-          </div>
-          <div class="six wide column"></div><!-- remplissage de la grille pour centrer le boutton -->
           <div class="four wide column" >
               <sui-button circular class="centered"> Délivrer le trophée </sui-button>
           </div>

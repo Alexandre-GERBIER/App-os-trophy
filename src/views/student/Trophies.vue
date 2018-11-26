@@ -49,6 +49,7 @@ export default {
       ordreObtenu: false,
       trophies: [
         {
+          id: '1',
           nom: 'Toujours présent',
           module: 'maths',
           date: '21/05/2018',
@@ -57,6 +58,7 @@ export default {
           obtenu: true
         },
         {
+          id: '2',
           nom: 'Toujours prêt',
           module: 'algo',
           date: '30/10/2018',
@@ -65,6 +67,7 @@ export default {
           obtenu: false
         },
         {
+          id: '3',
           nom: 'Toujours debout',
           module: 'bdd',
           date: '08/02/2018',
