@@ -1,6 +1,6 @@
 <template>
     <div id="boutonVote">
-        <button class='ui green inverted button' role='button' @click="toggle">Déliverer</button>
+        <sui-button class="inverted green" role='button' @click="toggle">Délivrer</sui-button>
         <sui-modal v-model="open">
             <sui-modal-header>Déliverer le trophée </sui-modal-header>
             <sui-modal-content>
