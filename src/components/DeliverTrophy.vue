@@ -2,11 +2,10 @@
     <div id="boutonVote">
         <button class='ui green inverted button' role='button' @click="toggle">Déliverer</button>
         <sui-modal v-model="open">
-            <sui-modal-header>Déliverer le trophée</sui-modal-header>
+            <sui-modal-header>Déliverer le trophée </sui-modal-header>
             <sui-modal-content>
                 <label>Etudiants concernés</label>
             <sui-dropdown fluid multiple :options="students" selection v-model="studentSelec">
-
             </sui-dropdown>
             </sui-modal-content>
             <sui-modal-actions>
