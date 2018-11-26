@@ -7,7 +7,7 @@
           <div class="four wide column">
           </div>
           <div class="six wide column">
-              <label> Titre </label>
+              <label> Titre :  </label>
               <sui-input name="TrophyName" v-model="TrophyName"/>
           </div>
           <div class="six wide column">
@@ -33,11 +33,9 @@
               <sui-input name="descTrophy" :value="TrophyDescription"/>
           </div>
           <div class="six wide column">
-              <!-- sauvegarder le trophée mais invisible pour les étudiants 
-                  <sui-checkbox label="Visible" toggle value="visible"/>
-                -->
+              <sui-checkbox label="Visible" toggle v-model="visible"/>
               <br> <br>
-              <sui-checkbox label="vote" :sync="true" toggle value="vote" @change="vote = !vote"/>
+              <sui-checkbox label="vote" toggle v-model="vote"/>
           </div>
           <div class="four wide column">
                <p class="hidden"></p>
@@ -45,17 +43,10 @@
           </div>
           <div class="six wide column"></div>
           <div class="six wide column">
+
               <div v-show="vote">
-              <!-- manque javascript pour avoir une entrée calendrier:
-              $('#example2').calendar({
-                type: 'date'
-                    });
-                    ou l'extension vuejs-datepicker sortie il y a 15 jours
-                    puis balise :
-                          <datepicker placeholder="Select Date"></datepicker>
-              <vuejs-datepicker placeholder="date de fin de vote"></vuejs-datepicker>
-            -->
-            calendrier
+                <!--v-model="state.date"-->
+                <datepicker monday-first="true" :language="fr" full-month-name="true"></datepicker>
               </div>
           </div>
           <div class="six wide column"></div><!-- remplissage de la grille pour centrer le boutton -->
@@ -70,34 +61,38 @@
         </sui-modal>
     </div>
 </template>
-
+<!--
 <script src="https://unpkg.com/vue"></script>
 <script src="https://unpkg.com/vuejs-datepicker"></script>
+-->
+
 <script>
+import Datepicker from 'vuejs-datepicker'
+import {fr} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'CreateTrophy',
+  components: { Datepicker },
   data () {
     return {
       open: false,
       vote: false,
+      visible: true,
       current: null,
-      TrophyName: "",
-      TrophyValue: "",
-      TrophyDescription: "",
+      fr: fr,
+      TrophyDescription: '',
+      TrophyName: '',
+      TrophyValue: '',
       textModule: [
-        { key: 'M3310', text: 'M3310 maths', value: 'M3310 maths' },
-        { key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
-        { key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
+        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths' },
+        {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
+        {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
       ],
       selectedModules: []
     }
   },
   methods: {
-    toggle() {
+    toggle () {
       this.open = !this.open
-    },
-    say: function (tmp) {
-        tmp = !tmp
     }
   }
 }
