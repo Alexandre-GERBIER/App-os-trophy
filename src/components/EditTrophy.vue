@@ -51,6 +51,10 @@
             <datepicker :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
           </div>
         </div>
+        <div class="six wide column"></div><!-- remplissage de la grille pour centrer le boutton -->
+        <div class="four wide column" >
+            <sui-button circular class="centered"> Délivrer le trophée </sui-button>
+        </div>
       </form>
       <sui-modal-actions>
         <sui-button positive>Éditer</sui-button>
