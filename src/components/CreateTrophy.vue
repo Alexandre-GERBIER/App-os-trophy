@@ -39,6 +39,8 @@
           <div class="six wide column">
               <sui-checkbox label="Visible" toggle v-model="visible"/>
               <br> <br>
+              <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+              <br> <br>
               <sui-checkbox label="vote" toggle v-model="vote"/>
               <!--v-model="state.date"-->
               <br> <br>
