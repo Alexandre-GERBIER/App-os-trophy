@@ -83,7 +83,7 @@ export default {
       TrophyName: '',
       TrophyValue: '',
       textModule: [
-        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths' },
+        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
         {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
         {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
       ],
