@@ -8,29 +8,15 @@
         </div>
         <div class="six wide column">
           <label> Titre :  </label>
-          <sui-input name="TrophyName" v-model="TrophyName"/>
+          {{ TrophyName }}
         </div>
         <div class="six wide column">
           <sui-dropdown fluid multiple :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
         </div>
         <div class="four wide column">
           <label>  Valeur du trophée :</label>
-          <br>
-          <sui-form-field>
-            <sui-checkbox name="TrophyValue" label="platine" radio value="platine" v-model="TrophyValue"/>
-          </sui-form-field>
-          <br>
-          <sui-form-field>
-            <sui-checkbox name="TrophyValue" label="or" radio value="or" v-model="TrophyValue"/>
-          </sui-form-field>
-          <br>
-          <sui-form-field>
-            <sui-checkbox name="TrophyValue" label="argent" radio value="argent" v-model="TrophyValue"/>
-          </sui-form-field>
-          <br>
-          <sui-form-field>
-            <sui-checkbox name="TrophyValue" label="bronze" radio value="bronze" v-model="TrophyValue"/>
-          </sui-form-field>
+          <br> <br>
+          {{ TrophyValue }}
         </div>
         <div class="six wide column">
           <label> Conditions d'obtentions: </label>
@@ -79,8 +65,8 @@ export default {
       current: null,
       fr: fr,
       TrophyDescription: '',
-      TrophyName: '',
-      TrophyValue: '',
+      TrophyName: 'Mon Trophée',
+      TrophyValue: 'platine',
       textModule: [
         {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
         {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
