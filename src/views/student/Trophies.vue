@@ -8,9 +8,9 @@
                         <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_module">Module <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell>Valeur <i class="sort Descending icon"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell>Obtenu <i class="sort Descending icon"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort Descending icon"></i></sui-table-header-cell>
                         <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
                     </sui-table-row>
                 </sui-table-header>
@@ -41,6 +41,7 @@ export default {
 
   data () {
     return {
+      sortingArr: ['platine', 'or', 'argent', 'bronze'],
       ordreNom: false,
       ordreModule: false,
       ordreDate: false,
@@ -62,7 +63,7 @@ export default {
           nom: 'Toujours prêt',
           module: 'algo',
           date: '30/10/2018',
-          valeur: 'or',
+          valeur: 'platine',
           vote: true,
           obtenu: false
         },
@@ -108,29 +109,55 @@ export default {
     sorted_date () {
       if (this.ordreDate === false) {
         this.trophies.sort((a, b) => {
-          a.date = a.split('/').reverse().join('')
-          b.date = b.split('/').reverse().join('')
+          a.date = a.date.split('/').reverse().join('/')
+          b.date = b.date.split('/').reverse().join('/')
           return a.date.localeCompare(b.date)
         })
         this.ordreDate = true
       } else {
         this.trophies.sort((a, b) => {
-          a.date = a.date.split('/').reverse().join('')
-          b.date = b.date.split('/').reverse().join('')
+          a.date = a.date.split('/').reverse().join('/')
+          b.date = b.date.split('/').reverse().join('/')
           return b.date.localeCompare(a.date)
         })
         this.ordreDate = false
       }
     },
+    sorted_valeur () {
+      if (this.ordreValeur === false) {
+        this.trophies.sort((a, b) => {
+          print(sortingArr.indexOf(a) - sortingArr.indexOf(b))
+        })
+        this.ordreValeur = true
+      } else {
+        this.trophies.sort((a, b) => {
+          print(sortingArr.indexOf(b) - sortingArr.indexOf(a))
+        })
+        this.ordreValeur = false
+      }
+    },
+    sorted_obtenu () {
+      if (this.ordreObtenu === false) {
+        this.trophies.sort((a, b) => {
+          return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? -1 : 1
+        })
+        this.ordreObtenu = true
+      } else {
+        this.trophies.sort((a, b) => {
+          return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? 1 : -1
+        })
+        this.ordreObtenu = false
+      }
+    },
     sorted_vote () {
       if (this.ordreVote === false) {
         this.trophies.sort((a, b) => {
-          return (a.vote === b.vote)? 0 : a.vote? -1 : 1
+          return (a.vote === b.vote) ? 0 : a.vote ? -1 : 1
         })
         this.ordreVote = true
       } else {
         this.trophies.sort((a, b) => {
-          return (a.vote === b.vote)? 0 : a.vote? 1 : -1
+          return (a.vote === b.vote) ? 0 : a.vote ? 1 : -1
         })
         this.ordreVote = false
       }
