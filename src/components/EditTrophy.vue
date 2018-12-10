@@ -16,7 +16,7 @@
         <div class="four wide column">
           <label>  Valeur du trophée :</label>
           <br> <br>
-          {{ TrophyValue }}
+          {{TrophyValue}}
         </div>
         <div class="six wide column">
           <label> Conditions d'obtentions: </label>
