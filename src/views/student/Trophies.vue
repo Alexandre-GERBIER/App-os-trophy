@@ -126,12 +126,12 @@ export default {
     sorted_valeur () {
       if (this.ordreValeur === false) {
         this.trophies.sort((a, b) => {
-          print(sortingArr.indexOf(a) - sortingArr.indexOf(b))
+          print(this.sortingArr.indexOf(a) - this.sortingArr.indexOf(b))
         })
         this.ordreValeur = true
       } else {
         this.trophies.sort((a, b) => {
-          print(sortingArr.indexOf(b) - sortingArr.indexOf(a))
+          print(this.sortingArr.indexOf(b) - this.sortingArr.indexOf(a))
         })
         this.ordreValeur = false
       }

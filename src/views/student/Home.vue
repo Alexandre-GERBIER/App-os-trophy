@@ -11,10 +11,10 @@
               <sui-icon name="user"/>
               <span>Mon Compte</span>
           </router-link>
-          <a is="sui-dropdown-item">
+          <router-link is="sui-dropdown-item" to="/login">
             <sui-icon name="sign-out" class="red"/>
             <span>Déconnexion</span>
-          </a>
+          </router-link>
         </sui-dropdown-menu>
       </sui-dropdown>
     </sui-menu>
