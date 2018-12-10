@@ -12,7 +12,7 @@
                                     {{ item[0] }}
                             </sui-grid-column>
                             <sui-grid-column>
-                                <input>
+                                <sui-input type="password" />
                             </sui-grid-column>
                         </sui-grid-row>
                     </sui-grid>
