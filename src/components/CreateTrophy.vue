@@ -5,13 +5,17 @@
         <sui-modal-header>Créer un trophée : {{ TrophyName }}</sui-modal-header>
         <form class="ui grid">
           <div class="four wide column">
+            <sui-image v-if="TrophyValue === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
+            <sui-image v-else-if="TrophyValue === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
+            <sui-image v-else-if="TrophyValue === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
+            <sui-image v-else-if="TrophyValue === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
           </div>
           <div class="six wide column">
               <label> Titre :  </label>
               <sui-input name="TrophyName" v-model="TrophyName"/>
           </div>
           <div class="six wide column">
-              <sui-dropdown fluid multiple :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
+              <sui-dropdown fluid :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
           </div>
           <div class="four wide column">
               <label>  Valeur du trophée :</label>
@@ -45,12 +49,6 @@
               <!--v-model="state.date"-->
               <br> <br>
               <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
-          </div>
-          <div class="six wide column">
-               <!-- remplissage de la grille pour aligner les composants -->
-          </div>
-          <div class="four wide column" >
-              <sui-button circular class="centered"> Délivrer le trophée </sui-button>
           </div>
         </form>
             <sui-modal-actions>
