@@ -15,8 +15,8 @@
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
-                    <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                        <sui-table-cell>{{trophy.nom}}</sui-table-cell>
+                    <sui-table-row v-for="trophy in mesTrophees" :key="trophy.nutroph">
+                        <sui-table-cell>{{trophy.titre}}</sui-table-cell>
                         <sui-table-cell>{{trophy.module}}</sui-table-cell>
                         <sui-table-cell>{{trophy.date}}</sui-table-cell>
                         <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
@@ -48,7 +48,8 @@ export default {
       ordreValeur: 0,
       ordreVote: 0,
       ordreObtenu: 0,
-      trophies: [
+      mesTrophees: {},
+      /*trophies: [
         {
           id: '1',
           nom: 'Toujours présent',
@@ -76,9 +77,20 @@ export default {
           vote: true,
           obtenu: true
         }
-      ]
+      ]*/
     }
   },
+
+  mounted () {
+    axios.get(global.API + '/user/trophy/9')
+      .then(response => {
+        this.mesTrophees = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+  },
+
   methods: {
 
     reset_sorted () {
