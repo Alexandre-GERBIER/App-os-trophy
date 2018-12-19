@@ -3,14 +3,14 @@
         <h2 is="sui-header">Mes trophées :</h2>
         <sui-container>
             <sui-table unstackable>
-                <sui-table-header>
+                <sui-table-header class="table_header">
                     <sui-table-row>
-                        <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_module">Module <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort Descending icon"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort Descending icon"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort icon" :class="(ordreNom != 0) ? ((ordreNom == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_module">Module <i class="sort icon" :class="(ordreModule != 0) ? ((ordreModule == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort icon" :class="(ordreDate != 0) ? ((ordreDate == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort icon" :class="(ordreValeur != 0) ? ((ordreValeur == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort icon" :class="(ordreVote != 0) ? ((ordreVote == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort icon" :class="(ordreObtenu != 0) ? ((ordreObtenu == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
                         <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
                     </sui-table-row>
                 </sui-table-header>
@@ -42,12 +42,12 @@ export default {
   data () {
     return {
       sortingArr: ['platine', 'or', 'argent', 'bronze'],
-      ordreNom: false,
-      ordreModule: false,
-      ordreDate: false,
-      ordreValeur: false,
-      ordreVote: false,
-      ordreObtenu: false,
+      ordreNom: 0,
+      ordreModule: 0,
+      ordreDate: 0,
+      ordreValeur: 0,
+      ordreVote: 0,
+      ordreObtenu: 0,
       trophies: [
         {
           id: '1',
@@ -80,86 +80,107 @@ export default {
     }
   },
   methods: {
+
+    reset_sorted () {
+      this.ordreNom = 0
+      this.ordreModule = 0
+      this.ordreDate = 0
+      this.ordreValeur = 0
+      this.ordreVote = 0
+      this.ordreObtenu = 0
+    },
     sorted_nom () {
-      if (this.ordreNom === false) {
+      if (this.ordreNom === 0 || this.ordreNom === -1) {
         this.trophies.sort((a, b) => {
           return a.nom.localeCompare(b.nom)
         })
-        this.ordreNom = true
+        this.reset_sorted()
+        this.ordreNom = 1
       } else {
         this.trophies.sort((a, b) => {
           return b.nom.localeCompare(a.nom)
         })
-        this.ordreNom = false
+        this.reset_sorted()
+        this.ordreNom = -1
       }
     },
     sorted_module () {
-      if (this.ordreModule === false) {
+      if (this.ordreModule === 0 || this.ordreModule === -1) {
         this.trophies.sort((a, b) => {
           return a.module.localeCompare(b.module)
         })
-        this.ordreModule = true
+        this.reset_sorted()
+        this.ordreModule = 1
       } else {
         this.trophies.sort((a, b) => {
           return b.module.localeCompare(a.module)
         })
-        this.ordreModule = false
+        this.reset_sorted()
+        this.ordreModule = -1
       }
     },
     sorted_date () {
-      if (this.ordreDate === false) {
+      if (this.ordreDate === 0 || this.ordreDate === -1) {
         this.trophies.sort((a, b) => {
-          a.date = a.date.split('/').reverse().join('/')
-          b.date = b.date.split('/').reverse().join('/')
           return a.date.localeCompare(b.date)
         })
-        this.ordreDate = true
+        this.reset_sorted()
+        this.ordreDate = 1
       } else {
         this.trophies.sort((a, b) => {
-          a.date = a.date.split('/').reverse().join('/')
-          b.date = b.date.split('/').reverse().join('/')
           return b.date.localeCompare(a.date)
         })
-        this.ordreDate = false
+        this.reset_sorted()
+        this.ordreDate = -1
       }
     },
     sorted_valeur () {
-      if (this.ordreValeur === false) {
+      if (this.ordreValeur === 0 || this.ordreValeur === -1) {
         this.trophies.sort((a, b) => {
-          print(sortingArr.indexOf(a) - sortingArr.indexOf(b))
+          a = a.valeur
+          b = b.valeur
+          return this.sortingArr.indexOf(b) - this.sortingArr.indexOf(a)
         })
-        this.ordreValeur = true
+        this.reset_sorted()
+        this.ordreValeur = 1
       } else {
         this.trophies.sort((a, b) => {
-          print(sortingArr.indexOf(b) - sortingArr.indexOf(a))
+          a = a.valeur
+          b = b.valeur
+          return this.sortingArr.indexOf(a) - this.sortingArr.indexOf(b)
         })
-        this.ordreValeur = false
+        this.reset_sorted()
+        this.ordreValeur = -1
       }
     },
     sorted_obtenu () {
-      if (this.ordreObtenu === false) {
+      if (this.ordreObtenu === 0 || this.ordreObtenu === -1) {
         this.trophies.sort((a, b) => {
           return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? -1 : 1
         })
-        this.ordreObtenu = true
+        this.reset_sorted()
+        this.ordreObtenu = 1
       } else {
         this.trophies.sort((a, b) => {
           return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? 1 : -1
         })
-        this.ordreObtenu = false
+        this.reset_sorted()
+        this.ordreObtenu = -1
       }
     },
     sorted_vote () {
-      if (this.ordreVote === false) {
+      if (this.ordreVote === 0 || this.ordreVote === -1) {
         this.trophies.sort((a, b) => {
           return (a.vote === b.vote) ? 0 : a.vote ? -1 : 1
         })
-        this.ordreVote = true
+        this.reset_sorted()
+        this.ordreVote = 1
       } else {
         this.trophies.sort((a, b) => {
           return (a.vote === b.vote) ? 0 : a.vote ? 1 : -1
         })
-        this.ordreVote = false
+        this.reset_sorted()
+        this.ordreVote = -1
       }
     }
   }
@@ -168,5 +189,7 @@ export default {
 </script>
 
 <style>
-
+.table_header {
+  user-select: none;
+}
 </style>

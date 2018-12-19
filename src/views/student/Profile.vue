@@ -12,7 +12,7 @@
                 </sui-grid-column>
             </sui-grid>
 
-            <label v-for="item in textProfil" :key="item[0]">
+            <label v-for="item in textProfil()" :key="item[0]">
                  <sui-grid stackable class="centered">
                     <sui-grid-row id="texteProfil">
                         <sui-grid-column id="texteGras" :width="2">
@@ -108,7 +108,10 @@
 
 <script>
 
+import axios from 'axios'
+
 import ChangePassword from '@/components/ChangePassword'
+import global from '@/globals.json'
 
 export default {
 
@@ -118,11 +121,8 @@ export default {
     return {
       percent: 50,
       open: false,
-      textProfil: [
-        ['Identifiant', '(API) id', 'Groupe', '(API) groupe'],
-        ['Nom', '(API) nom', 'Institution', '(API) intitution'],
-        ['Prénom', '(API) prenom', 'Statut', '(API) statut']
-      ],
+      profileInfo: {},
+      errors: [],
       textStat: [
         ['Niveau'],
         ['(API) niveauactuel'],
@@ -137,9 +137,26 @@ export default {
       ]
     }
   },
+
+  mounted () {
+    axios.get(global.API + '/user/9')
+      .then(response => {
+        this.profileInfo = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+  },
+
   computed: {
     label () {
       return ` Progression ${this.percent}%`
+    },
+
+    textProfil () {
+      return [['Identifiant', this.profileInfo.nuetu, 'Groupe', this.profileInfo.nucompte],
+        ['Nom', this.profileInfo.nom, 'Institution', this.profileInfo.institution],
+        ['Prénom', this.profileInfo.prenom, 'Statut', 'etudiant']]
     }
   },
   methods: {
