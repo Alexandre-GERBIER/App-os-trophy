@@ -69,12 +69,15 @@ import {fr} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'CreateTrophy',
   components: { Datepicker },
-  //  vue ressources, get au moment de l'affichage de la vue
-  textModule: [
-    {numod: 'M3310', nom: 'maths', visible: 'true', reference: 'M3310'},
-    {numod: 'M3315', nom: 'algèbre', visible: 'true', reference: 'M3315'},
-    {numod: 'M1111', nom: 'modélisation de données', visible: 'true', reference: 'M1111'}
-  ],
+  /*  fonction appelée a l'appel de la vue, initialise des variables (appel API)
+
+  mounted() {
+    this.$textModule = this.$ressources( adresse API)
+    this.$textModule.query().then((response)=> {
+      this.$textModule = reponse.data},
+      (response) => {...})
+    })
+},*/
   data () {
     return {
       open: false,
@@ -85,6 +88,11 @@ export default {
       TrophyDescription: '',
       TrophyName: '',
       TrophyValue: '',
+      textModule: [
+        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
+        {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
+        {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
+      ],
       selectedModule: []
     }
   },
