@@ -69,6 +69,15 @@ import {fr} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'CreateTrophy',
   components: { Datepicker },
+  /*  fonction appelée a l'appel de la vue, initialise des variables (appel API)
+
+  mounted() {
+    this.$textModule = this.$ressources( adresse API)
+    this.$textModule.query().then((response)=> {
+      this.$textModule = reponse.data},
+      (response) => {...})
+    })
+},*/
   data () {
     return {
       open: false,
@@ -84,7 +93,7 @@ export default {
         {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
         {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
       ],
-      selectedModules: []
+      selectedModule: []
     }
   },
   methods: {
