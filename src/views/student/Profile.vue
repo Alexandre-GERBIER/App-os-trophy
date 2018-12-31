@@ -11,26 +11,54 @@
                     <sui-divider fitted/>
                 </sui-grid-column>
             </sui-grid>
-
-            <label v-for="item in textProfil()" :key="item[0]">
-                 <sui-grid stackable class="centered">
-                    <sui-grid-row id="texteProfil">
-                        <sui-grid-column id="texteGras" :width="2">
-                                {{ item[0]}}
-                        </sui-grid-column>
-                        <sui-grid-column :width="2">
-                                {{ item[1]}}
-                        </sui-grid-column>
-                        <sui-grid-column id="texteGras" :width="2">
-                                {{ item[2]}}
-                        </sui-grid-column>
-                        <sui-grid-column :width="2">
-                                {{ item[3]}}
-                        </sui-grid-column>
-                    </sui-grid-row>
-                </sui-grid>
-            </label>
-
+            <sui-grid stackable class="centered">
+                <sui-grid-row id="texteProfil">
+                    <sui-grid-column id="texteGras" :width="2">
+                            Numéro étudiant
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo.nuetu}}
+                    </sui-grid-column>
+                    <sui-grid-column id="texteGras" :width="2">
+                            Groupe
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo.nugr }}
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+            <sui-grid stackable class="centered">
+                <sui-grid-row id="texteProfil">
+                    <sui-grid-column id="texteGras" :width="2">
+                            Nom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo.nom}}
+                    </sui-grid-column>
+                    <sui-grid-column id="texteGras" :width="2">
+                            Institution
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo.institution}}
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+            <sui-grid stackable class="centered">
+                <sui-grid-row id="texteProfil">
+                    <sui-grid-column id="texteGras" :width="2">
+                            Prénom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo.prenom}}
+                    </sui-grid-column>
+                    <sui-grid-column id="texteGras" :width="2">
+                            Statut
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            oui
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
             <sui-divider hidden />
             <sui-divider hidden />
 
@@ -151,12 +179,6 @@ export default {
   computed: {
     label () {
       return ` Progression ${this.percent}%`
-    },
-
-    textProfil () {
-      return [['Identifiant', this.profileInfo.nuetu, 'Groupe', this.profileInfo.nugr],
-        ['Nom', this.profileInfo.nom, 'Institution', this.profileInfo.institution],
-        ['Prénom', this.profileInfo.prenom, 'Statut', 'etudiant']]
     }
   },
   methods: {

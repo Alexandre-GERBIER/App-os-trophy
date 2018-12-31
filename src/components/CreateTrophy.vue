@@ -69,7 +69,7 @@ import {fr} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'CreateTrophy',
   components: { Datepicker },
-  /*  fonction appelée a l'appel de la vue, initialise des variables (appel API)
+  /*    fonction appelée a l'appel de la vue, initialise des variables (appel API)
 
   mounted() {
     this.$textModule = this.$ressources( adresse API)
@@ -77,7 +77,7 @@ export default {
       this.$textModule = reponse.data},
       (response) => {...})
     })
-},*/
+},  */
   data () {
     return {
       open: false,
