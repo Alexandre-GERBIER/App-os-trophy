@@ -14,42 +14,42 @@
             <sui-grid stackable class="centered">
                 <sui-grid-row id="texteProfil">
                     <sui-grid-column id="texteGras" :width="2">
+                            Nom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{infosProfil[0].nom}}
+                    </sui-grid-column>
+                    <sui-grid-column id="texteGras" :width="2">
+                            Prénom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{infosProfil[0].prenom}}
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+            <sui-grid stackable class="centered">
+                <sui-grid-row id="texteProfil">
+                    <sui-grid-column id="texteGras" :width="2">
                             Numéro étudiant
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ profileInfo.nuetu}}
+                            {{ infosProfil[0].nuetu}}
                     </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Groupe
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ profileInfo.nugr }}
+                            {{ infosProfil[0].nugr}}
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
             <sui-grid stackable class="centered">
                 <sui-grid-row id="texteProfil">
-                    <sui-grid-column id="texteGras" :width="2">
-                            Nom
-                    </sui-grid-column>
-                    <sui-grid-column :width="2">
-                            {{ profileInfo.nom}}
-                    </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Institution
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ profileInfo.institution}}
-                    </sui-grid-column>
-                </sui-grid-row>
-            </sui-grid>
-            <sui-grid stackable class="centered">
-                <sui-grid-row id="texteProfil">
-                    <sui-grid-column id="texteGras" :width="2">
-                            Prénom
-                    </sui-grid-column>
-                    <sui-grid-column :width="2">
-                            {{ profileInfo.prenom}}
+                            {{ infosProfil[0].institution}}
                     </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Statut
@@ -169,7 +169,7 @@ export default {
     axios.get(global.API + '/student/e12325Y')
       .then(response => {
         this.profileInfo = response.data
-        console.log(this.profileInfo)
+        // console.log(this.profileInfo)
       })
       .catch(e => {
         this.errors.push(e)
@@ -179,6 +179,9 @@ export default {
   computed: {
     label () {
       return ` Progression ${this.percent}%`
+    },
+    infosProfil () {
+      return this.profileInfo
     }
   },
   methods: {
