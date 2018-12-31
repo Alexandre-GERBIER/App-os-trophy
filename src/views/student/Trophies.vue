@@ -33,6 +33,7 @@
 <script>
 // TODO : doit permettre de trier les trophées par niveau, par module et par date
 
+import axios from 'axios'
 import vote from '@/components/vote'
 
 export default {
@@ -48,8 +49,8 @@ export default {
       ordreValeur: 0,
       ordreVote: 0,
       ordreObtenu: 0,
-      mesTrophees: {},
-      /*trophies: [
+      mesTrophees: {}
+      /*  trophies: [
         {
           id: '1',
           nom: 'Toujours présent',
@@ -77,7 +78,7 @@ export default {
           vote: true,
           obtenu: true
         }
-      ]*/
+      ] */
     }
   },
 
