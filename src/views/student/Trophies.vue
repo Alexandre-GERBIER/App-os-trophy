@@ -17,10 +17,10 @@
                 <sui-table-body>
                     <sui-table-row v-for="trophy in mesTrophees" :key="trophy.nutroph">
                         <sui-table-cell>{{trophy.titre}}</sui-table-cell>
-                        <sui-table-cell>{{trophy.module}}</sui-table-cell>
-                        <sui-table-cell>{{trophy.date}}</sui-table-cell>
-                        <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
-                        <sui-table-cell><vote v-if="trophy.vote"/></sui-table-cell>
+                        <sui-table-cell>{{trophy.numod}}</sui-table-cell>
+                        <sui-table-cell>{{trophy.datevisible}}</sui-table-cell>
+                        <sui-table-cell>{{trophy.type}}</sui-table-cell>
+                        <sui-table-cell><vote v-if="trophy.vote == 1"/></sui-table-cell>
                         <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>
                         <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.id">voir les détails du trophée</router-link></sui-table-cell>
                     </sui-table-row>
@@ -35,6 +35,7 @@
 
 import axios from 'axios'
 import vote from '@/components/vote'
+import global from '@/globals.json'
 
 export default {
 
@@ -83,7 +84,7 @@ export default {
   },
 
   mounted () {
-    axios.get(global.API + '/user/trophy/9')
+    axios.get(global.API + '/student/trophy/E175119X')
       .then(response => {
         this.mesTrophees = response.data
       })
@@ -104,14 +105,14 @@ export default {
     },
     sorted_nom () {
       if (this.ordreNom === 0 || this.ordreNom === -1) {
-        this.trophies.sort((a, b) => {
-          return a.nom.localeCompare(b.nom)
+        this.mesTrophees.sort((a, b) => {
+          return a.titre.localeCompare(b.titre)
         })
         this.reset_sorted()
         this.ordreNom = 1
       } else {
-        this.trophies.sort((a, b) => {
-          return b.nom.localeCompare(a.nom)
+        this.mesTrophees.sort((a, b) => {
+          return b.titre.localeCompare(a.titre)
         })
         this.reset_sorted()
         this.ordreNom = -1
@@ -119,14 +120,14 @@ export default {
     },
     sorted_module () {
       if (this.ordreModule === 0 || this.ordreModule === -1) {
-        this.trophies.sort((a, b) => {
-          return a.module.localeCompare(b.module)
+        this.mesTrophees.sort((a, b) => {
+          return a.numod.localeCompare(b.numod)
         })
         this.reset_sorted()
         this.ordreModule = 1
       } else {
-        this.trophies.sort((a, b) => {
-          return b.module.localeCompare(a.module)
+        this.mesTrophees.sort((a, b) => {
+          return b.numod.localeCompare(a.numod)
         })
         this.reset_sorted()
         this.ordreModule = -1
@@ -134,14 +135,14 @@ export default {
     },
     sorted_date () {
       if (this.ordreDate === 0 || this.ordreDate === -1) {
-        this.trophies.sort((a, b) => {
-          return a.date.localeCompare(b.date)
+        this.mesTrophees.sort((a, b) => {
+          return a.datevisible.localeCompare(b.datevisible)
         })
         this.reset_sorted()
         this.ordreDate = 1
       } else {
-        this.trophies.sort((a, b) => {
-          return b.date.localeCompare(a.date)
+        this.mesTrophees.sort((a, b) => {
+          return b.datevisible.localeCompare(a.datevisible)
         })
         this.reset_sorted()
         this.ordreDate = -1
@@ -149,17 +150,17 @@ export default {
     },
     sorted_valeur () {
       if (this.ordreValeur === 0 || this.ordreValeur === -1) {
-        this.trophies.sort((a, b) => {
-          a = a.valeur
-          b = b.valeur
+        this.mesTrophees.sort((a, b) => {
+          a = a.type
+          b = b.type
           return this.sortingArr.indexOf(b) - this.sortingArr.indexOf(a)
         })
         this.reset_sorted()
         this.ordreValeur = 1
       } else {
-        this.trophies.sort((a, b) => {
-          a = a.valeur
-          b = b.valeur
+        this.mesTrophees.sort((a, b) => {
+          a = a.type
+          b = b.type
           return this.sortingArr.indexOf(a) - this.sortingArr.indexOf(b)
         })
         this.reset_sorted()
@@ -168,13 +169,13 @@ export default {
     },
     sorted_obtenu () {
       if (this.ordreObtenu === 0 || this.ordreObtenu === -1) {
-        this.trophies.sort((a, b) => {
+        this.mesTrophees.sort((a, b) => {
           return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? -1 : 1
         })
         this.reset_sorted()
         this.ordreObtenu = 1
       } else {
-        this.trophies.sort((a, b) => {
+        this.mesTrophees.sort((a, b) => {
           return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? 1 : -1
         })
         this.reset_sorted()
@@ -183,13 +184,13 @@ export default {
     },
     sorted_vote () {
       if (this.ordreVote === 0 || this.ordreVote === -1) {
-        this.trophies.sort((a, b) => {
+        this.mesTrophees.sort((a, b) => {
           return (a.vote === b.vote) ? 0 : a.vote ? -1 : 1
         })
         this.reset_sorted()
         this.ordreVote = 1
       } else {
-        this.trophies.sort((a, b) => {
+        this.mesTrophees.sort((a, b) => {
           return (a.vote === b.vote) ? 0 : a.vote ? 1 : -1
         })
         this.reset_sorted()
