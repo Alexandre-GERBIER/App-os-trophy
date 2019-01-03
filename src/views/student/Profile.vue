@@ -17,13 +17,13 @@
                             Nom
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{infosProfil[0].nom}}
+                            {{profileInfo[0].nom}}
                     </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Prénom
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{infosProfil[0].prenom}}
+                            {{profileInfo[0].prenom}}
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
@@ -33,13 +33,13 @@
                             Numéro étudiant
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ infosProfil[0].nuetu}}
+                            {{ profileInfo[0].nuetu}}
                     </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Groupe
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ infosProfil[0].nugr}}
+                            {{ profileInfo[0].nugr}}
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
@@ -49,7 +49,7 @@
                             Institution
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            {{ infosProfil[0].institution}}
+                            {{ profileInfo[0].institution}}
                     </sui-grid-column>
                     <sui-grid-column id="texteGras" :width="2">
                             Statut
@@ -89,7 +89,7 @@
                 </sui-grid-column>
 
                 <sui-grid-column>
-                    <label >(API) niveauactuel</label>
+                    <label >{{currentLevel}}</label>
                 </sui-grid-column>
 
                 <sui-grid-column :width="4">
@@ -101,9 +101,11 @@
                 </sui-grid-column>
 
                 <sui-grid-column>
-                    <label >(API) niveausuivant</label>
+                    <label >{{nextLevel}}</label>
                 </sui-grid-column>
             </sui-grid-row>
+
+            <sui-button @click.native="calculLevel">calcul</sui-button>
             </sui-grid>
         </div>
 
@@ -146,9 +148,12 @@ export default {
 
   data () {
     return {
+      currentlvl: 0,
+      nextlvl: 0,
       percent: 50,
       open: false,
       profileInfo: {},
+      tabTrophies: {},
       errors: [],
       textStat: [
         ['Niveau'],
@@ -166,10 +171,18 @@ export default {
   },
 
   mounted () {
-    axios.get(global.API + '/student/e12325Y')
+    axios.get(global.API + '/student/E175119X')
       .then(response => {
         this.profileInfo = response.data
         // console.log(this.profileInfo)
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    axios.get(global.API + '/student/trophy/E175119X')
+      .then(response => {
+        this.tabTrophies = response.data
+        // console.log(this.tabTrophies)
       })
       .catch(e => {
         this.errors.push(e)
@@ -178,27 +191,35 @@ export default {
 
   computed: {
     label () {
-      return ` Progression ${this.percent}%`
+      return `Progression ${this.percent}%`
     },
-    infosProfil () {
-      return this.profileInfo
+    currentLevel () {
+      return `${this.currentlvl}`
+    },
+    nextLevel () {
+      return `${this.nextlvl}`
     }
   },
   methods: {
-    toggle () {
-      this.open = !this.open
-    },
-    decrease () {
-      this.percent -= 1
-      if (this.percent <= 0) {
-        this.percent = 0
+    calculLevel () {
+      this.currentlvl = 0
+      for (let index = 0; index < this.tabTrophies.length; index++) {
+        switch (this.tabTrophies[index].type) {
+          case 'platine':
+            this.currentlvl += 4
+            break
+          case 'or':
+            this.currentlvl += 3
+            break
+          case 'argent':
+            this.currentlvl += 2
+            break
+          case 'bronze':
+            this.currentlvl += 1
+            break
+        }
       }
-    },
-    increase () {
-      this.percent += 1
-      if (this.percent >= 100) {
-        this.percent = 100
-      }
+      this.nextlvl = this.currentlvl + 1
     }
   }
 }
