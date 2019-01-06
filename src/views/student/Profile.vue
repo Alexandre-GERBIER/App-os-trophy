@@ -1,7 +1,6 @@
 <template>
     <div>
-        <div id="infoProfil">
-
+        <div>
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
@@ -12,14 +11,14 @@
                 </sui-grid-column>
             </sui-grid>
             <sui-grid stackable class="centered">
-                <sui-grid-row id="texteProfil">
-                    <sui-grid-column id="texteGras" :width="2">
+                <sui-grid-row class="texteProfil">
+                    <sui-grid-column class="texteGras" :width="2">
                             Nom
                     </sui-grid-column>
                     <sui-grid-column :width="2">
                             {{profileInfo[0].nom}}
                     </sui-grid-column>
-                    <sui-grid-column id="texteGras" :width="2">
+                    <sui-grid-column class="texteGras" :width="2">
                             Prénom
                     </sui-grid-column>
                     <sui-grid-column :width="2">
@@ -28,14 +27,14 @@
                 </sui-grid-row>
             </sui-grid>
             <sui-grid stackable class="centered">
-                <sui-grid-row id="texteProfil">
-                    <sui-grid-column id="texteGras" :width="2">
+                <sui-grid-row class="texteProfil">
+                    <sui-grid-column class="texteGras" :width="2">
                             Numéro étudiant
                     </sui-grid-column>
                     <sui-grid-column :width="2">
                             {{ profileInfo[0].nuetu}}
                     </sui-grid-column>
-                    <sui-grid-column id="texteGras" :width="2">
+                    <sui-grid-column class="texteGras" :width="2">
                             Groupe
                     </sui-grid-column>
                     <sui-grid-column :width="2">
@@ -44,18 +43,18 @@
                 </sui-grid-row>
             </sui-grid>
             <sui-grid stackable class="centered">
-                <sui-grid-row id="texteProfil">
-                    <sui-grid-column id="texteGras" :width="2">
+                <sui-grid-row class="texteProfil">
+                    <sui-grid-column class="texteGras" :width="2">
                             Institution
                     </sui-grid-column>
                     <sui-grid-column :width="2">
                             {{ profileInfo[0].institution}}
                     </sui-grid-column>
-                    <sui-grid-column id="texteGras" :width="2">
+                    <sui-grid-column class="texteGras" :width="2">
                             Statut
                     </sui-grid-column>
                     <sui-grid-column :width="2">
-                            oui
+                            Etudiant
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
@@ -85,11 +84,11 @@
             <sui-grid stackable class="centered">
                 <sui-grid-row>
                 <sui-grid-column>
-                    <label id="texteProfil">Niveau</label>
+                    <label class="texteProfil">Niveau</label>
                 </sui-grid-column>
 
                 <sui-grid-column>
-                    <label >{{currentLevel}}</label>
+                    <label>{{currentLevel}}</label>
                 </sui-grid-column>
 
                 <sui-grid-column :width="4">
@@ -123,14 +122,36 @@
             <sui-divider hidden/>
             <sui-divider hidden/>
 
-            <sui-grid class="centered">
-                <label v-for="item in textTrophee" :key="item[0]">
+            <sui-grid stackable class="centered">
+                <sui-grid-row>
                     <sui-grid-column>
-                        <sui-image id="imageTrophee" :src="item[0]" size="small"/>
-                        <br/>
-                        <label>{{ item[1]}}</label>
+                        <sui-image class="imageTrophee" :src="textTrophee[0]" size="small"/>
                     </sui-grid-column>
-                </label>
+                    <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[1]" size="small"/>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[2]" size="small"/>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[3]" size="small"/>
+                    </sui-grid-column>
+                </sui-grid-row>
+                    <sui-grid-column>
+                        <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <label class="texteTrophee">{{nbTrophyOr}} or</label>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <label class="texteTrophee">{{nbTrophyArgent}} argent</label>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <label class="texteTrophee">{{nbTrophyBronze}} bronze</label>
+                    </sui-grid-column>
+                <sui-grid-row>
+
+                </sui-grid-row>
             </sui-grid>
        </div>
     </div>
@@ -148,24 +169,21 @@ export default {
 
   data () {
     return {
+      currentxp: 0,
       currentlvl: 0,
       nextlvl: 0,
-      percent: 50,
+      percent: 0,
+      nbTrophyPlatine: 0,
+      nbTrophyOr: 0,
+      nbTrophyArgent: 0,
+      nbTrophyBronze: 0,
       open: false,
       profileInfo: {},
       tabTrophies: {},
       errors: [],
-      textStat: [
-        ['Niveau'],
-        ['(API) niveauactuel'],
-        ['state="active" indicating :percent="percent" :label="label"'],
-        ['(API) niveausuivant']
-      ],
       textTrophee: [
-        ['/static/images/imageTropheeBronze.png', '(API) nbtropheebronze'],
-        ['/static/images/imageTropheeArgent.png', '(API) nbtropheeargent'],
-        ['/static/images/imageTropheeOr.png', '(API) nbtropheeor'],
-        ['/static/images/imageTropheePlatine.png', '(API) nbtropheeplatine']
+        '/static/images/imageTropheePlatine.png', '/static/images/imageTropheeOr.png',
+        '/static/images/imageTropheeArgent.png', '/static/images/imageTropheeBronze.png'
       ]
     }
   },
@@ -202,23 +220,28 @@ export default {
   },
   methods: {
     calculLevel () {
-      this.currentlvl = 0
       for (let index = 0; index < this.tabTrophies.length; index++) {
         switch (this.tabTrophies[index].type) {
           case 'platine':
-            this.currentlvl += 4
+            this.currentxp += 40
+            this.nbTrophyPlatine += 1
             break
           case 'or':
-            this.currentlvl += 3
+            this.currentxp += 30
+            this.nbTrophyOr += 1
             break
           case 'argent':
-            this.currentlvl += 2
+            this.currentxp += 20
+            this.nbTrophyArgent += 1
             break
           case 'bronze':
-            this.currentlvl += 1
+            this.currentxp += 10
+            this.nbTrophyBronze += 1
             break
         }
       }
+      this.currentlvl = Math.trunc(this.currentxp / 50)
+      this.percent = Math.trunc((this.currentxp / 50 - Math.trunc(this.currentxp / 50)) * 100)
       this.nextlvl = this.currentlvl + 1
     }
   }
@@ -227,12 +250,12 @@ export default {
 
 <style>
 
-#texteProfil {
+.texteProfil {
     font-size: 1.2em;
     font-family: 'Lato'
 }
 
-#texteGras {
+.texteGras {
     font-weight: bold
 }
 
@@ -240,10 +263,17 @@ h2 {
     text-align: center;
 }
 
-#imageTrophee {
+.imageTrophee {
     position: relative;
-    left: 25%;
+    left: 10%;
     zoom: 50%
+}
+
+/* .texteTrophee{
+    text-align: center
+} */
+.ui.centered.grid>.column:not(.aligned):not(.justified):not(.row), .ui.centered.grid>.row>.column:not(.aligned):not(.justified), .ui.grid .centered.row>.column:not(.aligned):not(.justified){
+    text-align: center;
 }
 
 </style>
