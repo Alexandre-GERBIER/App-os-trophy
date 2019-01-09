@@ -12,10 +12,10 @@
           </sui-table-row>
         </sui-table-header>
         <sui-table-body>
-          <sui-table-row v-for="module in modules" :key="module.name">
-            <sui-table-cell>{{module.id}} - {{module.name}}</sui-table-cell>
+          <sui-table-row v-for="module in modulesList" :key="module.nom">
+            <sui-table-cell>{{module.reference}} - {{module.nom}}</sui-table-cell>
             <sui-table-cell>{{module.level}}</sui-table-cell>
-            <sui-table-cell>{{module.trophies}} / {{module.max_trophies}}</sui-table-cell>
+            <sui-table-cell>{{module.trophies.length}} / {{module.max_trophies}}</sui-table-cell>
             <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.id">voir les détails du module</router-link></sui-table-cell>
           </sui-table-row>
         </sui-table-body>
@@ -25,32 +25,80 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+import global from '@/globals.json'
+
 export default {
   data () {
     return {
-      modules: [
-        {
-          id: 'M3101',
-          name: 'Bases de données avancées',
-          level: '1',
-          trophies: '3',
-          max_trophies: '10'
-        },
-        {
-          id: 'M3202',
-          name: 'GPI',
-          level: '5',
-          trophies: '10',
-          max_trophies: '15'
-        },
-        {
-          id: 'M3104',
-          name: 'Programmation serveur web',
-          level: '2',
-          trophies: '4',
-          max_trophies: '30'
+
+      loadingModulesList: [],
+      modulesList: [],
+      errors: []
+    }
+  },
+
+  mounted () {
+    axios.get(global.API + '/module/student/E175119X')
+      .then(response => {
+        this.loadingModulesList = response.data
+        for (let module of this.loadingModulesList) {
+          module.max_trophies = 0
+          module.level = 0
+          module.trophies = []
         }
-      ]
+        // console.log(response.data)
+
+        axios.get(global.API + '/trophy/student/E175119X')
+          .then(response => {
+            for (let module of this.loadingModulesList) {
+              module.trophies = response.data.filter(trophy => trophy.numod === module.reference)
+              this.calculLevel(module)
+              axios.get(global.API + '/trophy/module/' + module.reference)
+                .then(response => {
+                  module.max_trophies = response.data.length
+                  this.modulesList.push(module) // on ajoute le module seulement après son chargement complet
+                  this.modulesList.sort((a, b) => (a.reference - b.reference))
+                })
+                .catch(e => {
+                  this.errors.push(e)
+                })
+            }
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+  },
+
+  methods: {
+    updateStates (module) {
+      this.calculLevel(module)
+    },
+
+    calculLevel (module) {
+      let currentxp = 0
+      for (let index = 0; index < module.trophies.length; index++) {
+        switch (module.trophies[index].type) {
+          case 'platine':
+            currentxp += 40
+            break
+          case 'or':
+            currentxp += 30
+            break
+          case 'argent':
+            currentxp += 20
+            break
+          case 'bronze':
+            currentxp += 10
+            break
+        }
+      }
+      module.level = Math.trunc(currentxp / 50)
     }
   }
 }

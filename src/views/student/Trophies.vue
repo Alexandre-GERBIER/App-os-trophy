@@ -50,7 +50,8 @@ export default {
       ordreValeur: 0,
       ordreVote: 0,
       ordreObtenu: 0,
-      mesTrophees: {}
+      mesTrophees: {},
+      errors: []
       /*  trophies: [
         {
           id: '1',
