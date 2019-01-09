@@ -23,12 +23,19 @@ export default {
 
   data () {
     return {
-      ide: '',
-      rlink: ''
+      ide: ''
     }
   },
+
+  computed: {
+    rlink () {
+      return (this.ide === '') ? '/student/profile' : '/teacher/profile'
+    }
+  },
+
   methods: {
     routage () {
+      console.log('oui')
       if (this.ide === '') {
         this.rlink = '/student/profile'
       } else {
