@@ -194,7 +194,7 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
-    axios.get(global.API + '/student/trophy/E175119X')
+    axios.get(global.API + '/trophy/student/E175119X')
       .then(response => {
         this.tabTrophies = response.data
         this.calculLevel()
