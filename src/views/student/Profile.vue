@@ -83,28 +83,26 @@
 
             <sui-grid stackable class="centered">
                 <sui-grid-row>
-                <sui-grid-column>
-                    <label class="texteProfil">Niveau</label>
-                </sui-grid-column>
+                    <sui-grid-column>
+                        <label class="texteProfil">Niveau</label>
+                    </sui-grid-column>
 
-                <sui-grid-column>
-                    <label>{{currentLevel}}</label>
-                </sui-grid-column>
+                    <sui-grid-column>
+                        <label>{{currentLevel}}</label>
+                    </sui-grid-column>
 
-                <sui-grid-column :width="4">
-                <sui-progress id="barre"
-                    state="active"
-                    indicating
-                    :percent="percent"
-                    :label="label"/>
-                </sui-grid-column>
+                    <sui-grid-column :width="4">
+                    <sui-progress id="barre"
+                        state="active"
+                        indicating
+                        :percent="percent"
+                        :label="label"/>
+                    </sui-grid-column>
 
-                <sui-grid-column>
-                    <label >{{nextLevel}}</label>
-                </sui-grid-column>
-            </sui-grid-row>
-
-            <sui-button @click.native="calculLevel">calcul</sui-button>
+                    <sui-grid-column>
+                        <label >{{nextLevel}}</label>
+                    </sui-grid-column>
+                </sui-grid-row>
             </sui-grid>
         </div>
 
@@ -138,16 +136,16 @@
                     </sui-grid-column>
                 </sui-grid-row>
                     <sui-grid-column>
-                        <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        <label class="texteTrophee">{{nbTrophyOr}} or</label>
+                        <label class="texteTrophee">{{nbTrophyBronze}} bronze</label>
                     </sui-grid-column>
                     <sui-grid-column>
                         <label class="texteTrophee">{{nbTrophyArgent}} argent</label>
                     </sui-grid-column>
                     <sui-grid-column>
-                        <label class="texteTrophee">{{nbTrophyBronze}} bronze</label>
+                        <label class="texteTrophee">{{nbTrophyOr}} or</label>
+                    </sui-grid-column>
+                    <sui-grid-column>
+                        <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
                     </sui-grid-column>
                 <sui-grid-row>
 
@@ -182,8 +180,8 @@ export default {
       tabTrophies: {},
       errors: [],
       textTrophee: [
-        '/static/images/imageTropheePlatine.png', '/static/images/imageTropheeOr.png',
-        '/static/images/imageTropheeArgent.png', '/static/images/imageTropheeBronze.png'
+        '/static/images/imageTropheeBronze.png', '/static/images/imageTropheeArgent.png',
+        '/static/images/imageTropheeOr.png', '/static/images/imageTropheePlatine.png'
       ]
     }
   },
@@ -192,7 +190,6 @@ export default {
     axios.get(global.API + '/student/E175119X')
       .then(response => {
         this.profileInfo = response.data
-        // console.log(this.profileInfo)
       })
       .catch(e => {
         this.errors.push(e)
@@ -200,7 +197,7 @@ export default {
     axios.get(global.API + '/student/trophy/E175119X')
       .then(response => {
         this.tabTrophies = response.data
-        // console.log(this.tabTrophies)
+        this.calculLevel()
       })
       .catch(e => {
         this.errors.push(e)
@@ -220,6 +217,13 @@ export default {
   },
   methods: {
     calculLevel () {
+      this.currentxp = 0
+      this.currentlvl = 0
+      this.nbTrophyPlatine = 0
+      this.nbTrophyOr = 0
+      this.nbTrophyArgent = 0
+      this.nbTrophyBronze = 0
+      this.percent = 0
       for (let index = 0; index < this.tabTrophies.length; index++) {
         switch (this.tabTrophies[index].type) {
           case 'platine':
