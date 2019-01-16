@@ -15,7 +15,11 @@
               <sui-input name="TrophyName" v-model="TrophyName"/>
           </div>
           <div class="six wide column">
+              <!--
               <sui-dropdown fluid :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
+                -->
+                <br>
+                <label> Module : </label> {{ $route.params.id }} - {{name}}
           </div>
           <div class="four wide column">
               <label>  Valeur du trophée :</label>
