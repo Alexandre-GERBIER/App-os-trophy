@@ -12,22 +12,25 @@
             </sui-table-row>
           </sui-table-header>
           <sui-table-body>
-            <sui-table-row v-for="module in modules" :key="module.name">
-              <sui-table-cell>{{module.id}} - {{module.name}}</sui-table-cell>
+            <sui-table-row v-for="module in modulesList" :key="module.nom">
+              <sui-table-cell>{{module.reference}} - {{module.nom}}</sui-table-cell>
               <sui-table-cell>{{module.trophies}}</sui-table-cell>
-              <sui-table-cell><i v-if="!module.hidden" class="check icon"></i></sui-table-cell>
+              <sui-table-cell><i v-if="module.visible" class="check icon"></i></sui-table-cell>
               <sui-table-cell text-align="right"><router-link :to="'/teacher/module/' + module.id">éditer le module</router-link></sui-table-cell>
             </sui-table-row>
           </sui-table-body>
         </sui-table>
 
         <ModalCreateModule/>
-        <CreateTrophy/>
       </sui-container>
     </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+import global from '@/globals.json'
+
 import Vue from 'vue'
 import CreateTrophy from '@/components/CreateTrophy'
 import CreateModule from '@/components/CreateModule'
@@ -37,21 +40,36 @@ export default {
   components: { CreateTrophy },
   data () {
     return {
-      modules: [
-        {
-          id: 'M3101',
-          name: 'Bases de données avancées',
-          trophies: '3',
-          hidden: true
-        },
-        {
-          id: 'M3202',
-          name: 'GPI',
-          trophies: '10',
-          hidden: false
-        }
-      ]
+      loadingModulesList: [],
+      modulesList: [],
+      errors: []
     }
+  },
+
+  mounted () {
+    axios.get(global.API + '/prof/module/j.roger')
+      .then(response => {
+        this.loadingModulesList = response.data
+        for (let module of this.loadingModulesList) {
+          module.visible = true // TODO changer ça
+          module.trophies = 0
+        }
+
+        for (let module of this.loadingModulesList) {
+          axios.get(global.API + '/trophy/module/' + module.reference)
+            .then(response => {
+              module.trophies = response.data.length
+              this.modulesList.push(module) // on ajoute le module seulement après son chargement complet
+              this.modulesList.sort((a, b) => (a.reference - b.reference))
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        }
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
 }
 </script>
