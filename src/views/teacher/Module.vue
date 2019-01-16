@@ -34,6 +34,7 @@
                   </sui-container>
                 </sui-grid-column>
         </sui-grid>
+      <CreateTrophy/>
     </div>
 </template>
 
@@ -41,10 +42,11 @@
 
 import DeliverTrophy from '@/components/DeliverTrophy'
 import EditTrophy from '@/components/EditTrophy'
+import CreateTrophy from '@/components/CreateTrophy'
 
 export default {
 
-  components: {DeliverTrophy, EditTrophy},
+  components: {DeliverTrophy, EditTrophy, CreateTrophy},
 
   data () {
     return {
