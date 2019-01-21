@@ -8,15 +8,15 @@
             <sui-table-header-cell>Module</sui-table-header-cell>
             <sui-table-header-cell>Niveau</sui-table-header-cell>
             <sui-table-header-cell>Trophées</sui-table-header-cell>
-            <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
+            <!--<sui-table-header-cell text-align="right">Informations</sui-table-header-cell>-->
           </sui-table-row>
         </sui-table-header>
         <sui-table-body>
           <sui-table-row v-for="module in modulesList" :key="module.nom">
-            <sui-table-cell>{{module.reference}} - {{module.nom}}</sui-table-cell>
+            <sui-table-cell><router-link :to="'/student/module/' + module.id">{{module.reference}} - {{module.nom}}</router-link></sui-table-cell>
             <sui-table-cell>{{module.level}}</sui-table-cell>
             <sui-table-cell>{{module.trophies.length}} / {{module.max_trophies}}</sui-table-cell>
-            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.id">voir les détails du module</router-link></sui-table-cell>
+            <!--<sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.id">voir -->
           </sui-table-row>
         </sui-table-body>
       </sui-table>
@@ -105,5 +105,7 @@ export default {
 </script>
 
 <style>
-
+  li a {
+    text-decoration: none;
+  }
 </style>
