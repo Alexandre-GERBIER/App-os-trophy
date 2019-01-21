@@ -59,12 +59,10 @@
                 </sui-grid-row>
             </sui-grid>
             <sui-divider hidden />
-            <sui-divider hidden />
 
             <ChangePassword/>
         </div>
 
-        <sui-divider hidden />
         <sui-divider hidden />
         <sui-divider hidden />
 
@@ -108,7 +106,6 @@
 
         <sui-divider hidden />
         <sui-divider hidden />
-        <sui-divider hidden />
 
         <div>
             <div>
@@ -117,7 +114,6 @@
                 </h2  >
             </div>
 
-            <sui-divider hidden/>
             <sui-divider hidden/>
 
             <sui-grid stackable class="centered">
