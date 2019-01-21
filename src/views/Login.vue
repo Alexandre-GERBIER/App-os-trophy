@@ -1,7 +1,7 @@
 <template>
 <div id="background">
+    <h1 is="sui-header" class="">App'Os Trophy</h1>
     <form id="login">
-        <h1 is="sui-header" class="inverted">App'Os Trophy</h1>
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
             <input placeholder="Identifiant" type="text" name="ide" v-model="ide">
@@ -35,7 +35,6 @@ export default {
 
   methods: {
     routage () {
-      console.log('oui')
       if (this.ide === '') {
         this.rlink = '/student/profile'
       } else {
@@ -60,28 +59,51 @@ export default {
         height:100%;
         width:100%;
         display:flex;
-        justify-content:center;
+        flex-direction: column;
+        justify-content:space-around;
         align-items:center;
+    }
+    @media (max-width: 1200px) {
+        #background{
+            background-image:url("/static/images/2.2.jpg");
+            background-repeat: no-repeat;
+        }
     }
     #login{
         display:flex;
         flex-direction:column;
         align-items:center;
-        position:relative;
-        top:12%;
-        width:33%;
+        position: relative;
+        bottom: 10%;
     }
     #login h2, #login div{
-        margin: 2%;
+        margin: 5%;
     }
     #login h2{
         font-size: 2.5em;
     }
-    #login h1{
-        font-size: 2.8em;
+    #background h1{
+        font-size: 500%;
         margin-bottom:8%;
-        width:100%;
         text-align:center;
+        border: solid 2px rgb(66, 66, 66);
+        border-radius: 20px;
+        padding: 30px;
+        margin: 0 5px;
+        background-color: rgba(66, 66, 66, 0.2);
+    }
+    @media (max-width: 700px) {
+        #background h1{
+            padding: 10px;
+            font-size: 300%;
+            margin-bottom:10%;
+        }
+        #login h2, #login div{
+            margin: 2%;
+        }
+        #login{
+            bottom: 18%
+        }
     }
     #login div{
         width:100%;
