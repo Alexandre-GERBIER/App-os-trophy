@@ -12,7 +12,7 @@
                 </sui-grid-column>
             </sui-grid>
 
-            <label v-for="item in textProfil" :key="item[0]">
+            <label v-for="item in profileInfo" :key="item[0]">
                  <sui-grid stackable class="centered">
                     <sui-grid-row id="texteProfil">
                         <sui-grid-column id="texteGras" :width="2">
@@ -35,12 +35,14 @@
             <sui-divider hidden />
 
             <ChangePassword/>
+            <p>{{profileInfo.nuprof}}</p>
         </div>
     </div>
 </template>
 
 <script>
 
+import axios from 'axios'
 import ChangePassword from '@/components/ChangePassword'
 
 export default {
@@ -50,12 +52,17 @@ export default {
   data () {
     return {
       open: false,
-      textProfil: [
-        ['Identifiant', '(API) id', 'Groupe', '(API) groupe'],
-        ['Nom', '(API) nom', 'Institution', '(API) intitution'],
-        ['Prénom', '(API) prenom', 'Statut', '(API) statut']
-      ]
+      profileInfo: {}
     }
+  },
+  mounted () {
+    axios.get(global.API + '/prof/j.roger')
+      .then(response => {
+        this.profileInfo = response.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
 
 }
