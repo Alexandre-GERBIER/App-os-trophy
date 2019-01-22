@@ -18,12 +18,12 @@
                               <sui-table-header-cell>Valeur</sui-table-header-cell>
                               <sui-table-header-cell>Votes</sui-table-header-cell>
                               <sui-table-header-cell>Obtenu</sui-table-header-cell>
-                              <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
+                             <!--  <sui-table-header-cell text-align="right">Informations</sui-table-header-cell> -->
                           </sui-table-row>
                       </sui-table-header>
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                              <sui-table-cell>{{trophy.nom}}</sui-table-cell>
+                              <sui-table-cell><router-link :to="'/student/trophy/' + trophy.id">{{trophy.nom}}</router-link></sui-table-cell>
                               <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
                               <sui-table-cell ><vote class="check icon" v-if="!trophy.vote" /></sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>

@@ -10,19 +10,19 @@
                         <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort icon" :class="(ordreDate != 0) ? ((ordreDate == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort icon" :class="(ordreValeur != 0) ? ((ordreValeur == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort icon" :class="(ordreVote != 0) ? ((ordreVote == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
-                        <sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort icon" :class="(ordreObtenu != 0) ? ((ordreObtenu == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
-                        <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
+                        <!--<sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort icon" :class="(ordreObtenu != 0) ? ((ordreObtenu == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell> -->
+                        <!-- <sui-table-header-cell text-align="right">Informations</sui-table-header-cell> -->
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
                     <sui-table-row v-for="trophy in mesTrophees" :key="trophy.nutroph">
-                        <sui-table-cell>{{trophy.titre}}</sui-table-cell>
+                        <sui-table-cell><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
                         <sui-table-cell>{{trophy.numod}}</sui-table-cell>
                         <sui-table-cell>{{trophy.datevisible}}</sui-table-cell>
                         <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                         <sui-table-cell><vote v-if="trophy.vote == 1"/></sui-table-cell>
-                        <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>
-                        <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.nutroph">voir les détails du trophée</router-link></sui-table-cell>
+                       <!-- <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell> -->
+                        <!-- <sui-table-cell text-align="right">voir les détails du trophée</sui-table-cell> -->
                     </sui-table-row>
                 </sui-table-body>
             </sui-table>
@@ -49,7 +49,6 @@ export default {
       ordreDate: 0,
       ordreValeur: 0,
       ordreVote: 0,
-      ordreObtenu: 0,
       mesTrophees: {},
       errors: []
     }
@@ -73,7 +72,6 @@ export default {
       this.ordreDate = 0
       this.ordreValeur = 0
       this.ordreVote = 0
-      this.ordreObtenu = 0
     },
     sorted_nom () {
       if (this.ordreNom === 0 || this.ordreNom === -1) {
@@ -139,31 +137,16 @@ export default {
         this.ordreValeur = -1
       }
     },
-    sorted_obtenu () {
-      if (this.ordreObtenu === 0 || this.ordreObtenu === -1) {
-        this.mesTrophees.sort((a, b) => {
-          return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? -1 : 1
-        })
-        this.reset_sorted()
-        this.ordreObtenu = 1
-      } else {
-        this.mesTrophees.sort((a, b) => {
-          return (a.obtenu === b.obtenu) ? 0 : a.obtenu ? 1 : -1
-        })
-        this.reset_sorted()
-        this.ordreObtenu = -1
-      }
-    },
     sorted_vote () {
       if (this.ordreVote === 0 || this.ordreVote === -1) {
         this.mesTrophees.sort((a, b) => {
-          return (a.vote === b.vote) ? 0 : a.vote ? -1 : 1
+          return a.vote - b.vote
         })
         this.reset_sorted()
         this.ordreVote = 1
       } else {
         this.mesTrophees.sort((a, b) => {
-          return (a.vote === b.vote) ? 0 : a.vote ? 1 : -1
+          return b.vote - a.vote
         })
         this.reset_sorted()
         this.ordreVote = -1

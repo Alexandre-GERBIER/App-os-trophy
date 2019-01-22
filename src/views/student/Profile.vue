@@ -192,7 +192,7 @@ export default {
   },
 
   mounted () {
-    axios.get(global.API + '/student/E175119X')
+    axios.get(global.API + '/student/' + this.$session.get('user_account'))
       .then(response => {
         this.profileInfo = response.data
       })
