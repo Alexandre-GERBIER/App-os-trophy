@@ -23,9 +23,9 @@
                       </sui-table-header>
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                              <sui-table-cell><router-link :to="'/student/trophy/' + trophy.id">{{trophy.titre}}</router-link></sui-table-cell>
+                              <sui-table-cell><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
                               <sui-table-cell>{{trophy.type}}</sui-table-cell>
-                              <sui-table-cell ><vote class="check icon" v-if="trophy.vote == 1" /></sui-table-cell>
+                              <sui-table-cell ><vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" v-if="trophy.vote == 1" /></sui-table-cell>
                               <!--<sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>-->
                           </sui-table-row>
                       </sui-table-body>
