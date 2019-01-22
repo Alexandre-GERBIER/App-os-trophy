@@ -1,7 +1,6 @@
 <template>
     <div>
         <div id="infoProfil">
-
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
@@ -11,25 +10,46 @@
                     <sui-divider fitted/>
                 </sui-grid-column>
             </sui-grid>
-
-            <label v-for="item in profileInfo" :key="item[0]">
-                 <sui-grid stackable class="centered">
-                    <sui-grid-row id="texteProfil">
-                        <sui-grid-column id="texteGras" :width="2">
-                                {{ item[0]}}
-                        </sui-grid-column>
-                        <sui-grid-column :width="2">
-                                {{ item[1]}}
-                        </sui-grid-column>
-                        <sui-grid-column id="texteGras" :width="2">
-                                {{ item[2]}}
-                        </sui-grid-column>
-                        <sui-grid-column :width="2">
-                                {{ item[3]}}
-                        </sui-grid-column>
-                    </sui-grid-row>
-                </sui-grid>
-            </label>
+            <sui-grid stackable class="centered">
+                <sui-grid-row class="texteProfil">
+                    <sui-grid-column class="texteGras" :width="2">
+                            Nom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{profileInfo[0].nom}}
+                    </sui-grid-column>
+                    <sui-grid-column class="texteGras" :width="2">
+                            Prénom
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{profileInfo[0].prenom}}
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+            <sui-grid class="centered">
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
+            </sui-grid>
+            <sui-grid stackable class="centered">
+                <sui-grid-row class="texteProfil">
+                    <sui-grid-column class="texteGras" :width="2">
+                            Institution
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            {{ profileInfo[0].institution}}
+                    </sui-grid-column>
+                    <sui-grid-column class="texteGras" :width="2">
+                            Statut
+                    </sui-grid-column>
+                    <sui-grid-column :width="2">
+                            Professeur
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
 
             <sui-divider hidden />
             <sui-divider hidden />
@@ -43,6 +63,7 @@
 <script>
 
 import axios from 'axios'
+import global from '@/globals.json'
 import ChangePassword from '@/components/ChangePassword'
 
 export default {
@@ -70,12 +91,12 @@ export default {
 
 <style>
 
-#texteProfil {
+.texteProfil {
     font-size: 1.2em;
     font-family: 'Lato'
 }
 
-#texteGras {
+.texteGras {
     font-weight: bold
 }
 
