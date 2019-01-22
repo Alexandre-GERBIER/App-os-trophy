@@ -17,11 +17,16 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+import global from '@/globals.json'
+
 export default {
 
   data () {
     return {
-      ide: ''
+      ide: 'E175119X',
+      errors: []
     }
   },
   /*
@@ -31,20 +36,39 @@ export default {
   */
   methods: {
     rlink () {
-      return (this.ide === '') ? '/student/profile' : '/teacher/profile'
+      return (this.accountType() === 'student') ? '/student/profile' : '/teacher/profile'
+    },
+
+    accountType () {
+      if (this.ide.includes('.')) {
+        return 'prof'
+      } else {
+        return 'student'
+      }
     },
 
     loginUser () {
       // start session
       this.$session.start()
 
-      let rlink = this.rlink()
-      if (rlink === '/student/profile') {
-        this.$session.set('user_type', 'student')
-      } else {
-        this.$session.set('user_type', 'teacher')
-      }
-      this.$router.replace(this.rlink())
+      let accountValid = false
+
+      axios.get(global.API + '/' + this.accountType() + '/' + this.ide)
+        .then(res => {
+          console.log('done')
+          accountValid = (res.data.length === 1)
+          if (accountValid) {
+            console.log('valid')
+            this.$session.set('user_type', this.accountType())
+            this.$session.set('user_account', this.ide)
+            this.$router.replace(this.rlink())
+          } else {
+            console.log('invalid login !')
+          }
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
     }
 
     /* routage () {

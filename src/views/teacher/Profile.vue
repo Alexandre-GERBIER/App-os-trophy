@@ -77,7 +77,7 @@ export default {
     }
   },
   mounted () {
-    axios.get(global.API + '/prof/j.roger')
+    axios.get(global.API + '/prof/' + this.$session.get('user_account'))
       .then(response => {
         this.profileInfo = response.data
       })
