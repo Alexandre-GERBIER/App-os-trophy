@@ -13,10 +13,10 @@
                             </sui-table-row>
                         </sui-table-header>
                         <sui-table-body>
-                            <sui-table-row v-for="item in classementGeneral" :key="item[0]">
-                                    <sui-table-cell>{{item[0]}}</sui-table-cell>
-                                    <sui-table-cell>{{item[1]}}</sui-table-cell>
-                                    <sui-table-cell>{{item[2]}}</sui-table-cell>
+                            <sui-table-row v-for="item in allStudent" :key="item[0]">
+                                    <sui-table-cell>{{item.rank}}</sui-table-cell>
+                                    <sui-table-cell>{{item.prenom + ' ' + item.nom}}</sui-table-cell>
+                                    <sui-table-cell>{{item.level}}</sui-table-cell>
                             </sui-table-row>
                         </sui-table-body>
                     </sui-table>
@@ -67,10 +67,15 @@
 </template>
 
 <script>
+import axios from 'axios'
+import global from '@/globals.json'
+
 // TODO : popup qui affiche les infos d'un étudiant en cliquant dessus
+
 export default {
   data () {
     return {
+      allStudent: {},
       open: false,
       classementGeneral: [
         ['1', 'jean', '14'],
@@ -90,7 +95,65 @@ export default {
         ['3', 'louis', '5'],
         ['4', 'patrick', '5']
       ]
+    }
+  },
 
+  mounted () {
+    let loadingStudents = []
+    let studentCount = 0
+    axios.get(global.API + '/student')
+      .then(response => {
+        loadingStudents = response.data
+        let nbstudents = loadingStudents.length
+        loadingStudents.forEach(student => {
+          axios.get(global.API + '/trophy/student/' + student.nuetu)
+            .then(response => {
+              student.trophies = response.data
+              student.level = this.calculLevel(student)
+              studentCount++
+              if (studentCount === nbstudents) {
+                this.allStudent = loadingStudents
+                this.allStudent.sort((a, b) => {
+                  return b.level - a.level
+                })
+                console.log(this.allStudent)
+                for (let i = 0; i < nbstudents; i++) {
+                  this.allStudent[i].rank = i + 1
+                }
+              }
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+  },
+
+  methods: {
+    calculLevel (student) {
+      let currentxp = 0
+      let currentlvl = 0
+      for (let index = 0; index < student.trophies.length; index++) {
+        switch (student.trophies[index].type) {
+          case 'platine':
+            currentxp += 40
+            break
+          case 'or':
+            currentxp += 30
+            break
+          case 'argent':
+            currentxp += 20
+            break
+          case 'bronze':
+            currentxp += 10
+            break
+        }
+      }
+      currentlvl = currentxp / 50
+      return currentlvl
     }
   }
 }
