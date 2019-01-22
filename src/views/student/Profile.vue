@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div>
+        <div id="infoProfil">
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
@@ -26,6 +26,14 @@
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
+            <sui-grid class="centered">
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
+            </sui-grid>
             <sui-grid stackable class="centered">
                 <sui-grid-row class="texteProfil">
                     <sui-grid-column class="texteGras" :width="2">
@@ -41,6 +49,14 @@
                             {{ profileInfo[0].nugr}}
                     </sui-grid-column>
                 </sui-grid-row>
+            </sui-grid>
+            <sui-grid class="centered">
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
+                <sui-grid-column :width="4">
+                    <sui-divider hidden fitted/>
+                </sui-grid-column>
             </sui-grid>
             <sui-grid stackable class="centered">
                 <sui-grid-row class="texteProfil">
@@ -86,7 +102,7 @@
                     </sui-grid-column>
 
                     <sui-grid-column>
-                        <label>{{currentLevel}}</label>
+                        <label class="texteGras">{{currentLevel}}</label>
                     </sui-grid-column>
 
                     <sui-grid-column :width="4">
@@ -98,7 +114,7 @@
                     </sui-grid-column>
 
                     <sui-grid-column>
-                        <label >{{nextLevel}}</label>
+                        <label class="texteGras">{{nextLevel}}</label>
                     </sui-grid-column>
                 </sui-grid-row>
             </sui-grid>
@@ -120,31 +136,24 @@
                 <sui-grid-row>
                     <sui-grid-column>
                         <sui-image class="imageTrophee" :src="textTrophee[0]" size="small"/>
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        <sui-image class="imageTrophee" :src="textTrophee[1]" size="small"/>
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        <sui-image class="imageTrophee" :src="textTrophee[2]" size="small"/>
-                    </sui-grid-column>
-                    <sui-grid-column>
-                        <sui-image class="imageTrophee" :src="textTrophee[3]" size="small"/>
-                    </sui-grid-column>
-                </sui-grid-row>
-                    <sui-grid-column>
+                        <sui-divider hidden fitted/>
                         <label class="texteTrophee">{{nbTrophyBronze}} bronze</label>
                     </sui-grid-column>
                     <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[1]" size="small"/>
+                        <sui-divider hidden fitted/>
                         <label class="texteTrophee">{{nbTrophyArgent}} argent</label>
                     </sui-grid-column>
                     <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[2]" size="small"/>
+                        <sui-divider hidden fitted/>
                         <label class="texteTrophee">{{nbTrophyOr}} or</label>
                     </sui-grid-column>
                     <sui-grid-column>
+                        <sui-image class="imageTrophee" :src="textTrophee[3]" size="small"/>
+                        <sui-divider hidden fitted/>
                         <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
                     </sui-grid-column>
-                <sui-grid-row>
-
                 </sui-grid-row>
             </sui-grid>
        </div>
@@ -265,7 +274,7 @@ h2 {
 
 .imageTrophee {
     position: relative;
-    left: 10%;
+    left: 43%;
     zoom: 50%
 }
 
