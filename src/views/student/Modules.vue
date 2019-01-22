@@ -13,10 +13,9 @@
         </sui-table-header>
         <sui-table-body>
           <sui-table-row v-for="module in modulesList" :key="module.nom">
-            <sui-table-cell><router-link :to="'/student/module/' + module.id">{{module.reference}} - {{module.nom}}</router-link></sui-table-cell>
+            <sui-table-cell><router-link :to="'/student/module/' + module.reference">{{module.reference}} - {{module.nom}}</router-link></sui-table-cell>
             <sui-table-cell>{{module.level}}</sui-table-cell>
             <sui-table-cell>{{module.trophies.length}} / {{module.max_trophies}}</sui-table-cell>
-            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.reference">voir les détails du module</router-link></sui-table-cell>
           </sui-table-row>
         </sui-table-body>
       </sui-table>
@@ -40,7 +39,7 @@ export default {
   },
 
   mounted () {
-    axios.get(global.API + '/module/student/E175119X')
+    axios.get(global.API + '/module/student/' + this.$session.get('user_account'))
       .then(response => {
         this.loadingModulesList = response.data
         for (let module of this.loadingModulesList) {
@@ -50,7 +49,7 @@ export default {
         }
         // console.log(response.data)
 
-        axios.get(global.API + '/trophy/student/E175119X')
+        axios.get(global.API + '/trophy/student/' + this.$session.get('user_account'))
           .then(response => {
             for (let module of this.loadingModulesList) {
               module.trophies = response.data.filter(trophy => trophy.numod === module.reference)
