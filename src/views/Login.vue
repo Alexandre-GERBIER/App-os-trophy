@@ -11,9 +11,7 @@
             <input placeholder="Mot de passe" type="password">
             <i class="lock icon"></i>
         </div>
-        <router-link :to="rlink">
-            <button class="ui icon sign in right labeled button green" v-on:click="routage"><i class="sign in icon"></i>Login</button>
-        </router-link>
+            <div @click="loginUser" class="ui icon sign in right labeled button green"><i class="sign in icon"></i>Login</div>
     </form>
 </div>
 </template>
@@ -26,21 +24,36 @@ export default {
       ide: ''
     }
   },
-
+  /*
   computed: {
+
+  },
+  */
+  methods: {
     rlink () {
       return (this.ide === '') ? '/student/profile' : '/teacher/profile'
-    }
-  },
+    },
 
-  methods: {
-    routage () {
+    loginUser () {
+      // start session
+      this.$session.start()
+
+      let rlink = this.rlink()
+      if (rlink === '/student/profile') {
+        this.$session.set('user_type', 'student')
+      } else {
+        this.$session.set('user_type', 'teacher')
+      }
+      this.$router.replace(this.rlink())
+    }
+
+    /* routage () {
       if (this.ide === '') {
         this.rlink = '/student/profile'
       } else {
         this.rlink = '/teacher/profile'
       }
-    }
+    } */
   }
 }
 </script>
