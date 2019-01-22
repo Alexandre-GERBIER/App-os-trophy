@@ -111,7 +111,7 @@
             <div>
                 <h2 is="sui-header" icon text-align="center">
                     <sui-header-content>Nombre de trophées :</sui-header-content>
-                </h2  >
+                </h2>
             </div>
 
             <sui-divider hidden/>
