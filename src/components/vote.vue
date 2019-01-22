@@ -2,7 +2,7 @@
     <div id="boutonVote">
         <button class='ui green inverted button' role='button' @click="toggle">Voter</button>
         <sui-modal v-model="open">
-            <sui-modal-header>Voter</sui-modal-header>
+            <sui-modal-header>Voter pour : {{name}}</sui-modal-header>
             <sui-modal-content>
                 <sui-dropdown
                   fluid
@@ -24,6 +24,10 @@
 <script>
 export default {
   name: 'vote',
+  props: {
+    id: '',
+    name: ''
+  },
   data () {
     return {
       current: null,
