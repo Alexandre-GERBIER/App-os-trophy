@@ -5,10 +5,13 @@ import App from './App'
 import router from './router'
 
 import SuiVue from 'semantic-ui-vue'
+import VueSession from 'vue-session'
+
 import '../semantic/dist/semantic.min.css'
 
 Vue.config.productionTip = false
 Vue.use(SuiVue)
+Vue.use(VueSession)
 
 /* eslint-disable no-new */
 window.app = new Vue({
