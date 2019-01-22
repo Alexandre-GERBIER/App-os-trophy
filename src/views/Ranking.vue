@@ -23,7 +23,7 @@
                 </sui-tab-pane>
                 <sui-tab-pane title="Module">
                     <sui-tab  :menu="{ secondary: true }">
-                        <sui-tab-pane v-for="item in mesModules" :key="item.reference" :title="item.nom">
+                        <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom">
                             <sui-table unstackable celled>
                                 <sui-table-header>
                                     <sui-table-row>
@@ -33,10 +33,11 @@
                                     </sui-table-row>
                                 </sui-table-header>
                                 <sui-table-body>
-                                    <sui-table-row v-for="item in allStudentModule" :key="item[0]">
-                                            <sui-table-cell>{{item.rank}}</sui-table-cell>
-                                            <sui-table-cell>{{item.prenom + ' ' + item.nom}}</sui-table-cell>
-                                            <sui-table-cell>{{item.level}}</sui-table-cell>
+                                    <sui-table-row v-for="student in mod.classement" :key="student[0]">
+                                            <sui-table-cell>{{mod}}</sui-table-cell>
+                                            <sui-table-cell>{{student.rank}}</sui-table-cell>
+                                            <sui-table-cell>{{student.prenom + ' ' + item.nom}}</sui-table-cell>
+                                            <sui-table-cell>{{student.level}}</sui-table-cell>
                                     </sui-table-row>
                                 </sui-table-body>
                             </sui-table>
@@ -67,8 +68,9 @@ export default {
   mounted () {
     let loadingStudents = []
     let studentCount = 0
-    /* let loadingStudentsModule = []
-    let studentCountModule = 0 */
+    let loadingStudentsModule = []
+    let studentCountModule = 0
+    let moduleCount = 0
     axios.get(global.API + '/student')
       .then(response => {
         loadingStudents = response.data
@@ -97,27 +99,33 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
-    /* axios.get(global.API + '/module/student/E175119X') // les modules de l'étudiant
+    axios.get(global.API + '/module/student/E175119X') // les modules de l'étudiant --> mesModules
       .then(response => {
         this.mesModules = response.data
-        this.mesModules.forEach(mod => {
-          axios.get(global.API + '/student/module/' + mod.reference) // les étudiants d'un module
+        let nbModules = this.mesModules.length
+        this.mesModules.forEach(mod => { // mod --> pour chaque module
+          axios.get(global.API + '/student/module/' + mod.reference) // les étudiants d'un module --> loadingStudentsModule
             .then(response => {
               loadingStudentsModule = response.data
-              let nbstudentsModule = loadingStudentsModule.length
-              loadingStudentsModule.forEach(student => {
+              let nbstudentsModule = loadingStudentsModule.length // nbstudentsModule --> nombre d'étudiant pour un module
+              loadingStudentsModule.forEach(student => { // student --> pour chaque étudiant
                 axios.get(global.API + '/trophy/student/' + student.nuetu) // les trophées de l'étudiant
                   .then(response => {
-                    student.trophies = response.data.filter(trophy => trophy.numod === mod.reference)
-                    student.level = this.calculLevel(student)
+                    student.trophies = response.data.filter(trophy => trophy.numod === mod.reference) // student.trophies --> les trophées pour le modules en question
+                    student.level = this.calculLevel(student) // student.level --> le level pour le module en question
                     studentCountModule++
-                    if (studentCountModule === nbstudentsModule) {
-                      this.allStudentModule = loadingStudentsModule
-                      this.allStudentModule.sort((a, b) => {
+                    if (studentCountModule === nbstudentsModule) { // On test si on a fait pour tous les étu du module
+                      this.loadingStudentsModule.sort((a, b) => { // On ordonne les étudiants
                         return b.level - a.level
                       })
-                      for (let i = 0; i < nbstudentsModule; i++) {
-                        this.allStudentModule[i].rank = i + 1
+                      for (let i = 0; i < nbstudentsModule; i++) { // On donne le rang
+                        loadingStudentsModule[i].rank = i + 1
+                      }
+                      console.log('uuuuuu')
+                      if (moduleCount !== nbModules) {
+                        console.log('dgdfgdh')
+                        mod.classement = loadingStudentsModule
+                        moduleCount++
                       }
                     }
                   })
@@ -133,7 +141,7 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
-      }) */
+      })
   },
 
   methods: {
