@@ -20,7 +20,7 @@
                         <sui-table-cell>{{trophy.numod}}</sui-table-cell>
                         <sui-table-cell>{{trophy.datevisible}}</sui-table-cell>
                         <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
-                        <sui-table-cell><vote v-if="trophy.vote == 1"/></sui-table-cell>
+                        <sui-table-cell><vote :id="trophy.nutroph"  :name="trophy.titre" v-if="trophy.vote == 1"/></sui-table-cell>
                        <!-- <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell> -->
                         <!-- <sui-table-cell text-align="right">voir les détails du trophée</sui-table-cell> -->
                     </sui-table-row>
