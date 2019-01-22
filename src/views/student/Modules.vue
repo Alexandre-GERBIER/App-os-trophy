@@ -16,7 +16,7 @@
             <sui-table-cell>{{module.reference}} - {{module.nom}}</sui-table-cell>
             <sui-table-cell>{{module.level}}</sui-table-cell>
             <sui-table-cell>{{module.trophies.length}} / {{module.max_trophies}}</sui-table-cell>
-            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.id">voir les détails du module</router-link></sui-table-cell>
+            <sui-table-cell text-align="right"><router-link :to="'/student/module/' + module.reference">voir les détails du module</router-link></sui-table-cell>
           </sui-table-row>
         </sui-table-body>
       </sui-table>

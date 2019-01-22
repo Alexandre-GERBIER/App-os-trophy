@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2 is="sui-header">Module {{ $route.params.id }} - {{name}} </h2>
+        <h2 is="sui-header">Module {{ $route.params.reference }} - {{name}} </h2>
         <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
@@ -27,7 +27,7 @@
                               <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
                               <sui-table-cell ><vote class="check icon" v-if="!trophy.vote" /></sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>
-                              <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.id">voir les détails du trophée</router-link></sui-table-cell>
+                              <sui-table-cell text-align="right"><router-link :to="'/student/trophy/' + trophy.nutroph">voir les détails du trophée</router-link></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>

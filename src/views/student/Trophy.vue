@@ -1,21 +1,21 @@
 <template>
     <div>
-      <h3 is="sui-header">View Trophy and Vote <!--{{infosTrophee.nom}}{{ $route.params.nutroph}}--></h3>
-      <sui-table>
-        <sui-table-row>
-          <sui-table-cell><!--{{infoTrophee.numod}}--></sui-table-cell>
-          <sui-table-cell><!--{{infoTrophee.type}}--></sui-table-cell>
-          <sui-table-cell><!--{{infoTrophee.description}}--></sui-table-cell>
-          <sui-table-cell><!--{{infoTrophee.vote}}--></sui-table-cell>
-          <sui-table-cell><!--{{infoTrophee.nom}}--></sui-table-cell>
-        </sui-table-row>
-      </sui-table>
+      <h3 is="sui-header">View Trophy and Vote : {{infosTrophee[0].titre}}</h3>
+      <sui-grid>
+        <sui-grid-row>
+          <sui-grid-column :width="2">{{infosTrophee[0].numod}}</sui-grid-column>
+          <sui-grid-column :width="1">{{infosTrophee[0].type}}</sui-grid-column>
+          <sui-grid-column :width="4">{{infosTrophee[0].description}}</sui-grid-column>
+          <sui-grid-column :width="1">{{infosTrophee[0].vote}}</sui-grid-column>
+        </sui-grid-row>
+      </sui-grid>
     </div>
 </template>
 
 <script>
 
-// import axios from 'axios'
+import axios from 'axios'
+import global from '@/globals.json'
 
 // TODO : la route a en paramètre l'id du trophée
 export default {
@@ -24,17 +24,16 @@ export default {
     return {
       infosTrophee: []
     }
-  }
-  /* mounted () {
-    axios.get(global.API + '/trophy/1')
+  },
+  mounted () {
+    axios.get(global.API + '/trophy/' + this.$session.get('user_account'))
       .then(response => {
         this.infosTrophee = response.data
-        console.log(response.data)
       })
       .catch(e => {
         this.errors.push(e)
       })
-  } */
+  }
 }
 </script>
 

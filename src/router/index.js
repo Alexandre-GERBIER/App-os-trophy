@@ -39,7 +39,7 @@ let router = new Router({
           component: Ranking
         },
         {
-          path: 'trophy/:id',
+          path: 'trophy/:nutroph',
           component: StudTrophy
         },
         {
@@ -47,7 +47,7 @@ let router = new Router({
           component: StudTrophies
         },
         {
-          path: 'module/:id',
+          path: 'module/:reference',
           component: StudModule
         },
         {
@@ -69,11 +69,11 @@ let router = new Router({
           component: Ranking
         },
         {
-          path: 'trophy/:id',
+          path: 'trophy/:nutroph',
           component: TeachTrophy
         },
         {
-          path: 'module/:id',
+          path: 'module/:reference',
           component: TeachModule
         },
         {

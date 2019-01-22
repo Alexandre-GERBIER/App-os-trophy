@@ -52,40 +52,11 @@ export default {
       ordreObtenu: 0,
       mesTrophees: {},
       errors: []
-      /*  trophies: [
-        {
-          id: '1',
-          nom: 'Toujours présent',
-          module: 'maths',
-          date: '21/05/2018',
-          valeur: 'bronze',
-          vote: false,
-          obtenu: true
-        },
-        {
-          id: '2',
-          nom: 'Toujours prêt',
-          module: 'algo',
-          date: '30/10/2018',
-          valeur: 'platine',
-          vote: true,
-          obtenu: false
-        },
-        {
-          id: '3',
-          nom: 'Toujours debout',
-          module: 'bdd',
-          date: '08/02/2018',
-          valeur: 'or',
-          vote: true,
-          obtenu: true
-        }
-      ] */
     }
   },
 
   mounted () {
-    axios.get(global.API + '/trophy/student/E175119X')
+    axios.get(global.API + '/trophy/student/' + this.$session.get('user_account'))
       .then(response => {
         this.mesTrophees = response.data
       })
