@@ -23,7 +23,7 @@
                 </sui-tab-pane>
                 <sui-tab-pane title="Module">
                     <sui-tab  :menu="{ secondary: true }">
-                        <sui-tab-pane title="Math">
+                        <sui-tab-pane v-for="item in mesModules" :key="item" :title="item.nom">
                             <sui-table unstackable celled>
                                 <sui-table-header>
                                     <sui-table-row>
@@ -33,28 +33,10 @@
                                     </sui-table-row>
                                 </sui-table-header>
                                 <sui-table-body>
-                                    <sui-table-row v-for="item in classementModuleMath" :key="item[0]">
-                                            <sui-table-cell>{{item[0]}}</sui-table-cell>
-                                            <sui-table-cell>{{item[1]}}</sui-table-cell>
-                                            <sui-table-cell>{{item[2]}}</sui-table-cell>
-                                    </sui-table-row>
-                                </sui-table-body>
-                            </sui-table>
-                        </sui-tab-pane>
-                        <sui-tab-pane title="Probas">
-                            <sui-table unstackable celled>
-                                <sui-table-header>
-                                    <sui-table-row>
-                                        <sui-table-header-cell>Rang</sui-table-header-cell>
-                                        <sui-table-header-cell>Etudiant</sui-table-header-cell>
-                                        <sui-table-header-cell>Niveau</sui-table-header-cell>
-                                    </sui-table-row>
-                                </sui-table-header>
-                                <sui-table-body>
-                                    <sui-table-row v-for="item in classementModuleProbas" :key="item[0]">
-                                            <sui-table-cell>{{item[0]}}</sui-table-cell>
-                                            <sui-table-cell>{{item[1]}}</sui-table-cell>
-                                            <sui-table-cell>{{item[2]}}</sui-table-cell>
+                                    <sui-table-row v-for="item in allStudentModule" :key="item[0]">
+                                            <sui-table-cell>{{item.rank}}</sui-table-cell>
+                                            <sui-table-cell>{{item.prenom + ' ' + item.nom}}</sui-table-cell>
+                                            <sui-table-cell>{{item.level}}</sui-table-cell>
                                     </sui-table-row>
                                 </sui-table-body>
                             </sui-table>
@@ -76,6 +58,8 @@ export default {
   data () {
     return {
       allStudent: {},
+      allStudentModule: {},
+      mesModules: {},
       open: false,
       classementGeneral: [
         ['1', 'jean', '14'],
@@ -101,6 +85,8 @@ export default {
   mounted () {
     let loadingStudents = []
     let studentCount = 0
+    let loadingStudentsModule = []
+    let studentCountModule = 0
     axios.get(global.API + '/student')
       .then(response => {
         loadingStudents = response.data
@@ -121,6 +107,43 @@ export default {
                   this.allStudent[i].rank = i + 1
                 }
               }
+            })
+            .catch(e => {
+              this.errors.push(e)
+            })
+        })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
+    axios.get(global.API + 'module/student/E175119X')
+      .then(response => {
+        this.mesModules = response.data
+        this.mesModules.forEach(mod => {
+          axios.get(global.API + 'student/module/' + mod.reference)
+            .then(response => {
+              loadingStudentsModule = response.data
+              let nbstudentsModule = loadingStudentsModule.length
+              loadingStudentsModule.forEach(student => {
+                axios.get(global.API + '/trophy/student/' + student.nuetu)
+                  .then(response => {
+                    student.trophies = response.data
+                    student.level = this.calculLevel(student)
+                    studentCountModule++
+                    if (studentCountModule === nbstudentsModule) {
+                      this.studentsInModule = loadingStudents
+                      this.studentsInModule.sort((a, b) => {
+                        return b.level - a.level
+                      })
+                      for (let i = 0; i < nbstudentsModule; i++) {
+                        this.allStudentModule[i].rank = i + 1
+                      }
+                    }
+                  })
+                  .catch(e => {
+                    this.errors.push(e)
+                  })
+              })
             })
             .catch(e => {
               this.errors.push(e)
