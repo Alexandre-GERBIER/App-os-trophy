@@ -273,14 +273,11 @@ h2 {
 }
 
 .imageTrophee {
-    position: relative;
-    left: 43%;
+    /* position: relative;
+    left: 43%; */
     zoom: 50%
 }
 
-/* .texteTrophee{
-    text-align: center
-} */
 .ui.centered.grid>.column:not(.aligned):not(.justified):not(.row), .ui.centered.grid>.row>.column:not(.aligned):not(.justified), .ui.grid .centered.row>.column:not(.aligned):not(.justified){
     text-align: center;
 }
