@@ -8,15 +8,14 @@
               <sui-table-header-cell>Module</sui-table-header-cell>
               <sui-table-header-cell>Trophées</sui-table-header-cell>
               <sui-table-header-cell>Visible</sui-table-header-cell>
-              <sui-table-header-cell text-align="right">Editer</sui-table-header-cell>
             </sui-table-row>
           </sui-table-header>
           <sui-table-body>
             <sui-table-row v-for="module in modulesList" :key="module.nom">
-              <sui-table-cell>{{module.reference}} - {{module.nom}}</sui-table-cell>
+              <sui-table-cell><router-link :to="'/prof/module/' + module.reference">{{module.reference}} - {{module.nom}}</router-link></sui-table-cell>
               <sui-table-cell>{{module.trophies}}</sui-table-cell>
-              <sui-table-cell><i v-if="module.visible" class="check icon"></i></sui-table-cell>
-              <sui-table-cell text-align="right"><router-link :to="'/teacher/module/' + module.id">éditer le module</router-link></sui-table-cell>
+              <sui-table-cell v-if="module.visible" positive><i class="check icon"></i></sui-table-cell>
+              <sui-table-row  v-else negative><i class="close icon"></i></sui-table-row>
             </sui-table-row>
           </sui-table-body>
         </sui-table>
@@ -47,7 +46,7 @@ export default {
   },
 
   mounted () {
-    axios.get(global.API + '/prof/module/j.roger')
+    axios.get(global.API + '/prof/module/' + this.$session.get('user_account'))
       .then(response => {
         this.loadingModulesList = response.data
         for (let module of this.loadingModulesList) {
