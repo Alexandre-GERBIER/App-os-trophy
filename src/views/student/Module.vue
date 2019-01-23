@@ -24,8 +24,11 @@
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                               <sui-table-cell><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
-                              <sui-table-cell>{{trophy.type}}</sui-table-cell>
-                              <sui-table-cell ><vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" v-if="trophy.vote == 1" /></sui-table-cell>
+                              <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
+                              <sui-table-cell>
+                                <vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" v-if="trophy.vote == 1"/>
+                                <i v-else class="close icon"></i>
+                              </sui-table-cell>
                               <!--<sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>-->
                           </sui-table-row>
                       </sui-table-body>

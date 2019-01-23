@@ -1,15 +1,14 @@
 <template>
     <div>
-        <h2 is="sui-header">Module {{ $route.params.id }} - {{name}} </h2>
+        <h2 is="sui-header">Module {{ $route.params.reference }} - {{name}} </h2>
         <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
-                    <p>Enseignant responsable : <b>{{ teacher }}</b></p>
-                    <p>Nombre d'étudiants inscrits au module : <b>{calculer}</b></p>
+                    <p>Nombre d'étudiants inscrits au module : <b>{{numetu}}</b></p>
                     <sui-divider hidden/>
                     <sui-divider hidden/>
 
-                    <h3 is="sui-header">Trophées ( {calculer} disponibles )</h3>
+                    <h3 is="sui-header">Trophées ( {{numtro}} disponibles )</h3>
                     <sui-container>
                     <sui-table unstackable>
                       <sui-table-header>
@@ -24,7 +23,7 @@
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                               <sui-table-cell>{{trophy.nom}}</sui-table-cell>
-                              <sui-table-cell>{{trophy.valeur}}</sui-table-cell>
+                              <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
                               <sui-table-cell ><DeliverTrophy/></sui-table-cell>
                               <sui-table-cell text-align="right"><EditTrophy/></sui-table-cell>
@@ -43,6 +42,8 @@
 import DeliverTrophy from '@/components/DeliverTrophy'
 import EditTrophy from '@/components/EditTrophy'
 import CreateTrophy from '@/components/CreateTrophy'
+import axios from 'axios'
+import global from '@/globals.json'
 
 export default {
 
@@ -50,30 +51,41 @@ export default {
 
   data () {
     return {
-      id: 'M3101',
-      name: 'Bases de données avancées',
-      teacher: 'John Doe',
-      trophies: [
-        {
-          id: '1',
-          nom: 'Toujours présent',
-          valeur: 'bronze',
-          vote: false
-        },
-        {
-          id: '2',
-          nom: 'Toujours prêt',
-          valeur: 'or',
-          vote: true
-        },
-        {
-          id: '3',
-          nom: 'Toujours debout',
-          valeur: 'platine',
-          vote: true
-        }
-      ]
+      id: this.$route.params.reference,
+      name: 'loading...',
+      numetu: '',
+      numtro: '',
+      errors: [],
+      trophies: []
     }
+  },
+  mounted () {
+    console.log('oui')
+    axios.get(global.API + '/prof/module/' + this.$route.params.reference)
+      .then(res => {
+        this.name = res.data[0].nom
+        console.log('1 : ' + this.name)
+        axios.get(global.API + '/prof/module/' + this.$route.params.reference)
+          .then(res => {
+            this.numetu = res.data.length
+            console.log('2 : ' + this.numetu)
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+        axios.get(global.API + '/trophy/module/' + this.$route.params.reference)
+          .then(res => {
+            this.numtro = res.data.length
+            this.trophies = res.data
+            console.log('3 : ' + this.numtro)
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
 }
 </script>
