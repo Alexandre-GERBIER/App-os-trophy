@@ -66,34 +66,21 @@ export default {
   },
 
   mounted () {
-    let loadingStudents = []
-    let studentCount = 0
     let loadingStudentsModule = []
     let studentCountModule = 0
     let moduleCount = 0
-    axios.get(global.API + '/student')
+    axios.get(global.API + '/rank')
       .then(response => {
-        loadingStudents = response.data
-        let nbstudents = loadingStudents.length
-        loadingStudents.forEach(student => {
-          axios.get(global.API + '/trophy/student/' + student.nuetu)
-            .then(response => {
-              student.trophies = response.data
-              student.level = this.calculLevel(student)
-              studentCount++
-              if (studentCount === nbstudents) {
-                this.allStudent = loadingStudents
-                this.allStudent.sort((a, b) => {
-                  return b.level - a.level
-                })
-                for (let i = 0; i < nbstudents; i++) {
-                  this.allStudent[i].rank = i + 1
-                }
-              }
-            })
-            .catch(e => {
-              this.errors.push(e)
-            })
+        this.allStudent = response.data
+        let nbstudents = this.allStudent.length
+        this.allStudent.forEach(student => {
+          student.level = this.calculLevel(student)
+          this.allStudent.sort((a, b) => {
+            return b.level - a.level
+          })
+          for (let i = 0; i < nbstudents; i++) {
+            this.allStudent[i].rank = i + 1
+          }
         })
       })
       .catch(e => {
@@ -146,9 +133,9 @@ export default {
 
   methods: {
     calculLevel (student) {
-      let currentxp = 0
+      let currentxp = student.nbPlatine * 40 + student.nbOr * 30 + student.nbArgent * 20 + student.nbBronze * 10
       let currentlvl = 0
-      for (let index = 0; index < student.trophies.length; index++) {
+      /* for (let index = 0; index < student.trophies.length; index++) {
         switch (student.trophies[index].type) {
           case 'platine':
             currentxp += 40
@@ -163,7 +150,7 @@ export default {
             currentxp += 10
             break
         }
-      }
+      } */
       currentlvl = currentxp / 50
       return currentlvl
     }
