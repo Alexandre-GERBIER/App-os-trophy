@@ -10,8 +10,6 @@
                         <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort icon" :class="(ordreDate != 0) ? ((ordreDate == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort icon" :class="(ordreValeur != 0) ? ((ordreValeur == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
                         <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort icon" :class="(ordreVote != 0) ? ((ordreVote == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
-                        <!--<sui-table-header-cell v-on:click="sorted_obtenu">Obtenu <i class="sort icon" :class="(ordreObtenu != 0) ? ((ordreObtenu == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell> -->
-                        <!-- <sui-table-header-cell text-align="right">Informations</sui-table-header-cell> -->
                     </sui-table-row>
                 </sui-table-header>
                 <sui-table-body>
@@ -21,8 +19,6 @@
                         <sui-table-cell>{{trophy.datevisible}}</sui-table-cell>
                         <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                         <sui-table-cell><vote :id="trophy.nutroph" :name="trophy.titre" v-if="trophy.vote == 1"/></sui-table-cell>
-                       <!-- <sui-table-cell><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell> -->
-                        <!-- <sui-table-cell text-align="right">voir les détails du trophée</sui-table-cell> -->
                     </sui-table-row>
                 </sui-table-body>
             </sui-table>
@@ -31,7 +27,6 @@
 </template>
 
 <script>
-// TODO : doit permettre de trier les trophées par niveau, par module et par date
 
 import axios from 'axios'
 import vote from '@/components/vote'

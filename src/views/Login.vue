@@ -5,13 +5,15 @@
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
             <input placeholder="Identifiant" type="text" name="ide" v-model="ide">
-            <i class="user icon"></i>
+            <i class="user icon"/>
         </div>
         <div class="ui lock left icon input">
             <input placeholder="Mot de passe" type="password">
-            <i class="lock icon"></i>
+            <i class="lock icon"/>
         </div>
-            <div @click="loginUser" class="ui icon sign in right labeled button green"><i class="sign in icon"></i>Login</div>
+        <div @click="loginUser" class="ui icon sign in right labeled button green">
+            <i class="sign in icon"/>Login
+        </div>
     </form>
 </div>
 </template>
@@ -29,11 +31,6 @@ export default {
       errors: []
     }
   },
-  /*
-  computed: {
-
-  },
-  */
   methods: {
     rlink () {
       return (this.accountType() === 'student') ? '/student/profile' : '/teacher/profile'
@@ -70,14 +67,6 @@ export default {
           this.errors.push(e)
         })
     }
-
-    /* routage () {
-      if (this.ide === '') {
-        this.rlink = '/student/profile'
-      } else {
-        this.rlink = '/teacher/profile'
-      }
-    } */
   }
 }
 </script>

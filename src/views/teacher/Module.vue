@@ -61,8 +61,7 @@ export default {
     }
   },
   mounted () {
-    // let promesses = []
-    /* promesses.push( */ axios.get(global.API + '/module/' + this.$route.params.reference)
+    axios.get(global.API + '/module/' + this.$route.params.reference)
       .then(res => {
         this.name = res.data[0].nom
         axios.get(global.API + '/module/' + this.$route.params.reference)
@@ -83,10 +82,7 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
-      }) // )
-    /* Promise.all(promesses).then(function () {
-      console.log('fini')
-    }) */
+      })
   }
 }
 </script>

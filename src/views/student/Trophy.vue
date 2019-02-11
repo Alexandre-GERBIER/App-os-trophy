@@ -38,7 +38,6 @@
 import axios from 'axios'
 import global from '@/globals.json'
 
-// TODO : la route a en paramètre l'id du trophée
 export default {
 
   data () {

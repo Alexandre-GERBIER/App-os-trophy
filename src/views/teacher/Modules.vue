@@ -19,7 +19,6 @@
             </sui-table-row>
           </sui-table-body>
         </sui-table>
-
         <ModalCreateModule/>
       </sui-container>
     </div>

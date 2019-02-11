@@ -17,8 +17,6 @@
                               <sui-table-header-cell>Nom</sui-table-header-cell>
                               <sui-table-header-cell>Valeur</sui-table-header-cell>
                               <sui-table-header-cell>Votes</sui-table-header-cell>
-                              <!--<sui-table-header-cell>Obtenu</sui-table-header-cell>-->
-                             <!--  <sui-table-header-cell text-align="right">Informations</sui-table-header-cell> -->
                           </sui-table-row>
                       </sui-table-header>
                       <sui-table-body>
@@ -29,7 +27,6 @@
                                 <vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" v-if="trophy.vote == 1"/>
                                 <i v-else class="close icon"></i>
                               </sui-table-cell>
-                              <!--<sui-table-cell ><i class="check icon" v-if="trophy.obtenu"></i></sui-table-cell>-->
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>
@@ -40,7 +37,6 @@
 </template>
 
 <script>
-// TODO : popup pour afficher les trophées disponibles
 import vote from '@/components/vote'
 import axios from 'axios'
 import global from '@/globals.json'

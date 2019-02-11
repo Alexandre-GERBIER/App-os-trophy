@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="fond">
     <sui-menu class="fixed inverted" id="menu_student_big">
       <sui-menu-item is="sui-header">App'Os Trophy - étudiant</sui-menu-item>
 
@@ -43,7 +43,6 @@
     <sui-divider hidden/>
     <sui-divider hidden/>
     <sui-divider hidden />
-
     <router-view></router-view>
   </div>
 </template>
@@ -75,5 +74,15 @@ export default {
     #menu_student_small {
       display: none;
     }
+  }
+
+  #fond {
+      background-image: url('/static/tableauNoir.jpg');
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      background-attachment:local;
   }
 </style>

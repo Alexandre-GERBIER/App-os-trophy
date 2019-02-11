@@ -4,7 +4,6 @@
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
-
             <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
@@ -273,8 +272,6 @@ h2 {
 }
 
 .imageTrophee {
-    /* position: relative;
-    left: 43%; */
     zoom: 50%
 }
 

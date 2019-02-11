@@ -5,9 +5,10 @@
         <sui-grid class=centered>
             <sui-grid-row>
                 <sui-grid-column :width="6">
-                    <p>Le site App'OS trophy est un outil mis à la disposition des enseignants pour ludifier l'apprentissage de leur matière.
-                    Le site permet de distribuer des trophées aux élèves pour stimuler leur compétitivité et favoriser l'émulation intellectuelle.
-                    Les élèves peuvent voter entre eux pour l'attribution de trophées.
+                    <p>
+                        Le site App'OS trophy est un outil mis à la disposition des enseignants pour ludifier l'apprentissage de leur matière.
+                        Le site permet de distribuer des trophées aux élèves pour stimuler leur compétitivité et favoriser l'émulation intellectuelle.
+                        Les élèves peuvent voter entre eux pour l'attribution de trophées.
                     </p>
                 </sui-grid-column>
             </sui-grid-row>

@@ -3,7 +3,6 @@
         <sui-button @click.native="toggle">Changer de mot de passe</sui-button>
         <sui-modal v-model="open">
         <sui-modal-header>Changer de mot de passe</sui-modal-header>
-
             <sui-modal-content>
                 <label v-for="item in sections" :key="item[0]">
                     <sui-grid>

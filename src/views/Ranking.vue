@@ -53,8 +53,6 @@
 import axios from 'axios'
 import global from '@/globals.json'
 
-// TODO : popup qui affiche les infos d'un étudiant en cliquant dessus
-
 export default {
   data () {
     return {
