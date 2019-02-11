@@ -46,7 +46,9 @@ export default {
       .then(response => {
         let students = response.data
         students.forEach(student => {
-          this.studModule.push({'value': student.prenom + ' ' + student.nom, 'text': student.prenom + ' ' + student.nom})
+          if (student.nuetu !== this.$session.get('user_account')) {
+            this.studModule.push({'value': student.prenom + ' ' + student.nom, 'text': student.prenom + ' ' + student.nom})
+          }
         })
       })
       .catch(e => {

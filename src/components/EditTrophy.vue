@@ -90,13 +90,10 @@ export default {
   mounted () {
     axios.get(global.API + '/trophy/' + this.id)
       .then(res => {
-        console.log('get ' + this.id)
         this.trophy = res.data
-        // console.log(this.trophy)
       })
       .catch(e => {
         this.errors.push(e)
-        console.log(this.errors)
       })
   }
 }

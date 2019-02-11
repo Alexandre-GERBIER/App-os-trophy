@@ -79,7 +79,7 @@ export default {
     }
   }
 
-  #fond {
+  /* #fond {
       background-image: url('/static/tableauNoir.jpg');
       background-size: cover;
       background-position: center;
@@ -87,5 +87,5 @@ export default {
       width: 100%;
       position: absolute;
       background-attachment:local;
-  }
+  } */
 </style>
