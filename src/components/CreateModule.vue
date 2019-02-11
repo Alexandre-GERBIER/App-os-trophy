@@ -32,12 +32,8 @@
         </sui-form>
       </sui-modal-content>
       <sui-modal-actions>
-        <sui-button negative>
-          Annuler
-        </sui-button>
-        <sui-button positive>
-          Créer
-        </sui-button>
+        <sui-button positive>Créer</sui-button>
+        <sui-button negative>Annuler</sui-button>
       </sui-modal-actions>
     </sui-modal>
   </div>

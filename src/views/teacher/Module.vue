@@ -26,7 +26,7 @@
                               <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
                               <sui-table-cell ><DeliverTrophy/></sui-table-cell>
-                              <sui-table-cell text-align="right"><EditTrophy/></sui-table-cell>
+                              <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>
@@ -48,7 +48,6 @@ import global from '@/globals.json'
 export default {
 
   components: {DeliverTrophy, EditTrophy, CreateTrophy},
-
   data () {
     return {
       id: this.$route.params.reference,
