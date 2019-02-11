@@ -15,9 +15,6 @@
               <sui-input name="TrophyName" v-model="TrophyName"/>
           </div>
           <div class="six wide column">
-              <!--
-              <sui-dropdown fluid :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
-                -->
                 <br>
                 <label> Module : </label> {{ $route.params.id }} - {{name}}
           </div>
@@ -50,7 +47,6 @@
               <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
               <br> <br>
               <sui-checkbox label="vote" toggle v-model="vote"/>
-              <!--v-model="state.date"-->
               <br> <br>
               <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
           </div>
@@ -62,10 +58,6 @@
         </sui-modal>
     </div>
 </template>
-<!--
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vuejs-datepicker"></script>
--->
 
 <script>
 import Datepicker from 'vuejs-datepicker'
@@ -73,15 +65,6 @@ import {fr} from 'vuejs-datepicker/dist/locale'
 export default {
   name: 'CreateTrophy',
   components: { Datepicker },
-  /*    fonction appelée a l'appel de la vue, initialise des variables (appel API)
-
-  mounted() {
-    this.$textModule = this.$ressources( adresse API)
-    this.$textModule.query().then((response)=> {
-      this.$textModule = reponse.data},
-      (response) => {...})
-    })
-},  */
   data () {
     return {
       open: false,
@@ -119,7 +102,6 @@ export default {
 }
 div{
     font-family: 'Lato';
-    /*padding: 5px;*/
 }
 #img{
     zoom: 20%;

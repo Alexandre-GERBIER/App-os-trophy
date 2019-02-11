@@ -8,7 +8,6 @@
             <sui-table-header-cell>Module</sui-table-header-cell>
             <sui-table-header-cell>Niveau</sui-table-header-cell>
             <sui-table-header-cell>Trophées</sui-table-header-cell>
-            <!--<sui-table-header-cell text-align="right">Informations</sui-table-header-cell>-->
           </sui-table-row>
         </sui-table-header>
         <sui-table-body>
@@ -47,7 +46,6 @@ export default {
           module.level = 0
           module.trophies = []
         }
-        // console.log(response.data)
 
         axios.get(global.API + '/trophy/student/' + this.$session.get('user_account'))
           .then(response => {

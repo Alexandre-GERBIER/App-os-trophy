@@ -58,10 +58,6 @@
     </sui-modal>
   </div>
 </template>
-<!--
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vuejs-datepicker"></script>
--->
 
 <script>
 import Datepicker from 'vuejs-datepicker'
@@ -117,7 +113,6 @@ export default {
   }
   div{
     font-family: 'Lato';
-    /*padding: 5px;*/
   }
   #img{
     zoom: 20%;

@@ -4,7 +4,6 @@
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
-
             <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
