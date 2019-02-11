@@ -2,7 +2,7 @@
     <div id="boutonVote">
         <sui-button class="inverted green" role='button' @click="toggle">Délivrer</sui-button>
         <sui-modal v-model="open">
-            <sui-modal-header>Déliverer le trophée </sui-modal-header>
+            <sui-modal-header>Délivrer le trophée</sui-modal-header>
             <sui-modal-content>
                 <label>Etudiants concernés</label>
             <sui-dropdown fluid multiple :options="students" selection v-model="studentSelec">
@@ -17,21 +17,34 @@
 </template>
 
 <script>
+
+import axios from 'axios'
+import global from '@/globals.json'
+
 export default {
   name: 'DeliverTrophy',
+  props: {
+    numodule: ''
+  },
   data () {
     return {
       open: false,
       studentSelec: null,
-      students: [
-        {key: 'Jean', text: 'Jean', value: 'Jean'},
-        {key: 'Claude', text: 'Claude', value: 'Claude'},
-        {key: 'Bernard', text: 'Bernard', value: 'Bernard'},
-        {key: 'Louis', text: 'Louis', value: 'Louis'},
-        {key: 'Eudes', text: 'Eudes', value: 'Eudes'},
-        {key: 'Albert', text: 'Albert', value: 'Albert'}
-      ]
+      alldata: [],
+      students: []
     }
+  },
+  mounted () {
+    axios.get(global.API + '/student/module/' + this.numodule)
+      .then(res => {
+        this.alldata = res.data
+        this.alldata.forEach(stud => {
+          this.students.push({'text': stud.nom + ' ' + stud.prenom, 'value': stud.nom + ' ' + stud.prenom})
+        })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   },
 
   methods: {
