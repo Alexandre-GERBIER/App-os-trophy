@@ -2,7 +2,7 @@
   <div id="boutonTrophy">
     <sui-button @click.native="toggle">Éditer un trophée</sui-button>
     <sui-modal v-model="open">
-      <sui-modal-header>éditer un trophée : {{ trophy[0].titre }} </sui-modal-header>
+      <sui-modal-header >éditer un trophée : {{ trophy[0].titre }} </sui-modal-header>
       <form class="ui grid">
         <div class="four wide column">
           <sui-image v-if="trophy[0].type === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
@@ -79,15 +79,7 @@ export default {
       visible: true,
       current: null,
       fr: fr,
-      TrophyDescription: '',
-      trophy: {},
-      TrophyValue: 'platine',
-      textModule: [
-        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
-        {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
-        {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
-      ],
-      selectedModules: []
+      trophy: {}
     }
   },
   methods: {
@@ -98,8 +90,9 @@ export default {
   mounted () {
     axios.get(global.API + '/trophy/' + this.id)
       .then(res => {
+        console.log('get ' + this.id)
         this.trophy = res.data
-        console.log(this.trophy)
+        // console.log(this.trophy)
       })
       .catch(e => {
         this.errors.push(e)

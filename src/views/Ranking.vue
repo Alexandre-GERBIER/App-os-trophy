@@ -22,7 +22,7 @@
                     </sui-table>
                 </sui-tab-pane>
                 <sui-tab-pane title="Module">
-                    <sui-tab  :menu="{ secondary: true }">
+                    <sui-tab :menu="{ secondary: true }">
                         <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom">
                             <sui-table unstackable celled>
                                 <sui-table-header>
@@ -81,23 +81,25 @@ export default {
       .catch(e => {
         this.errors.push(e)
       })
-    axios.get(global.API + '/module/student/E175119X') // les modules de l'étudiant --> mesModules
+    let promesse = []
+    let tmpAllStudentModule = {}
+    promesse.push(axios.get(global.API + '/module/' + this.$session.get('user_type') + '/' + this.$session.get('user_account')) // les modules de l'étudiant --> mesModules
       .then(response => {
         this.mesModules = response.data
         this.mesModules.forEach(mod => { // mod --> pour chaque module
           axios.get(global.API + '/rank/' + mod.reference)
             .then(response => {
-              let tmp = response.data
-              let nbstudents = tmp.length
-              tmp.forEach(student => {
+              let rankModule = response.data
+              let nbstudents = rankModule.length
+              rankModule.forEach(student => {
                 student.level = this.calculLevel(student)
-                tmp.sort((a, b) => {
+                rankModule.sort((a, b) => {
                   return b.level - a.level
                 })
                 for (let i = 0; i < nbstudents; i++) {
-                  tmp[i].rank = i + 1
+                  rankModule[i].rank = i + 1
                 }
-                this.allStudentModule[mod.reference] = tmp
+                tmpAllStudentModule[mod.reference] = rankModule
               })
             })
             .catch(e => {
@@ -107,7 +109,11 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
-      })
+      }))
+    Promise.all(promesse).then(() => {
+      this.allStudentModule = tmpAllStudentModule
+      console.log(this.allStudentModule)
+    })
   },
 
   methods: {
