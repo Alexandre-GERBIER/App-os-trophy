@@ -1,6 +1,6 @@
 <template>
     <div id="boutonTrophy">
-        <sui-button @click.native="toggle">Créer un trophée</sui-button>
+        <sui-button class="green" @click.native="toggle" content="Nouveau  trophée" icon="plus"/>
         <sui-modal v-model="open">
         <sui-modal-header>Créer un trophée : {{ TrophyName }}</sui-modal-header>
         <form class="ui grid">
@@ -47,7 +47,7 @@
           <div class="six wide column">
               <sui-checkbox label="Visible" toggle v-model="visible"/>
               <br> <br>
-              <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+              <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
               <br> <br>
               <sui-checkbox label="vote" toggle v-model="vote"/>
               <!--v-model="state.date"-->
@@ -56,7 +56,7 @@
           </div>
         </form>
             <sui-modal-actions>
-                <sui-button positive>Créer (Envoi serveur)</sui-button>
+                <sui-button positive>Créer</sui-button>
                 <sui-button negative @click.native="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
