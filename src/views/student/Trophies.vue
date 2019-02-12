@@ -46,6 +46,9 @@
                 </sui-table-body>
             </sui-table>
         </sui-container>
+        <div v-if="chargement" class="ui active dimmer">
+          <div class="ui indeterminate text loader">Chargement ...</div>
+        </div>
     </div>
 </template>
 
@@ -68,18 +71,23 @@ export default {
       ordreValeur: 0,
       ordreVote: 0,
       mesTrophees: {},
-      errors: []
+      errors: [],
+      chargement: true
     }
   },
 
   mounted () {
-    axios.get(global.API + '/trophy/student/' + this.$session.get('user_account'))
+    let promesse = []
+    promesse.push(axios.get(global.API + '/trophy/student/' + this.$session.get('user_account'))
       .then(response => {
         this.mesTrophees = response.data
       })
       .catch(e => {
         this.errors.push(e)
-      })
+      }))
+    Promise.all(promesse).then(() => {
+      this.chargement = false
+    })
   },
 
   methods: {
