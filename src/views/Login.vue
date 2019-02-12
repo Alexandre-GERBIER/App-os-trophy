@@ -169,7 +169,7 @@ export default {
     }
     .logos img{
         width: 10%;
-        height: auto;
+        height: 10%;
         margin: 10px;
     }
     .logos{
