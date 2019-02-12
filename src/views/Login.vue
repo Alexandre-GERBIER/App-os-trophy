@@ -47,6 +47,27 @@ export default {
       }
     },
 
+    getModulesStudent () {
+      let modules = []
+
+      axios.get(global.API + '/module/student/' + this.$session.get('user_account'))
+        .then(response => {
+          modules = response.data
+          for (let module of modules) {
+            module.max_trophies = ''
+            module.level = ''
+            module.trophies = []
+            module.level_loaded = false
+            module.progress_loaded = false
+          }
+          console.log('GOT MODULES !')
+          localStorage.setItem('modules', JSON.stringify(modules))
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+
     loginUser () {
       // start session
       this.$session.start()
@@ -61,6 +82,14 @@ export default {
             console.log('valid')
             this.$session.set('user_type', this.accountType())
             this.$session.set('user_account', this.ide)
+
+            /* initialisation de la connexion */
+
+            // récupération de la liste des modules
+            if (this.accountType() === 'student') {
+              this.getModulesStudent()
+            }
+
             this.$router.replace(this.rlink())
           } else {
             console.log('invalid login !')
@@ -70,14 +99,6 @@ export default {
           this.errors.push(e)
         })
     }
-
-    /* routage () {
-      if (this.ide === '') {
-        this.rlink = '/student/profile'
-      } else {
-        this.rlink = '/teacher/profile'
-      }
-    } */
   }
 }
 </script>
