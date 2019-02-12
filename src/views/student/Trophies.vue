@@ -2,7 +2,7 @@
     <div>
         <h2 is="sui-header">Mes trophées</h2>
         <sui-container>
-            <sui-table unstackable>
+            <sui-table unstackable class="tab_trophies_big">
                 <sui-table-header class="table_header">
                     <sui-table-row>
                         <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort icon" :class="(ordreNom != 0) ? ((ordreNom == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
@@ -19,6 +19,29 @@
                         <sui-table-cell>{{trophy.datevisible}}</sui-table-cell>
                         <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                         <sui-table-cell><vote :id="trophy.nutroph" :name="trophy.titre" :numod="trophy.numod" v-if="trophy.vote == 1"/></sui-table-cell>
+                    </sui-table-row>
+                </sui-table-body>
+            </sui-table>
+        </sui-container>
+
+        <sui-container>
+            <sui-table unstackable class="tab_trophies_small">
+                <sui-table-header class="table_header">
+                    <sui-table-row>
+                        <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort icon" :class="(ordreNom != 0) ? ((ordreNom == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <!-- <sui-table-header-cell v-on:click="sorted_module">Module <i class="sort icon" :class="(ordreModule != 0) ? ((ordreModule == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_date">Date <i class="sort icon" :class="(ordreDate != 0) ? ((ordreDate == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell> -->
+                        <sui-table-header-cell v-on:click="sorted_valeur">Valeur <i class="sort icon" :class="(ordreValeur != 0) ? ((ordreValeur == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                        <sui-table-header-cell v-on:click="sorted_vote">Votes <i class="sort icon" :class="(ordreVote != 0) ? ((ordreVote == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>
+                    </sui-table-row>
+                </sui-table-header>
+                <sui-table-body>
+                    <sui-table-row v-for="trophy in mesTrophees" :key="trophy.nutroph">
+                        <sui-table-cell :width="3"><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
+                        <!-- <sui-table-cell>{{trophy.numod}}</sui-table-cell>
+                        <sui-table-cell>{{trophy.datevisible}}</sui-table-cell> -->
+                        <sui-table-cell :width="2"><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
+                        <sui-table-cell :width="2"><vote :id="trophy.nutroph" :name="trophy.titre" :numod="trophy.numod" v-if="trophy.vote == 1"/></sui-table-cell>
                     </sui-table-row>
                 </sui-table-body>
             </sui-table>
@@ -156,4 +179,16 @@ export default {
 .table_header {
   user-select: none;
 }
+
+  @media (max-width: 700px) {
+    .tab_trophies_big {
+      display: none;
+    }
+  }
+
+  @media (min-width: 701px) {
+    .tab_trophies_small {
+      display: none;
+    }
+  }
 </style>
