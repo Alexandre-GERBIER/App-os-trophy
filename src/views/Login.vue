@@ -1,6 +1,10 @@
 <template>
 <div id="background">
     <h1 is="sui-header" class="">App'Os Trophy</h1>
+    <div class="logos">
+        <img src="/static/images/univ.jpg" alt="univLogo">
+        <img src="/static/images/iutnantes.png" alt="iutLogo">
+    </div>
     <form id="login">
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
@@ -162,5 +166,17 @@ export default {
     }
     #login div{
         width:100%;
+    }
+    .logos img{
+        width: 10%;
+        height: auto;
+        margin: 10px;
+    }
+    .logos{
+        position: absolute;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        top: 0;
     }
 </style>

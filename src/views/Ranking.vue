@@ -126,6 +126,9 @@ export default {
       let currentlvl = 0
       currentlvl = currentxp / 50
       return currentlvl
+    },
+    forceUpdate () {
+      this.forceUpdate()
     }
   }
 }
@@ -139,12 +142,6 @@ h1 {
 
 #classementP {
     text-align: center
-}
-
-.menuModule{
-  display: flex;
-  flex-direction: column;
-  color: red;
 }
 
 </style>
