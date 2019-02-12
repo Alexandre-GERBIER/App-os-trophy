@@ -117,7 +117,6 @@ export default {
     Promise.all(promesse1, promesse2).then(() => {
       this.allStudentModule = tmpAllStudentModule
       this.chargement = false
-      console.log(this.chargement)
     })
   },
 
