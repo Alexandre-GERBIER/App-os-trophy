@@ -23,7 +23,7 @@
                 </sui-tab-pane>
                 <sui-tab-pane title="Module">
                     <sui-tab :menu="{ secondary: true }">
-                        <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom">
+                        <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom" class="menuModules">
                             <sui-table unstackable celled>
                                 <sui-table-header>
                                     <sui-table-row>
@@ -45,7 +45,9 @@
                 </sui-tab-pane>
             </sui-tab>
         </div>
-        {{allStudentModule}}
+        <div v-if="chargement" class="ui active dimmer">
+          <div class="ui indeterminate text loader">Chargement ...</div>
+        </div>
     </div>
 </template>
 
@@ -59,12 +61,15 @@ export default {
       allStudent: {},
       allStudentModule: {},
       mesModules: {},
-      open: false
+      open: false,
+      chargement: true
     }
   },
 
   mounted () {
-    axios.get(global.API + '/rank')
+    let promesse1 = []
+    let promesse2 = []
+    promesse1.push(axios.get(global.API + '/rank')
       .then(response => {
         this.allStudent = response.data
         let nbstudents = this.allStudent.length
@@ -80,10 +85,9 @@ export default {
       })
       .catch(e => {
         this.errors.push(e)
-      })
-    let promesse = []
+      }))
     let tmpAllStudentModule = {}
-    promesse.push(axios.get(global.API + '/module/' + this.$session.get('user_type') + '/' + this.$session.get('user_account')) // les modules de l'étudiant --> mesModules
+    promesse2.push(axios.get(global.API + '/module/' + this.$session.get('user_type') + '/' + this.$session.get('user_account')) // les modules de l'étudiant --> mesModules
       .then(response => {
         this.mesModules = response.data
         this.mesModules.forEach(mod => { // mod --> pour chaque module
@@ -110,9 +114,10 @@ export default {
       .catch(e => {
         this.errors.push(e)
       }))
-    Promise.all(promesse).then(() => {
+    Promise.all(promesse1, promesse2).then(() => {
       this.allStudentModule = tmpAllStudentModule
-      console.log(this.allStudentModule)
+      this.chargement = false
+      console.log(this.chargement)
     })
   },
 
@@ -135,6 +140,12 @@ h1 {
 
 #classementP {
     text-align: center
+}
+
+.menuModule{
+  display: flex;
+  flex-direction: column;
+  color: red;
 }
 
 </style>
