@@ -13,9 +13,17 @@
           <sui-table-body>
             <sui-table-row v-for="module in modulesList" :key="module.nom">
               <sui-table-cell><router-link :to="'/teacher/module/' + module.reference">{{module.reference}} - {{module.nom}}</router-link></sui-table-cell>
-              <sui-table-cell>{{module.trophies}}</sui-table-cell>
-              <sui-table-cell v-if="module.visible" positive><i class="check icon"></i></sui-table-cell>
-              <sui-table-row  v-else negative><i class="close icon"></i></sui-table-row>
+              <sui-table-cell>
+                <span v-if="!module.trophies_loaded" class="ui active inline loader tiny"></span>
+                <span v-else >{{module.trophies.length}}</span>
+              </sui-table-cell>
+              <sui-table-cell>
+                <div v-if="!module.visible_loaded" class="ui active inline loader tiny"></div>
+                <div v-else>
+                  <i v-if="module.visible" class="check icon" positive></i>
+                  <i v-else class="close icon" negative></i>
+                </div>
+              </sui-table-cell>
             </sui-table-row>
           </sui-table-body>
         </sui-table>
@@ -38,36 +46,43 @@ export default {
   components: { CreateTrophy },
   data () {
     return {
-      loadingModulesList: [],
       modulesList: [],
       errors: []
     }
   },
 
   mounted () {
-    axios.get(global.API + '/prof/module/' + this.$session.get('user_account'))
-      .then(response => {
-        this.loadingModulesList = response.data
-        for (let module of this.loadingModulesList) {
-          module.visible = true // TODO changer ça
-          module.trophies = 0
-        }
+    let getTrophies = () => {
+      for (let module of this.modulesList) {
+        axios.get(global.API + '/trophy/module/' + module.reference)
+          .then(response => {
+            module.trophies = response.data
+            module.trophies_loaded = true
+            this.modulesList.sort((a, b) => (a.reference - b.reference))
+          })
+          .catch(e => {
+            this.errors.push(e)
+          })
+      }
+    }
 
-        for (let module of this.loadingModulesList) {
-          axios.get(global.API + '/trophy/module/' + module.reference)
-            .then(response => {
-              module.trophies = response.data.length
-              this.modulesList.push(module) // on ajoute le module seulement après son chargement complet
-              this.modulesList.sort((a, b) => (a.reference - b.reference))
-            })
-            .catch(e => {
-              this.errors.push(e)
-            })
-        }
-      })
-      .catch(e => {
-        this.errors.push(e)
-      })
+    if (localStorage.getItem('modules')) {
+      this.modulesList = JSON.parse(localStorage.getItem('modules'))
+      getTrophies()
+    } else {
+      axios.get(global.API + '/prof/module/' + this.$session.get('user_account'))
+        .then(response => {
+          this.modulesList = response.data
+          for (let module of this.modulesList) {
+            module.visible = true // TODO changer ça
+            module.trophies = 0
+            module.trophies_loaded = false
+            module.visible_loaded = true // TODO changer ça aussi
+          }
+          localStorage.setItem('modules', JSON.stringify(this.modulesList))
+          getTrophies()
+        })
+    }
   }
 }
 </script>

@@ -69,6 +69,26 @@ export default {
         })
     },
 
+    getModulesTeacher () {
+      let modules = []
+
+      axios.get(global.API + '/prof/module/' + this.$session.get('user_account'))
+        .then(response => {
+          modules = response.data
+          for (let module of modules) {
+            module.visible = true // TODO changer ça
+            module.trophies = 0
+            module.trophies_loaded = false
+            module.visible_loaded = true
+          }
+          console.log('GOT MODULES TEACHER !')
+          localStorage.setItem('modules', JSON.stringify(modules))
+        })
+        .catch(e => {
+          this.errors.push(e)
+        })
+    },
+
     loginUser () {
       // start session
       this.$session.start()
@@ -89,6 +109,8 @@ export default {
             // récupération de la liste des modules
             if (this.accountType() === 'student') {
               this.getModulesStudent()
+            } else {
+              this.getModulesTeacher()
             }
 
             this.$router.replace(this.rlink())

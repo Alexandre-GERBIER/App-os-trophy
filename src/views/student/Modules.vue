@@ -69,12 +69,9 @@ export default {
         })
     }
 
-    if (localStorage.modules) {
+    if (localStorage.getItem('modules')) {
       this.modulesList = JSON.parse(localStorage.getItem('modules'))
-      console.log('ui')
-      for (let module of this.modulesList) {
-        console.log(module)
-      }
+
       getTrophies()
     } else {
       axios.get(global.API + '/module/student/' + this.$session.get('user_account'))
