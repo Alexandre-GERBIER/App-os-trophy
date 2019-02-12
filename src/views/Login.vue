@@ -144,7 +144,7 @@ export default {
         justify-content:space-around;
         align-items:center;
     }
-    @media (max-width: 1200px) {
+    @media (max-width: 700px) {
         #background{
             background-image:url("/static/images/2.2.jpg");
             background-repeat: no-repeat;
@@ -191,7 +191,7 @@ export default {
     }
     .logos img{
         width: 10%;
-        height: auto;
+        height: 10%;
         margin: 10px;
     }
     .logos{
