@@ -20,24 +20,13 @@
           </sui-form-field>
           <sui-form-field>
             <label>Groupes concernés</label>
-            <sui-dropdown fluid multiple :options="groups" selection v-model="groupSelection">
-
-            </sui-dropdown>
-            <!--<select class="ui simple selection fluid" name="modGroups" multiple>
-                <option v-for="group in groups" :key="group" :value="group">
-                  {{group}}
-                </option>
-            </select>-->
+            <sui-dropdown fluid multiple :options="groups" selection v-model="groupSelection"></sui-dropdown>
           </sui-form-field>
         </sui-form>
       </sui-modal-content>
       <sui-modal-actions>
-        <sui-button negative>
-          Annuler
-        </sui-button>
-        <sui-button positive>
-          Créer
-        </sui-button>
+        <sui-button positive>Créer</sui-button>
+        <sui-button negative>Annuler</sui-button>
       </sui-modal-actions>
     </sui-modal>
   </div>

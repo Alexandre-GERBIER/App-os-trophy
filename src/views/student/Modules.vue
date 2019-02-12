@@ -8,7 +8,6 @@
             <sui-table-header-cell>Module</sui-table-header-cell>
             <sui-table-header-cell>Niveau</sui-table-header-cell>
             <sui-table-header-cell>Trophées</sui-table-header-cell>
-            <!--<sui-table-header-cell text-align="right">Informations</sui-table-header-cell>-->
           </sui-table-row>
         </sui-table-header>
         <sui-table-body>

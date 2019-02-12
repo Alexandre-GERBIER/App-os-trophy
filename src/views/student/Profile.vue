@@ -4,7 +4,6 @@
             <h2 is="sui-header" >
                 <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
             </h2>
-
             <sui-grid class="centered">
                 <sui-grid-column :width="8">
                     <sui-divider fitted/>
@@ -82,7 +81,7 @@
         <sui-divider hidden />
         <sui-divider hidden />
 
-        <div>
+        <div class="stats_big">
             <div>
                 <h1 is="sui-header" icon text-align="center">
                     <sui-header-content>Statistiques :</sui-header-content>
@@ -120,10 +119,49 @@
             </sui-grid>
         </div>
 
+         <div class="stats_small">
+            <div>
+                <h1 is="sui-header" icon text-align="center">
+                    <sui-header-content>Statistiques :</sui-header-content>
+                </h1>
+            </div>
+
+            <sui-grid class="centered">
+                <sui-grid-column :width="8">
+                    <sui-divider/>
+                </sui-grid-column>
+            </sui-grid>
+
+            <sui-grid class="centered">
+                <sui-grid-row class="centered">
+                    <sui-grid-column :width="2">
+                        <label class="texteProfil">Niveau</label>
+                    </sui-grid-column>
+                </sui-grid-row>
+                <sui-grid-row>
+                    <sui-grid-column :width="2">
+                        <label class="texteGras">{{currentLevel}}</label>
+                    </sui-grid-column>
+
+                    <sui-grid-column :width="10">
+                    <sui-progress id="barre"
+                        state="active"
+                        indicating
+                        :percent="percent"
+                        :label="label"/>
+                    </sui-grid-column>
+
+                    <sui-grid-column :width="2">
+                        <label class="texteGras">{{nextLevel}}</label>
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+        </div>
+
         <sui-divider hidden />
         <sui-divider hidden />
 
-        <div>
+        <div class="nbtrophy_big">
             <div>
                 <h2 is="sui-header" icon text-align="center">
                     <sui-header-content>Nombre de trophées :</sui-header-content>
@@ -132,7 +170,7 @@
 
             <sui-divider hidden/>
 
-            <sui-grid stackable class="centered">
+            <sui-grid class="centered">
                 <sui-grid-row>
                     <sui-grid-column>
                         <sui-image class="imageTrophee" :src="textTrophee[0]" size="small"/>
@@ -152,6 +190,37 @@
                     <sui-grid-column>
                         <sui-image class="imageTrophee" :src="textTrophee[3]" size="small"/>
                         <sui-divider hidden fitted/>
+                        <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
+                    </sui-grid-column>
+                </sui-grid-row>
+            </sui-grid>
+       </div>
+
+       <div class="nbtrophy_small">
+            <div>
+                <h2 is="sui-header" icon text-align="center">
+                    <sui-header-content>Nombre de trophées :</sui-header-content>
+                </h2>
+            </div>
+
+            <sui-divider hidden/>
+
+            <sui-grid class="centered">
+                <sui-grid-row>
+                    <sui-grid-column :width="3">
+                        <sui-image class="imageTrophee" :src="textTrophee[0]" size="small"/>
+                        <label class="texteTrophee">{{nbTrophyBronze}} bronze</label>
+                    </sui-grid-column>
+                    <sui-grid-column :width="3">
+                        <sui-image class="imageTrophee" :src="textTrophee[1]" size="small"/>
+                        <label class="texteTrophee">{{nbTrophyArgent}} argent</label>
+                    </sui-grid-column>
+                    <sui-grid-column :width="3">
+                        <sui-image class="imageTrophee" :src="textTrophee[2]" size="small"/>
+                        <label class="texteTrophee">{{nbTrophyOr}} or</label>
+                    </sui-grid-column>
+                    <sui-grid-column :width="3">
+                        <sui-image class="imageTrophee" :src="textTrophee[3]" size="small"/>
                         <label class="texteTrophee">{{nbTrophyPlatine}} platine</label>
                     </sui-grid-column>
                 </sui-grid-row>
@@ -259,6 +328,35 @@ export default {
 
 <style>
 
+  @media (max-width: 767px) {
+    .stats_big {
+      display: none;
+    }
+    .imageTrophee {
+        -moz-transform: scale(0.5);
+        zoom: 25%;
+    }
+    .nbtrophy_big {
+      display: none;
+    }
+    .ui.centered.grid > .column:not(.aligned):not(.justified):not(.row), .ui.centered.grid > .row > .column:not(.aligned):not(.justified), .ui.grid .centered.row > .column:not(.aligned):not(.justified){
+        margin: 0 0;
+        padding: 0 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .stats_small {
+      display: none;
+    }
+    .nbtrophy_small {
+      display: none;
+    }
+    .imageTrophee {
+        zoom: 50%;
+    }
+  }
+
 .texteProfil {
     font-size: 1.2em;
     font-family: 'Lato'
@@ -270,12 +368,6 @@ export default {
 
 h2 {
     text-align: center;
-}
-
-.imageTrophee {
-    /* position: relative;
-    left: 43%; */
-    zoom: 50%
 }
 
 .ui.centered.grid>.column:not(.aligned):not(.justified):not(.row), .ui.centered.grid>.row>.column:not(.aligned):not(.justified), .ui.grid .centered.row>.column:not(.aligned):not(.justified){

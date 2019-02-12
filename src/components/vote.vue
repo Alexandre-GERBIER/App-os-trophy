@@ -6,7 +6,7 @@
             <sui-modal-content>
                 <sui-dropdown
                   fluid
-                  :options="skills"
+                  :options="studModule"
                   placeholder="Etudiant"
                   search
                   selection
@@ -14,30 +14,46 @@
                 />
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Confirmer (Envoi au serveur)</sui-button>
                 <sui-button negative @click="toggle">Annuler</sui-button>
+                <sui-button positive>Confirmer</sui-button>
             </sui-modal-actions>
         </sui-modal>
     </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+import global from '@/globals.json'
+
 export default {
   name: 'vote',
   props: {
     id: '',
-    name: ''
+    name: '',
+    numod: ''
   },
   data () {
     return {
       current: null,
       open: false,
-      skills: [
-        { key: 'BO', value: 'BO', text: 'Bob fterz' },
-        { key: 'JE', value: 'JE', text: 'Jean fgsfgs' },
-        { key: 'TO', value: 'TO', text: 'Toto grtdgr' }
-      ]
+      studModule: []
     }
+  },
+
+  mounted () {
+    axios.get(global.API + '/student/module/' + this.numod)
+      .then(response => {
+        let students = response.data
+        students.forEach(student => {
+          if (student.nuetu !== this.$session.get('user_account')) {
+            this.studModule.push({'value': student.prenom + ' ' + student.nom, 'text': student.prenom + ' ' + student.nom})
+          }
+        })
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   },
 
   methods: {
@@ -49,5 +65,4 @@ export default {
 </script>
 
 <style>
-
 </style>

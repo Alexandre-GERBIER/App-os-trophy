@@ -17,7 +17,6 @@ import StudModule from '@/views/student/Module'
 // teacher routes
 import TeachHome from '@/views/teacher/Home'
 import TeachProfile from '@/views/teacher/Profile'
-import TeachTrophy from '@/views/teacher/Trophy'
 import TeachModules from '@/views/teacher/Modules'
 import TeachModule from '@/views/teacher/Module'
 
@@ -67,10 +66,6 @@ let router = new Router({
         {
           path: 'ranking',
           component: Ranking
-        },
-        {
-          path: 'trophy/:nutroph',
-          component: TeachTrophy
         },
         {
           path: 'module/:reference',

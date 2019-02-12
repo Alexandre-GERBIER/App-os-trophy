@@ -1,38 +1,52 @@
 <template>
   <div id="boutonTrophy">
     <sui-button @click.native="toggle">Éditer un trophée</sui-button>
-    <sui-modal v-model="open">
-      <sui-modal-header>éditer un trophée : {{ TrophyName }}</sui-modal-header>
+    <sui-modal v-model="open" id="big_popup">
+      <sui-modal-header >éditer un trophée : {{ trophy[0].titre }} </sui-modal-header>
       <form class="ui grid">
         <div class="four wide column">
-          <sui-image v-if="TrophyValue === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
-            <sui-image v-else-if="TrophyValue === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
-            <sui-image v-else-if="TrophyValue === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
-            <sui-image v-else-if="TrophyValue === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
+          <sui-image v-if="trophy[0].type === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
+            <sui-image v-else-if="trophy[0].type === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
+            <sui-image v-else-if="trophy[0].type === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
+            <sui-image v-else-if="trophy[0].type === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
         </div>
         <div class="six wide column">
           <label> Titre :  </label>
-          {{ TrophyName }}
+          {{ trophy[0].titre }}
         </div>
         <div class="six wide column">
-          <sui-dropdown fluid :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
+          Modules : {{ trophy[0].numod}}
         </div>
         <div class="four wide column">
           <label>  Valeur du trophée :</label>
-          <br> <br>
-          {{TrophyValue}}
+          <label>  Valeur du trophée :</label>
+          <br>
+          <sui-form-field>
+            <sui-checkbox name="TrophyValue" :checked="trophy[0].type == 'platine'" label="platine" radio value="platine" v-model="trophy[0].type"/>
+          </sui-form-field>
+          <br>
+          <sui-form-field>
+            <sui-checkbox name="TrophyValue" :checked="trophy[0].type == 'or'" label="or" radio value="or" v-model="trophy[0].type"/>
+          </sui-form-field>
+          <br>
+          <sui-form-field>
+            <sui-checkbox name="TrophyValue" :checked="trophy[0].type == 'argent'" label="argent" radio value="argent" v-model="trophy[0].type"/>
+          </sui-form-field>
+          <br>
+          <sui-form-field>
+            <sui-checkbox name="TrophyValue" :checked="trophy[0].type == 'bronze'" label="bronze" radio value="bronze" v-model="trophy[0].type"/>
+          </sui-form-field>
         </div>
         <div class="six wide column">
           <label> Conditions d'obtentions: </label>
-          <sui-input name="descTrophy" :value="TrophyDescription"/>
+          <sui-input name="descTrophy" :value="trophy[0].description"/>
         </div>
         <div class="six wide column">
-            <sui-checkbox label="Visible" toggle v-model="visible"/>
+            <sui-checkbox label="Visible" toggle v-model="trophy[0].visible"/>
             <br> <br>
             <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
             <br> <br>
             <sui-checkbox label="vote" toggle v-model="vote"/>
-              <!--v-model="state.date"-->
             <br> <br>
             <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
         </div>
@@ -42,47 +56,144 @@
         <sui-button negative @click.native="toggle">Annuler</sui-button>
       </sui-modal-actions>
     </sui-modal>
+    <sui-modal v-model="open" id="small_popup">
+      <sui-modal-header >éditer un trophée : {{ trophy[0].titre }} </sui-modal-header>
+      <form >
+        <sui-grid>
+          <sui-grid-row>
+            <sui-grid-column :width="5" >
+              <sui-image v-if="trophy[0].type === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
+              <sui-image v-else-if="trophy[0].type === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
+              <sui-image v-else-if="trophy[0].type === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
+              <sui-image v-else-if="trophy[0].type === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
+           </sui-grid-column>
+            <sui-grid-column :width="5" >
+              <label> Titre :  </label>
+              {{ trophy[0].titre }}
+            </sui-grid-column>
+            <sui-grid-column :width="5" >
+              Module : {{ trophy[0].numod}}
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row >
+            <sui-grid-column :width="six"> Valeur du trophée : </sui-grid-column>
+          </sui-grid-row >
+          <sui-grid-row >
+            <sui-grid-column :width="3"></sui-grid-column>
+            <sui-grid-column :width="5">
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="platine" radio value="platine" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+            <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="or" radio value="or" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+            <sui-grid-column :width="15"></sui-grid-column>
+            <sui-grid-column :width="3"></sui-grid-column>
+            <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="argent" radio value="argent" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+            <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="bronze" radio value="bronze" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row>
+            <sui-grid-column class="six wide column">
+              <label> Conditions d'obtentions: </label>
+              <sui-input name="descTrophy" :value="trophy[0].description" size="25"/>
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row >
+            <sui-grid-column >
+              <sui-checkbox label="Visible" toggle v-model="visible"/>
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row>
+            <sui-grid-column>
+              <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row>
+            <sui-grid-column>
+              <sui-checkbox label="vote" toggle v-model="vote"/>
+            </sui-grid-column>
+          </sui-grid-row>
+          <sui-grid-row>
+            <sui-grid-column>
+              <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+            </sui-grid-column>
+          </sui-grid-row>
+        </sui-grid>
+      </form>
+      <sui-modal-actions>
+        <sui-button positive>Éditer</sui-button>
+        <sui-button negative @click.native="toggle">Annuler</sui-button>
+      </sui-modal-actions>
+    </sui-modal>
   </div>
 </template>
-<!--
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vuejs-datepicker"></script>
--->
 
 <script>
 import Datepicker from 'vuejs-datepicker'
+import axios from 'axios'
 import {fr} from 'vuejs-datepicker/dist/locale'
+import global from '@/globals.json'
+import SuiGrid from 'semantic-ui-vue/dist/commonjs/collections/Grid/Grid'
+import SuiGridRow from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridRow'
+import SuiGridColumn from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridColumn'
+
 export default {
   name: 'EditTrophy',
-  components: { Datepicker },
+  components: { SuiGridColumn, SuiGridRow, SuiGrid, Datepicker },
+  props: {
+    id: ''
+  },
   data () {
     return {
+      errors: [],
       open: false,
       vote: false,
       visible: true,
       current: null,
       fr: fr,
-      TrophyDescription: '',
-      TrophyName: 'Mon Trophée',
-      TrophyValue: 'platine',
-      textModule: [
-        {key: 'M3310', text: 'M3310 maths', value: 'M3310 maths'},
-        {key: 'M3315', text: 'M3315 algèbre', value: 'M3315 algèbre'},
-        {key: 'M1111', text: 'M1111 modélisation de données', value: 'M1111 modélisation de données'}
-      ],
-      selectedModules: []
+      trophy: {}
     }
   },
   methods: {
     toggle () {
       this.open = !this.open
     }
+  },
+  mounted () {
+    axios.get(global.API + '/trophy/' + this.id)
+      .then(res => {
+        this.trophy = res.data
+      })
+      .catch(e => {
+        this.errors.push(e)
+      })
   }
 }
 </script>
 
 <style>
+  @media (max-width: 700px) {
+    #big_popup {
+      display: none;
+    }
+  }
 
+  @media (min-width: 701px) {
+    #small_popup {
+      display: none;
+    }
+  }
   #boutonPassword{
     text-align: center;
   }
@@ -92,7 +203,6 @@ export default {
   }
   div{
     font-family: 'Lato';
-    /*padding: 5px;*/
   }
   #img{
     zoom: 20%;

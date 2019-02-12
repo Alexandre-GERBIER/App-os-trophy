@@ -1,7 +1,7 @@
 <template>
     <div id="boutonTrophy">
-        <sui-button @click.native="toggle">Créer un trophée</sui-button>
-        <sui-modal v-model="open">
+        <sui-button class="green" @click.native="toggle" content="Nouveau  trophée" icon="plus"/>
+        <sui-modal v-model="open" id="big_popup">
         <sui-modal-header>Créer un trophée : {{ TrophyName }}</sui-modal-header>
         <form class="ui grid">
           <div class="four wide column">
@@ -14,12 +14,8 @@
               <label> Titre :  </label>
               <sui-input name="TrophyName" v-model="TrophyName"/>
           </div>
-          <div class="six wide column">
-              <!--
-              <sui-dropdown fluid :options="textModule" placeholder="Modules" selection v-model="current" :value="selectedModules" />
-                -->
-                <br>
-                <label> Module : </label> {{ $route.params.id }} - {{name}}
+          <div class="five wide column">
+                <label> Module : </label> {{ $route.params.reference }} - {{name}}
           </div>
           <div class="four wide column">
               <label>  Valeur du trophée :</label>
@@ -47,41 +43,110 @@
           <div class="six wide column">
               <sui-checkbox label="Visible" toggle v-model="visible"/>
               <br> <br>
-              <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+              <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
               <br> <br>
               <sui-checkbox label="vote" toggle v-model="vote"/>
-              <!--v-model="state.date"-->
               <br> <br>
               <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
           </div>
         </form>
             <sui-modal-actions>
-                <sui-button positive>Créer (Envoi serveur)</sui-button>
+                <sui-button positive>Créer</sui-button>
                 <sui-button negative @click.native="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
+      <sui-modal v-model="open" id="small_popup">
+        <sui-modal-header>
+          Créer un trophée : {{ TrophyName }} <br>
+          Module : {{ $route.params.reference }}  {{name}}
+        </sui-modal-header>
+        <form>
+          <sui-grid>
+            <sui-grid-row>
+              <sui-grid-column :width="5">
+                <sui-image v-if="TrophyValue === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
+                <sui-image v-else-if="TrophyValue === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
+                <sui-image v-else-if="TrophyValue === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
+                <sui-image v-else-if="TrophyValue === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
+              </sui-grid-column>
+              <sui-grid-column :width="10">
+                <label> Titre :  </label>
+                <sui-input name="TrophyName" v-model="TrophyName" :size="15"/>
+              </sui-grid-column>
+            </sui-grid-row>
+            <sui-grid-row>
+              <sui-grid-column :width="six">
+                <label> Conditions d'obtentions: </label>
+                <sui-input name="descTrophy" :value="TrophyDescription" :size="25"/>
+              </sui-grid-column>
+            </sui-grid-row>
+            <sui-grid-row >
+              <sui-grid-column :width="six"> Valeur du trophée : </sui-grid-column>
+            </sui-grid-row >
+            <sui-grid-row >
+              <sui-grid-column :width="3"></sui-grid-column>
+              <sui-grid-column :width="5">
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="platine" radio value="platine" v-model="TrophyValue"/>
+              </sui-form-field>
+              </sui-grid-column>
+              <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="or" radio value="or" v-model="TrophyValue"/>
+              </sui-form-field>
+              </sui-grid-column>
+              <sui-grid-column :width="15"></sui-grid-column>
+              <sui-grid-column :width="3"></sui-grid-column>
+              <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="argent" radio value="argent" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+              <sui-grid-column :width="5" >
+              <sui-form-field>
+                <sui-checkbox name="TrophyValue" label="bronze" radio value="bronze" v-model="TrophyValue"/>
+              </sui-form-field>
+            </sui-grid-column>
+            </sui-grid-row>
+          <sui-grid-row >
+            <sui-grid-column >
+              <sui-checkbox label="Visible" toggle v-model="visible"/>
+            </sui-grid-column>
+          </sui-grid-row>
+            <sui-grid-row>
+            <sui-grid-column>
+            <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+            </sui-grid-column>
+          </sui-grid-row>
+            <sui-grid-row>
+              <sui-grid-column>
+              <sui-checkbox label="vote" toggle v-model="vote"/>
+              </sui-grid-column>
+            </sui-grid-row>
+            <sui-grid-row>
+            <sui-grid-column>
+            <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+            </sui-grid-column>
+            </sui-grid-row>
+          </sui-grid>
+        </form>
+        <sui-modal-actions>
+          <sui-button positive>Créer</sui-button>
+          <sui-button negative @click.native="toggle">Annuler</sui-button>
+        </sui-modal-actions>
+      </sui-modal>
     </div>
 </template>
-<!--
-<script src="https://unpkg.com/vue"></script>
-<script src="https://unpkg.com/vuejs-datepicker"></script>
--->
 
 <script>
 import Datepicker from 'vuejs-datepicker'
 import {fr} from 'vuejs-datepicker/dist/locale'
+import SuiGrid from 'semantic-ui-vue/dist/commonjs/collections/Grid/Grid'
+import SuiGridRow from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridRow'
+import SuiGridColumn from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridColumn'
 export default {
   name: 'CreateTrophy',
-  components: { Datepicker },
-  /*    fonction appelée a l'appel de la vue, initialise des variables (appel API)
-
-  mounted() {
-    this.$textModule = this.$ressources( adresse API)
-    this.$textModule.query().then((response)=> {
-      this.$textModule = reponse.data},
-      (response) => {...})
-    })
-},  */
+  components: { SuiGridColumn, SuiGridRow, SuiGrid, Datepicker },
   data () {
     return {
       open: false,
@@ -109,7 +174,17 @@ export default {
 </script>
 
 <style>
+  @media (max-width: 700px) {
+    #big_popup {
+      display: none;
+    }
+  }
 
+  @media (min-width: 701px) {
+    #small_popup {
+      display: none;
+    }
+  }
 #boutonPassword{
     text-align: center;
 }
@@ -119,7 +194,6 @@ export default {
 }
 div{
     font-family: 'Lato';
-    /*padding: 5px;*/
 }
 #img{
     zoom: 20%;

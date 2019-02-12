@@ -22,18 +22,18 @@
                       </sui-table-header>
                       <sui-table-body>
                           <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                              <sui-table-cell>{{trophy.nom}}</sui-table-cell>
+                              <sui-table-cell>{{trophy.titre}}</sui-table-cell>
                               <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                               <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
-                              <sui-table-cell ><DeliverTrophy/></sui-table-cell>
-                              <sui-table-cell text-align="right"><EditTrophy/></sui-table-cell>
+                              <sui-table-cell ><DeliverTrophy :numodule="trophy.numod"/></sui-table-cell>
+                              <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>
                           </sui-table-row>
                       </sui-table-body>
                     </sui-table>
                   </sui-container>
+                  <CreateTrophy/>
                 </sui-grid-column>
         </sui-grid>
-      <CreateTrophy/>
     </div>
 </template>
 
@@ -48,7 +48,6 @@ import global from '@/globals.json'
 export default {
 
   components: {DeliverTrophy, EditTrophy, CreateTrophy},
-
   data () {
     return {
       id: this.$route.params.reference,
@@ -60,15 +59,12 @@ export default {
     }
   },
   mounted () {
-    console.log('oui')
-    axios.get(global.API + '/prof/module/' + this.$route.params.reference)
+    axios.get(global.API + '/module/' + this.$route.params.reference)
       .then(res => {
         this.name = res.data[0].nom
-        console.log('1 : ' + this.name)
-        axios.get(global.API + '/prof/module/' + this.$route.params.reference)
+        axios.get(global.API + '/module/' + this.$route.params.reference)
           .then(res => {
             this.numetu = res.data.length
-            console.log('2 : ' + this.numetu)
           })
           .catch(e => {
             this.errors.push(e)
@@ -77,7 +73,6 @@ export default {
           .then(res => {
             this.numtro = res.data.length
             this.trophies = res.data
-            console.log('3 : ' + this.numtro)
           })
           .catch(e => {
             this.errors.push(e)

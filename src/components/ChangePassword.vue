@@ -3,7 +3,6 @@
         <sui-button @click.native="toggle">Changer de mot de passe</sui-button>
         <sui-modal v-model="open">
         <sui-modal-header>Changer de mot de passe</sui-modal-header>
-
             <sui-modal-content>
                 <label v-for="item in sections" :key="item[0]">
                     <sui-grid>
@@ -19,8 +18,8 @@
                 </label>
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Confirmer (Envoi serveur)</sui-button>
                 <sui-button negative @click.native="toggle">Annuler</sui-button>
+                <sui-button positive>Confirmer</sui-button>
             </sui-modal-actions>
         </sui-modal>
     </div>
