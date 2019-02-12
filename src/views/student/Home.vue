@@ -20,7 +20,7 @@
     </sui-menu>
 
     <sui-menu class="fixed inverted" id="menu_student_small">
-      <sui-menu-item is="sui-header">App'Os Trophy - étudiant</sui-menu-item>
+      <sui-menu-item is="sui-header">App'Os Trophy</sui-menu-item>
 
       <sui-dropdown item icon="content" class=" top right">
         <sui-dropdown-menu>
