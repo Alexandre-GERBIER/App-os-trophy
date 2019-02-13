@@ -2,7 +2,7 @@
     <div>
         <h1 is="sui-header">Classement</h1>
         <div id="classementP">
-            <sui-tab>
+            <sui-tab @change="testRender()">
                 <sui-tab-pane title="Global">
                     <sui-table unstackable celled>
                         <sui-table-header>
@@ -32,7 +32,7 @@
                                         <sui-table-header-cell>Niveau</sui-table-header-cell>
                                     </sui-table-row>
                                 </sui-table-header>
-                                <sui-table-body>
+                                <sui-table-body :key="test">
                                     <sui-table-row v-for="student in allStudentModule[mod.reference]" :key="student.nuetu">
                                             <sui-table-cell>{{student.rank}}</sui-table-cell>
                                             <sui-table-cell>{{student.prenom + ' ' + student.nom}}</sui-table-cell>
@@ -62,7 +62,8 @@ export default {
       allStudentModule: {},
       mesModules: {},
       open: false,
-      chargement: true
+      chargement: true,
+      test: 0
     }
   },
 
@@ -127,8 +128,9 @@ export default {
       currentlvl = currentxp / 50
       return currentlvl
     },
-    forceUpdate () {
-      this.forceUpdate()
+    testRender () {
+      this.test += 1
+      console.log()
     }
   }
 }
