@@ -1,6 +1,6 @@
 <template>
   <div id="fond">
-    <sui-menu class="fixed inverted" id="menu_student_big">
+    <sui-menu class="fixed inverted dblue" id="menu_student_big">
       <sui-menu-item is="sui-header">App'Os Trophy - étudiant</sui-menu-item>
 
       <router-link is="sui-menu-item" v-for="item in sections" :key="item[0]" :to="item[1]">{{ item[0] }}</router-link>
@@ -19,7 +19,7 @@
       </sui-dropdown>
     </sui-menu>
 
-    <sui-menu class="fixed inverted" id="menu_student_small">
+    <sui-menu class="fixed inverted dblue" id="menu_student_small">
       <sui-menu-item is="sui-header">App'Os Trophy</sui-menu-item>
 
       <sui-dropdown item icon="content" class=" top right">

@@ -675,11 +675,6 @@ a:hover {
   color: rgba(0, 0, 0, 0.87);
 }
 
-::-moz-selection {
-  background-color: #CCE2FF;
-  color: rgba(0, 0, 0, 0.87);
-}
-
 ::selection {
   background-color: #CCE2FF;
   color: rgba(0, 0, 0, 0.87);
@@ -689,12 +684,6 @@ a:hover {
 
 textarea::-webkit-selection,
 input::-webkit-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-textarea::-moz-selection,
-input::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
@@ -25297,6 +25286,21 @@ Floated Menu / Item
 }
 
 .ui.inverted.orange.menu .active.item {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Dblue */
+
+.ui.inverted.menu .dblue.active.item,
+.ui.inverted.dblue.menu {
+  background-color: #002e5d;
+}
+
+.ui.inverted.dblue.menu .item:before {
+  background-color: rgba(34, 36, 38, 0.1);
+}
+
+.ui.inverted.dblue.menu .active.item {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
 
