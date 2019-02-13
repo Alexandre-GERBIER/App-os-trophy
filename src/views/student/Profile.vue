@@ -47,7 +47,7 @@
         <sui-divider hidden />
         <sui-divider hidden />
 
-        <div class="stats_big">
+        <div class="stats stats_big">
             <div>
                 <h1 is="sui-header" icon text-align="center">
                     <sui-header-content>Statistiques :</sui-header-content>
@@ -74,6 +74,7 @@
                     <sui-progress id="barre"
                         state="active"
                         indicating
+                        color="grey"
                         :percent="percent"
                         :label="label"/>
                     </sui-grid-column>
@@ -85,7 +86,7 @@
             </sui-grid>
         </div>
 
-        <div class="stats_small">
+        <div class="stats stats_small">
             <div>
                 <h1 is="sui-header" icon text-align="center">
                     <sui-header-content>Statistiques :</sui-header-content>
@@ -110,7 +111,7 @@
                     </sui-grid-column>
 
                     <sui-grid-column :width="10">
-                    <sui-progress id="barre"
+                    <sui-progress color="grey" id="barre"
                         state="active"
                         indicating
                         :percent="percent"
@@ -124,10 +125,7 @@
             </sui-grid>
         </div>
 
-        <sui-divider hidden />
-        <sui-divider hidden />
-
-        <div class="nbtrophy_big">
+        <div class="nbTrophy nbtrophy_big">
             <div>
                 <h2 is="sui-header" icon text-align="center">
                     <sui-header-content>Nombre de trophées :</sui-header-content>
@@ -162,7 +160,7 @@
             </sui-grid>
        </div>
 
-       <div class="nbtrophy_small">
+       <div class="nbTrophy nbtrophy_small">
             <div>
                 <h2 is="sui-header" icon text-align="center">
                     <sui-header-content>Nombre de trophées :</sui-header-content>
@@ -345,5 +343,16 @@ h2 {
     border-bottom: 4px solid #c4d600;
     border-bottom-right-radius: 20%;
 }
-
+.stats{
+    padding: 50px;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    color: white;
+    background-color: #002e5d;
+}
+.nbTrophy{
+    background-color: #002e5d;
+    color: white;
+    padding: 20px;
+}
 </style>
