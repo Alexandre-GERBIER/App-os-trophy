@@ -46,7 +46,7 @@
     <sui-divider hidden/>
     <sui-divider hidden/>
     <sui-divider hidden />
-
+    <div class="background"></div>
     <router-view></router-view>
   </div>
 </template>
@@ -79,13 +79,13 @@ export default {
     }
   }
 
-  /* #fond {
-      background-image: url('/static/tableauNoir.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      background-attachment:local;
-  } */
+  .background {
+    position: fixed;
+    background-color: #f1f2f6;
+    height: 120%;
+    width: 100%;
+    z-index: -1;
+    top: -20%;
+  }
+
 </style>
