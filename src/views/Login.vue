@@ -1,6 +1,6 @@
 <template>
 <div id="background">
-    <h1 is="sui-header" class="">App'Os Trophy</h1>
+    <h1 class="">App'Os Trophy</h1>
     <div class="logos">
         <img src="/static/images/univ.jpg" alt="univLogo">
         <img src="/static/images/iutnantes.png" alt="iutLogo">
@@ -132,6 +132,14 @@ export default {
         padding: 0;
         box-sizing: border-box;
     }
+
+    h1 {
+      color: #002e5d;
+      border-bottom: 4px solid #c4d600;
+      border-bottom-right-radius: 20%;
+      font-size: 5em;
+    }
+
     #background{
         background-image:url("/static/images/2.jpg");
         background-size:cover;
@@ -163,7 +171,7 @@ export default {
     #login h2{
         font-size: 2.5em;
     }
-    #background h1{
+    /*#background h1{
         font-size: 500%;
         margin-bottom:8%;
         text-align:center;
@@ -172,8 +180,11 @@ export default {
         padding: 30px;
         margin: 0 5px;
         background-color: rgba(66, 66, 66, 0.2);
-    }
+    }*/
     @media (max-width: 700px) {
+        h1 {
+          font-size: 3em;
+        }
         #background h1{
             padding: 10px;
             font-size: 300%;
