@@ -11,7 +11,7 @@
 
                     <h3 is="sui-header">Trophées ( {{numtro}} disponibles )</h3>
                     <sui-container>
-                    <sui-table unstackable>
+                    <sui-table color="orange" unstackable>
                       <sui-table-header>
                           <sui-table-row>
                               <sui-table-header-cell>Nom</sui-table-header-cell>

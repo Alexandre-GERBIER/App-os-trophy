@@ -2,7 +2,7 @@
     <div>
       <sui-container>
         <h2 is="sui-header">Mes modules</h2>
-        <sui-table unstackable>
+        <sui-table color="olive" unstackable>
           <sui-table-header>
             <sui-table-row>
               <sui-table-header-cell>Module</sui-table-header-cell>

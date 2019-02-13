@@ -4,7 +4,7 @@
       <sui-divider hidden/>
       <sui-grid class="centered">
         <sui-container>
-          <sui-table unstackable definition>
+          <sui-table color="teal" unstackable definition>
             <sui-table-body>
                 <sui-table-row>
                   <sui-table-cell>Numero de module</sui-table-cell>

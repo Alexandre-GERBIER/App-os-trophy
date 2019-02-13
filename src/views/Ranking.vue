@@ -4,7 +4,7 @@
         <div id="classementP">
             <sui-tab @change="testRender()">
                 <sui-tab-pane title="Global">
-                    <sui-table unstackable celled>
+                    <sui-table color="purple" unstackable celled>
                         <sui-table-header>
                             <sui-table-row>
                                 <sui-table-header-cell>Rang</sui-table-header-cell>
@@ -24,7 +24,7 @@
                 <sui-tab-pane title="Module">
                     <sui-tab :menu="{ secondary: true }">
                         <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom" class="menuModules">
-                            <sui-table unstackable celled>
+                            <sui-table color="pink" unstackable celled>
                                 <sui-table-header>
                                     <sui-table-row>
                                         <sui-table-header-cell>Rang</sui-table-header-cell>
