@@ -8,7 +8,7 @@
             <sui-divider hidden/>
             <sui-grid class="centered">
                 <sui-container>
-                    <sui-table color="red" celled definition>
+                    <sui-table color="red" unstackable celled definition>
                         <sui-table-body>
                             <sui-table-row text-align="center">
                                 <sui-table-cell>Nom</sui-table-cell>
@@ -299,6 +299,7 @@ export default {
     .imageTrophee {
         -moz-transform: scale(0.5);
         zoom: 25%;
+        margin: auto
     }
     .nbtrophy_big {
       display: none;
@@ -323,7 +324,8 @@ export default {
 
 .texteProfil {
     font-size: 1.2em;
-    font-family: 'Lato'
+    font-family: 'Lato';
+    font-weight: bold
 }
 
 .texteGras {
@@ -347,12 +349,11 @@ h2 {
     padding: 50px;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
-    color: white;
-    background-color: #002e5d;
+    background-color: white;
 }
 .nbTrophy{
-    background-color: #002e5d;
-    color: white;
+    background-color: white;
     padding: 20px;
+    font-weight: bold
 }
 </style>
