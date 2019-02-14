@@ -17,7 +17,7 @@
               <sui-table-row>
                   <sui-table-header-cell>Nom</sui-table-header-cell>
                   <sui-table-header-cell>Valeur</sui-table-header-cell>
-                  <sui-table-header-cell>Vote</sui-table-header-cell>
+                  <sui-table-header-cell class="vue_small">Vote</sui-table-header-cell>
                   <sui-table-header-cell>Délivrer</sui-table-header-cell>
                   <sui-table-header-cell>Informations</sui-table-header-cell>
               </sui-table-row>
@@ -26,7 +26,7 @@
               <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                   <sui-table-cell>{{trophy.titre}}</sui-table-cell>
                   <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
-                  <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
+                  <sui-table-cell class="vue_small"><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
                   <sui-table-cell ><DeliverTrophy :numodule="trophy.numod"/></sui-table-cell>
                   <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>
               </sui-table-row>
@@ -87,4 +87,9 @@ export default {
 
 <style>
 
+  @media (max-width: 700px) {
+    .vue_small {
+      display: none;
+    }
+  }
 </style>

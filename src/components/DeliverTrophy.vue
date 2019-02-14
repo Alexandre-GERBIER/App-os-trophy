@@ -1,6 +1,7 @@
 <template>
     <div id="boutonVote">
-        <sui-button class="inverted green" role='button' @click="toggle">Délivrer</sui-button>
+        <sui-button id="bouton_big" class="inverted green" @click="toggle">Délivrer</sui-button>
+        <sui-button id="bouton_small" class="inverted green" @click="toggle"></sui-button>
         <sui-modal v-model="open">
             <sui-modal-header>Délivrer le trophée</sui-modal-header>
             <sui-modal-content>
@@ -9,7 +10,7 @@
             </sui-dropdown>
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Déliverer</sui-button>
+                <sui-button positive>Délivrer</sui-button>
                 <sui-button negative @click="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
@@ -56,4 +57,17 @@ export default {
 </script>
 
 <style>
+
+  @media (max-width: 700px) {
+    #bouton_big {
+      display: none;
+    }
+  }
+
+  @media (min-width: 701px) {
+    #bouton_small {
+      display: none;
+    }
+  }
+
 </style>
