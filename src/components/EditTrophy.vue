@@ -1,6 +1,6 @@
 <template>
   <div id="boutonTrophy">
-    <sui-button floated="left" @click.native="toggle" color="teal" icon="settings">Éditer</sui-button>
+    <sui-button floated="left" @click.native="toggle" color="teal" icon="settings"> Éditer</sui-button>
     <sui-modal v-model="open" id="big_popup">
       <sui-modal-header >Éditer le trophée : {{ trophy[0].titre }} </sui-modal-header>
       <form class="ui grid">

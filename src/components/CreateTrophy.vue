@@ -1,6 +1,6 @@
 <template>
     <div id="boutonTrophy">
-        <sui-button class="green" @click.native="toggle" content="Nouveau  trophée" icon="plus"/>
+        <sui-button class="green" @click.native="toggle" icon="plus"> Nouveau trophée</sui-button>
         <sui-modal v-model="open" id="big_popup">
         <sui-modal-header>Créer un trophée : {{ TrophyName }}</sui-modal-header>
         <form class="ui grid">

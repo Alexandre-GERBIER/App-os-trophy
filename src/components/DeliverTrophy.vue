@@ -1,7 +1,7 @@
 <template>
     <div id="boutonVote">
-        <sui-button id="bouton_big" class="inverted green" @click="toggle">Délivrer</sui-button>
-        <sui-button id="bouton_small" class="inverted green" @click="toggle"></sui-button>
+        <sui-button id="bouton_big" class="green" @click="toggle"><i class="trophy icon imgtrophee"/> Délivrer</sui-button>
+        <sui-button id="bouton_small" class="green" @click="toggle"><i class="trophy icon"/></sui-button>
         <sui-modal v-model="open">
             <sui-modal-header>Délivrer le trophée</sui-modal-header>
             <sui-modal-content>
@@ -70,4 +70,7 @@ export default {
     }
   }
 
+  .imgtrophee.ui.button:not(.icon)>.icon:not(.button):not(.dropdown) {
+    margin: 0
+  }
 </style>
