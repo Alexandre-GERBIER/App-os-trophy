@@ -2,9 +2,7 @@
   <div id="boutonCreerModule">
     <sui-button class="green" @click="toggle" content="Nouveau module" icon="plus" />
     <sui-modal v-model="open">
-      <sui-modal-header>
-        Créer un module
-      </sui-modal-header>
+      <sui-modal-header>Créer un module</sui-modal-header>
       <sui-modal-content>
         <sui-form>
           <sui-form-field>

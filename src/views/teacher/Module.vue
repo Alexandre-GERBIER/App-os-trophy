@@ -2,38 +2,38 @@
     <div>
         <h2 is="sui-header">Module {{ $route.params.reference }} - {{name}} </h2>
         <sui-grid class="centered">
-                <sui-grid-column :width="8">
-                    <sui-divider fitted/>
-                    <p>Nombre d'étudiants inscrits au module : <b>{{numetu}}</b></p>
-                    <sui-divider hidden/>
-                    <sui-divider hidden/>
-
-                    <h3 is="sui-header">Trophées ( {{numtro}} disponibles )</h3>
-                    <sui-container>
-                    <sui-table  color="orange" unstackable>
-                      <sui-table-header>
-                          <sui-table-row>
-                              <sui-table-header-cell>Nom</sui-table-header-cell>
-                              <sui-table-header-cell>Valeur</sui-table-header-cell>
-                              <sui-table-header-cell>Vote</sui-table-header-cell>
-                              <sui-table-header-cell>Délivrer</sui-table-header-cell>
-                              <sui-table-header-cell text-align="right">Informations</sui-table-header-cell>
-                          </sui-table-row>
-                      </sui-table-header>
-                      <sui-table-body>
-                          <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                              <sui-table-cell>{{trophy.titre}}</sui-table-cell>
-                              <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
-                              <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
-                              <sui-table-cell ><DeliverTrophy :numodule="trophy.numod"/></sui-table-cell>
-                              <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>
-                          </sui-table-row>
-                      </sui-table-body>
-                    </sui-table>
-                  </sui-container>
-                  <CreateTrophy/>
-                </sui-grid-column>
+          <sui-grid-column :width="8">
+            <sui-divider fitted/>
+            <p>Nombre d'étudiants inscrits au module : <b>{{numetu}}</b></p>
+            <sui-divider hidden/>
+          </sui-grid-column>
         </sui-grid>
+
+        <h3 is="sui-header" class="centered">Trophées ( {{numtro}} disponibles )</h3>
+
+        <sui-container>
+        <sui-table  color="orange" unstackable>
+          <sui-table-header>
+              <sui-table-row>
+                  <sui-table-header-cell>Nom</sui-table-header-cell>
+                  <sui-table-header-cell>Valeur</sui-table-header-cell>
+                  <sui-table-header-cell>Vote</sui-table-header-cell>
+                  <sui-table-header-cell>Délivrer</sui-table-header-cell>
+                  <sui-table-header-cell>Informations</sui-table-header-cell>
+              </sui-table-row>
+          </sui-table-header>
+          <sui-table-body>
+              <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
+                  <sui-table-cell>{{trophy.titre}}</sui-table-cell>
+                  <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
+                  <sui-table-cell ><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
+                  <sui-table-cell ><DeliverTrophy :numodule="trophy.numod"/></sui-table-cell>
+                  <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>
+              </sui-table-row>
+          </sui-table-body>
+        </sui-table>
+        <CreateTrophy/>
+      </sui-container>
     </div>
 </template>
 

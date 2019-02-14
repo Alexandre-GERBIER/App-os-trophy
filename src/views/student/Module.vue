@@ -2,37 +2,39 @@
     <div>
         <h2 is="sui-header">Module {{ id }} - {{name}} </h2>
         <sui-grid class="centered">
-                <sui-grid-column :width="8">
-                    <sui-divider fitted/>
-                    <p>Enseignant responsable : <b>{{ teacher }}</b></p>
-                    <p>Nombre d'étudiants inscrits au module : <b>{{numetu}}</b></p>
-                    <sui-divider hidden/>
-                    <sui-divider hidden/>
+          <sui-grid-column :width="8">
+              <sui-divider fitted/>
+              <p>Enseignant responsable : <b>{{ teacher }}</b></p>
+              <p>Nombre d'étudiants inscrits au module : <b>{{numetu}}</b></p>
 
-                    <h3 is="sui-header">Trophées ( {{numtro}} disponibles )</h3>
-                    <sui-container>
-                    <sui-table color="orange" unstackable>
-                      <sui-table-header>
-                          <sui-table-row>
-                              <sui-table-header-cell>Nom</sui-table-header-cell>
-                              <sui-table-header-cell>Valeur</sui-table-header-cell>
-                              <sui-table-header-cell>Votes</sui-table-header-cell>
-                          </sui-table-row>
-                      </sui-table-header>
-                      <sui-table-body>
-                          <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
-                              <sui-table-cell><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
-                              <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
-                              <sui-table-cell>
-                                <vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" :numod="trophy.numod" v-if="trophy.vote == 1"/>
-                                <i v-else class="close icon"></i>
-                              </sui-table-cell>
-                          </sui-table-row>
-                      </sui-table-body>
-                    </sui-table>
-                  </sui-container>
-                </sui-grid-column>
+              <sui-divider hidden/>
+              <sui-divider hidden/>
+          </sui-grid-column>
         </sui-grid>
+
+        <h3 is="sui-header" class="centered">Trophées ( {{numtro}} disponibles )</h3>
+
+        <sui-container>
+        <sui-table color="orange" unstackable>
+          <sui-table-header>
+              <sui-table-row>
+                  <sui-table-header-cell>Nom</sui-table-header-cell>
+                  <sui-table-header-cell>Valeur</sui-table-header-cell>
+                  <sui-table-header-cell>Votes</sui-table-header-cell>
+              </sui-table-row>
+          </sui-table-header>
+          <sui-table-body>
+              <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
+                  <sui-table-cell><router-link :to="'/student/trophy/' + trophy.nutroph">{{trophy.titre}}</router-link></sui-table-cell>
+                  <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
+                  <sui-table-cell>
+                    <vote class="check icon" :id="trophy.nutroph"  :name="trophy.titre" :numod="trophy.numod" v-if="trophy.vote == 1"/>
+                    <i v-else class="close icon"></i>
+                  </sui-table-cell>
+              </sui-table-row>
+          </sui-table-body>
+        </sui-table>
+      </sui-container>
     </div>
 </template>
 

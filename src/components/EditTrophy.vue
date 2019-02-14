@@ -1,8 +1,8 @@
 <template>
   <div id="boutonTrophy">
-    <sui-button @click.native="toggle">Éditer un trophée</sui-button>
+    <sui-button floated="left" @click.native="toggle" color="teal" icon="settings">Éditer</sui-button>
     <sui-modal v-model="open" id="big_popup">
-      <sui-modal-header >éditer un trophée : {{ trophy[0].titre }} </sui-modal-header>
+      <sui-modal-header >Éditer le trophée : {{ trophy[0].titre }} </sui-modal-header>
       <form class="ui grid">
         <div class="four wide column">
           <sui-image v-if="trophy[0].type === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
