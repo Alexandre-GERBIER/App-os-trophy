@@ -26,7 +26,7 @@
       </sui-modal-content>
       <sui-modal-actions>
         <sui-button positive>Créer</sui-button>
-        <sui-button negative>Annuler</sui-button>
+        <sui-button negative @click.native="toggle">Annuler</sui-button>
       </sui-modal-actions>
     </sui-modal>
   </div>

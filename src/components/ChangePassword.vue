@@ -18,8 +18,8 @@
                 </label>
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button negative @click.native="toggle">Annuler</sui-button>
                 <sui-button positive>Confirmer</sui-button>
+                <sui-button negative @click.native="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
     </div>

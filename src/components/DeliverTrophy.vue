@@ -9,7 +9,7 @@
             </sui-dropdown>
             </sui-modal-content>
             <sui-modal-actions>
-                <sui-button positive>Déliverer (Envoi au serveur)</sui-button>
+                <sui-button positive>Déliverer</sui-button>
                 <sui-button negative @click="toggle">Annuler</sui-button>
             </sui-modal-actions>
         </sui-modal>
