@@ -10,14 +10,14 @@
             <sui-image v-else-if="trophy[0].type === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
             <sui-image v-else-if="trophy[0].type === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
         </div>
-        <div class="six wide column">
+        <div class="6 wide column">
           <label> Titre :  </label>
           {{ trophy[0].titre }}
         </div>
-        <div class="six wide column">
+        <div class="6 wide column">
           Modules : {{ trophy[0].numod}}
         </div>
-        <div class="four wide column">
+        <div class="4 wide column">
           <label>  Valeur du trophée :</label>
           <label>  Valeur du trophée :</label>
           <br>
@@ -37,11 +37,11 @@
             <sui-checkbox name="TrophyValue" :checked="trophy[0].type == 'bronze'" label="bronze" radio value="bronze" v-model="trophy[0].type"/>
           </sui-form-field>
         </div>
-        <div class="six wide column">
+        <div class="6 wide column">
           <label> Conditions d'obtentions: </label>
           <sui-input name="descTrophy" :value="trophy[0].description"/>
         </div>
-        <div class="six wide column">
+        <div class="6 wide column">
             <sui-checkbox label="Visible" toggle v-model="trophy[0].visible"/>
             <br> <br>
             <datepicker v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
@@ -76,7 +76,7 @@
             </sui-grid-column>
           </sui-grid-row>
           <sui-grid-row >
-            <sui-grid-column :width="six"> Valeur du trophée : </sui-grid-column>
+            <sui-grid-column :width="6"> Valeur du trophée : </sui-grid-column>
           </sui-grid-row >
           <sui-grid-row >
             <sui-grid-column :width="3"></sui-grid-column>
@@ -104,7 +104,7 @@
             </sui-grid-column>
           </sui-grid-row>
           <sui-grid-row>
-            <sui-grid-column class="six wide column">
+            <sui-grid-column class="6 wide column">
               <label> Conditions d'obtentions: </label>
               <sui-input name="descTrophy" :value="trophy[0].description" size="25"/>
             </sui-grid-column>
@@ -162,7 +162,11 @@ export default {
       visible: true,
       current: null,
       fr: fr,
-      trophy: {}
+      trophy: {},
+      TrophyDescription: '',
+      TrophyName: '',
+      TrophyValue: '',
+      selectedModule: []
     }
   },
   methods: {
