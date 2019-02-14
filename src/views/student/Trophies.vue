@@ -25,7 +25,7 @@
         </sui-container>
 
         <sui-container>
-            <sui-table unstackable class="tab_trophies_small">
+            <sui-table color="yellow" unstackable class="tab_trophies_small">
                 <sui-table-header class="table_header">
                     <sui-table-row>
                         <sui-table-header-cell v-on:click="sorted_nom">Nom <i class="sort icon" :class="(ordreNom != 0) ? ((ordreNom == 1) ? 'down': 'up'): ''"></i></sui-table-header-cell>

@@ -22,8 +22,8 @@
                     </sui-table>
                 </sui-tab-pane>
                 <sui-tab-pane title="Module">
-                    <sui-tab :menu="{ secondary: true }">
-                        <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom" class="menuModules">
+                    <sui-tab :menu="{secondary: true}">
+                        <sui-tab-pane v-for="mod in mesModules" :key="mod.reference" :title="mod.nom">
                             <sui-table color="pink" unstackable celled>
                                 <sui-table-header>
                                     <sui-table-row>
