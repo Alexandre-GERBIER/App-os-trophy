@@ -62,7 +62,7 @@ export default {
     axios.get(global.API + '/module/' + this.$route.params.reference)
       .then(res => {
         this.name = res.data[0].nom
-        axios.get(global.API + '/module/' + this.$route.params.reference)
+        axios.get(global.API + '/student/module/' + this.$route.params.reference)
           .then(res => {
             this.numetu = res.data.length
           })
