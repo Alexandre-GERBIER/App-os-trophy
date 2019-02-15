@@ -25,18 +25,18 @@
           <sui-grid>
             <sui-grid-row>
               <sui-grid-column :width="8">
-                <sui-checkbox name="TrophyValue" radio value="bronze" v-model="TrophyValue">bronze</sui-checkbox>
+                <sui-checkbox name="TrophyValue" :checked=" trophy[0].type == 'bronze'" radio value="bronze" v-model="trophy[0].type">bronze</sui-checkbox>
               </sui-grid-column>
               <sui-grid-column :width="8">
-                <sui-checkbox name="TrophyValue" radio value="argent" v-model="TrophyValue">argent</sui-checkbox>
+                <sui-checkbox name="TrophyValue" :checked=" trophy[0].type == 'argent'" radio value="argent" v-model="trophy[0].type">argent</sui-checkbox>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row>
               <sui-grid-column :width="8">
-                <sui-checkbox name="TrophyValue" radio value="or" v-model="TrophyValue">or</sui-checkbox>
+                <sui-checkbox name="TrophyValue" :checked=" trophy[0].type == 'or'" radio value="or" v-model="trophy[0].type">or</sui-checkbox>
               </sui-grid-column>
               <sui-grid-column :width="8">
-                <sui-checkbox name="TrophyValue" radio value="platine" v-model="TrophyValue">platine</sui-checkbox>
+                <sui-checkbox name="TrophyValue" :checked=" trophy[0].type == 'platine'" radio value="platine" v-model="trophy[0].type">platine</sui-checkbox>
               </sui-grid-column>
             </sui-grid-row>
           </sui-grid>
