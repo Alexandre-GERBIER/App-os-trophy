@@ -6,6 +6,7 @@
           Créer un trophée : {{ TrophyName }} <br>
           Module : {{ $route.params.reference }}
         </sui-modal-header>
+        <sui-modal-content scrolling>
           <sui-grid>
             <sui-grid-row>
               <sui-grid-column :width="5">
@@ -67,6 +68,7 @@
               </sui-grid-column>
             </sui-grid-row>
           </sui-grid>
+        </sui-modal-content>
         <sui-modal-actions>
           <sui-button positive>Créer</sui-button>
           <sui-button negative @click.native="toggle">Annuler</sui-button>
