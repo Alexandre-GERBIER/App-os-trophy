@@ -38,7 +38,7 @@ export default {
   },
 
   mounted () {
-    this.$refs.ide.focus();
+    this.$refs.ide.focus()
   },
 
   methods: {
@@ -67,7 +67,6 @@ export default {
             module.level_loaded = false
             module.progress_loaded = false
           }
-          console.log('GOT MODULES !')
           localStorage.setItem('modules', JSON.stringify(modules))
         })
         .catch(e => {
@@ -87,7 +86,6 @@ export default {
             module.trophies_loaded = false
             module.visible_loaded = true
           }
-          console.log('GOT MODULES TEACHER !')
           localStorage.setItem('modules', JSON.stringify(modules))
         })
         .catch(e => {
@@ -96,7 +94,6 @@ export default {
     },
 
     loginUser () {
-
       this.loading = true
 
       // start session
