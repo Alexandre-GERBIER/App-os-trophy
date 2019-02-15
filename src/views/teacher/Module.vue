@@ -34,6 +34,9 @@
         </sui-table>
         <CreateTrophy/>
       </sui-container>
+      <div v-if="chargement" class="ui active dimmer">
+        <div class="ui indeterminate text loader">Chargement ...</div>
+      </div>
     </div>
 </template>
 
@@ -55,32 +58,39 @@ export default {
       numetu: '',
       numtro: '',
       errors: [],
-      trophies: []
+      trophies: [],
+      chargement: true
     }
   },
   mounted () {
-    axios.get(global.API + '/module/' + this.$route.params.reference)
+    let promesse1 = []
+    let promesse2 = []
+    let promesse3 = []
+    promesse1.push(axios.get(global.API + '/module/' + this.$route.params.reference)
       .then(res => {
         this.name = res.data[0].nom
-        axios.get(global.API + '/module/' + this.$route.params.reference)
+        promesse2.push(axios.get(global.API + '/module/' + this.$route.params.reference)
           .then(res => {
             this.numetu = res.data.length
           })
           .catch(e => {
             this.errors.push(e)
-          })
-        axios.get(global.API + '/trophy/module/' + this.$route.params.reference)
+          }))
+        promesse3.push(axios.get(global.API + '/trophy/module/' + this.$route.params.reference)
           .then(res => {
             this.numtro = res.data.length
             this.trophies = res.data
           })
           .catch(e => {
             this.errors.push(e)
-          })
+          }))
       })
       .catch(e => {
         this.errors.push(e)
-      })
+      }))
+    Promise.all(promesse1, promesse2, promesse3).then(() => {
+      this.chargement = false
+    })
   }
 }
 </script>

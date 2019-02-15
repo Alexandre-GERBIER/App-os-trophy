@@ -1,24 +1,24 @@
 <template>
-<div id="background">
+<div id="background" >
     <h1 class="">App'Os Trophy</h1>
     <div class="logos">
         <img src="/static/images/univ.jpg" alt="univLogo">
         <img src="/static/images/iutnantes.png" alt="iutLogo">
     </div>
-    <form id="login">
+    <div id="login">
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
-            <input placeholder="Identifiant" type="text" name="ide" v-model="ide">
+            <input @keyup.enter="loginUser" ref="ide" placeholder="Identifiant" type="text" name="ide" v-model="ide">
             <i class="user icon"/>
         </div>
         <div class="ui lock left icon input">
-            <input placeholder="Mot de passe" type="password">
+            <input @keyup.enter="loginUser" placeholder="Mot de passe" type="password">
             <i class="lock icon"/>
         </div>
-        <div @click="loginUser" class="ui icon sign in right labeled button green">
+        <div @click="loginUser" :class="'ui icon sign in right labeled button green ' + (loading ? 'loading' : '')">
             <i class="sign in icon"/>Login
         </div>
-    </form>
+    </div>
 </div>
 </template>
 
@@ -31,10 +31,16 @@ export default {
 
   data () {
     return {
+      loading: false,
       ide: 'E175119X',
       errors: []
     }
   },
+
+  mounted () {
+    this.$refs.ide.focus()
+  },
+
   methods: {
     rlink () {
       return (this.accountType() === 'student') ? '/student/profile' : '/teacher/profile'
@@ -61,7 +67,6 @@ export default {
             module.level_loaded = false
             module.progress_loaded = false
           }
-          console.log('GOT MODULES !')
           localStorage.setItem('modules', JSON.stringify(modules))
         })
         .catch(e => {
@@ -81,7 +86,6 @@ export default {
             module.trophies_loaded = false
             module.visible_loaded = true
           }
-          console.log('GOT MODULES TEACHER !')
           localStorage.setItem('modules', JSON.stringify(modules))
         })
         .catch(e => {
@@ -90,6 +94,8 @@ export default {
     },
 
     loginUser () {
+      this.loading = true
+
       // start session
       this.$session.start()
 

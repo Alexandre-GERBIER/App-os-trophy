@@ -349,6 +349,7 @@ h2 {
     padding: 50px;
     border-top-right-radius: 50%;
     border-top-left-radius: 50%;
+    border-top: solid #c4d600 2px;
     background-color: white;
 }
 .nbTrophy{
