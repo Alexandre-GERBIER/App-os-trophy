@@ -9,14 +9,14 @@
         <h2 is="sui-header" class="inverted">Connexion</h2>
         <div class="ui user left icon input">
             <input @keyup.enter="loginUser" ref="ide" placeholder="Identifiant" type="text" name="ide" v-model="ide">
-            <i class="user icon"/>
+            <i class="user icon"></i>
         </div>
         <div class="ui lock left icon input">
             <input @keyup.enter="loginUser" placeholder="Mot de passe" type="password">
-            <i class="lock icon"/>
+            <i class="lock icon"></i>
         </div>
         <div @click="loginUser" :class="'ui icon sign in right labeled button green ' + (loading ? 'loading' : '')">
-            <i class="sign in icon"/>Login
+            <i class="sign in icon"></i>Login
         </div>
     </div>
 </div>
