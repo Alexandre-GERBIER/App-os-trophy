@@ -10,14 +10,14 @@
           <sui-grid>
             <sui-grid-row>
               <sui-grid-column :width="5">
-                <sui-image v-if="TrophyValue === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny" />
-                <sui-image v-else-if="TrophyValue === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny" />
-                <sui-image v-else-if="TrophyValue === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny" />
-                <sui-image v-else-if="TrophyValue === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny" />
+                <sui-image v-if="TrophyValue === 'platine'" label="imageTrophy" src="/static/images/imageTropheePlatine.png" size="tiny"></sui-image>
+                <sui-image v-else-if="TrophyValue === 'or'" label="imageTrophy" src="/static/images/imageTropheeOr.png" size="tiny"></sui-image>
+                <sui-image v-else-if="TrophyValue === 'argent'" label="imageTrophy" src="/static/images/imageTropheeArgent.png" size="tiny"></sui-image>
+                <sui-image v-else-if="TrophyValue === 'bronze'" label="imageTrophy" src="/static/images/imageTropheeBronze.png" size="tiny"></sui-image>
               </sui-grid-column>
               <sui-grid-column :width="10">
                 <label> Titre :  </label>
-                <sui-input name="TrophyName" v-model="TrophyName" :size="15"/>
+                <sui-input name="TrophyName" v-model="TrophyName" :size="15"></sui-input>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row >
@@ -44,33 +44,33 @@
             <sui-grid-row>
               <sui-grid-column :width="15">
                 <label>Conditions d'obtentions: </label>
-                <sui-input name="descTrophy" :value="TrophyDescription" :size="25"/>
+                <sui-input name="descTrophy" v-model="TrophyDescription" :size="25"></sui-input>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row >
               <sui-grid-column >
-                <sui-checkbox label="Visible" toggle v-model="visible"/>
+                <sui-checkbox label="Visible" toggle v-model="visible"></sui-checkbox>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row>
               <sui-grid-column>
-                <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+                <datepicker class="ui input" v-show="visible" :monday-first="true" :language="fr" :full-month-name="true" :format="customFormatterVisible"></datepicker>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row>
               <sui-grid-column>
-                <sui-checkbox label="vote" toggle v-model="vote"/>
+                <sui-checkbox label="vote" toggle v-model="vote"></sui-checkbox>
               </sui-grid-column>
             </sui-grid-row>
             <sui-grid-row>
               <sui-grid-column>
-                <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true"></datepicker>
+                <datepicker v-show="vote" :monday-first="true" :language="fr" :full-month-name="true" :format="customFormatterVote"></datepicker>
               </sui-grid-column>
             </sui-grid-row>
           </sui-grid>
         </sui-modal-content>
         <sui-modal-actions>
-          <sui-button positive>Créer</sui-button>
+          <sui-button positive @click="envoieTrophee">Créer</sui-button>
           <sui-button negative @click.native="toggle">Annuler</sui-button>
         </sui-modal-actions>
       </sui-modal>
@@ -83,6 +83,10 @@ import {fr} from 'vuejs-datepicker/dist/locale'
 import SuiGrid from 'semantic-ui-vue/dist/commonjs/collections/Grid/Grid'
 import SuiGridRow from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridRow'
 import SuiGridColumn from 'semantic-ui-vue/dist/commonjs/collections/Grid/GridColumn'
+import axios from 'axios'
+import global from '@/globals.json'
+import moment from 'moment'
+
 export default {
   name: 'CreateTrophy',
   components: { SuiGridColumn, SuiGridRow, SuiGrid, Datepicker },
@@ -96,12 +100,44 @@ export default {
       TrophyDescription: '',
       TrophyName: '',
       TrophyValue: '',
-      selectedModule: []
+      selectedModule: [],
+      datevisible: '',
+      datevote: ''
     }
   },
   methods: {
     toggle () {
       this.open = !this.open
+    },
+    customFormatterVisible (date) {
+      this.datevisible = moment(date).format()
+      this.datevisible = this.datevisible.replace('T', ' ').split('+')[0]
+      return moment(date).format('MMM Do YY')
+    },
+    customFormatterVote (date) {
+      this.datevote = moment(date).format()
+      this.datevote = this.datevote.replace('T', ' ').split('+')[0]
+      return moment(date).format('MMM Do YY')
+    },
+    envoieTrophee () {
+      console.log('datevisible: ' + this.datevisible)
+      console.log('datevote: ' + this.datevote)
+      axios.post(global.API + '/trophy', {
+        numod: this.$route.params.reference,
+        vote: (this.vote ? 1 : 0),
+        visible: (this.visible ? 1 : 0),
+        datevisible: this.datevisible,
+        datevote: this.datevote,
+        titre: this.TrophyName,
+        type: this.TrophyValue,
+        description: this.TrophyDescription
+      })
+        .then((res) => {
+          console.log('RESPONSE RECEIVED: ', res)
+        })
+        .catch((err) => {
+          console.log('AXIOS ERROR: ', err)
+        })
     }
   }
 }
@@ -109,25 +145,7 @@ export default {
 
 <style>
 
-#boutonPassword{
-    text-align: center;
-}
-#texte{
-    text-align: end;
-    font-family: 'Lato'
-}
-div{
-    font-family: 'Lato';
-}
-#img{
-    zoom: 20%;
-    -moz-transform: scale(0.35);
-}
-#exception{
-    margin: 0px;
-}
-
-.ui.grid {
-  margin: 1%
+div {
+  font-family: 'Lato',serif;
 }
 </style>

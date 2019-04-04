@@ -10,12 +10,11 @@
                   placeholder="Etudiant"
                   search
                   selection
-                  v-model="current"
-                />
+                  v-model="current"></sui-dropdown>
             </sui-modal-content>
             <sui-modal-actions>
                 <sui-button negative @click="toggle">Annuler</sui-button>
-                <sui-button positive>Confirmer</sui-button>
+                <sui-button positive @click="envoieVote">Confirmer</sui-button>
             </sui-modal-actions>
         </sui-modal>
     </div>
@@ -47,7 +46,7 @@ export default {
         let students = response.data
         students.forEach(student => {
           if (student.nuetu !== this.$session.get('user_account')) {
-            this.studModule.push({'value': student.prenom + ' ' + student.nom, 'text': student.prenom + ' ' + student.nom})
+            this.studModule.push({'value': student.nuetu, 'text': student.prenom + ' ' + student.nom})
           }
         })
       })
@@ -59,6 +58,19 @@ export default {
   methods: {
     toggle () {
       this.open = !this.open
+    },
+    envoieVote () {
+      axios.post(global.API + '/vote', {
+        nuetu: this.current,
+        nutroph: this.id,
+        nuetuvotant: this.$session.get('user_account')
+      })
+        .then((res) => {
+          console.log('RESPONSE RECEIVED: ', res)
+        })
+        .catch((err) => {
+          console.log('AXIOS ERROR: ', err)
+        })
     }
   }
 }
