@@ -34,7 +34,18 @@
 
 <script>
 export default {
+  mounted () {
+    // connecter l'utilisateur automatiquement si celui-ci s'est déjà connecté durant la session
+    if (this.$session.get('api_token') !== undefined && this.$session.get('user_type') !== undefined) {
+      this.$router.replace(this.rlink(this.$session.get('user_type')))
+    }
+  },
 
+  methods: {
+    rlink (accountType) {
+      return (accountType === 'student') ? '/student/profile' : '/teacher/profile'
+    }
+  }
 }
 </script>
 

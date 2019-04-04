@@ -40,6 +40,9 @@ export default {
 
   mounted () {
     this.$refs.ide.focus()
+
+    sessionStorage.clear()
+    localStorage.clear()
   },
 
   methods: {
@@ -120,7 +123,6 @@ export default {
       }).catch(e => {
         this.errors.push(e)
         this.loading = false
-        console.log(e)
         alert('Le login ou mot de passe est incorrect')
       })
       /*
