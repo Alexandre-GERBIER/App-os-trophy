@@ -12,7 +12,7 @@
             <i class="user icon"></i>
         </div>
         <div class="ui lock left icon input">
-            <input @keyup.enter="loginUser" placeholder="Mot de passe" type="password">
+            <input @keyup.enter="loginUser" placeholder="Mot de passe" type="password" v-model="pass">
             <i class="lock icon"></i>
         </div>
         <div @click="loginUser" :class="'ui icon sign in right labeled button green ' + (loading ? 'loading' : '')">
@@ -32,7 +32,8 @@ export default {
   data () {
     return {
       loading: false,
-      ide: 'E175119X',
+      ide: 'msauciflard@gmail.com',
+      pass: '',
       errors: []
     }
   },
@@ -42,16 +43,8 @@ export default {
   },
 
   methods: {
-    rlink () {
-      return (this.accountType() === 'student') ? '/student/profile' : '/teacher/profile'
-    },
-
-    accountType () {
-      if (this.ide.includes('.')) {
-        return 'prof'
-      } else {
-        return 'student'
-      }
+    rlink (accountType) {
+      return (accountType === 'student') ? '/student/profile' : '/teacher/profile'
     },
 
     getModulesStudent () {
@@ -101,6 +94,36 @@ export default {
 
       let accountValid = false
 
+      axios.post(global.API + '/login', {
+        email: this.ide,
+        password: this.pass
+      }).then(res => {
+        let data = res.data
+        accountValid = (res.data.token !== undefined)
+        if (accountValid) {
+          let accountType = (data.type === 'prof') ? 'prof' : 'student'
+          this.$session.set('user_type', accountType)
+          this.$session.set('user_account', data.identifiant)
+          this.$session.set('api_token', data.token)
+
+          // récupération de la liste des modules
+          if (accountType === 'student') {
+            this.getModulesStudent()
+          } else {
+            this.getModulesTeacher()
+          }
+
+          this.$router.replace(this.rlink(accountType))
+        } else {
+          alert('Une erreur est survenue')
+        }
+      }).catch(e => {
+        this.errors.push(e)
+        this.loading = false
+        console.log(e)
+        alert('Le login ou mot de passe est incorrect')
+      })
+      /*
       axios.get(global.API + '/' + this.accountType() + '/' + this.ide)
         .then(res => {
           console.log('done')
@@ -109,8 +132,6 @@ export default {
             console.log('valid')
             this.$session.set('user_type', this.accountType())
             this.$session.set('user_account', this.ide)
-
-            /* initialisation de la connexion */
 
             // récupération de la liste des modules
             if (this.accountType() === 'student') {
@@ -126,7 +147,7 @@ export default {
         })
         .catch(e => {
           this.errors.push(e)
-        })
+        })  */
     }
   }
 }
