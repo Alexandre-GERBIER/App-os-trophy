@@ -66,10 +66,11 @@ export default {
         nuetuvotant: this.$session.get('user_account')
       })
         .then((res) => {
-          console.log('RESPONSE RECEIVED: ', res)
+          this.toggle()
+          window.alert('Votre vote a bien été pris en compte !')
         })
         .catch((err) => {
-          console.log('AXIOS ERROR: ', err)
+          window.alert('Votre vote n\'a pas pu être pris en compte à cause de l\'erreur suivante : ' + err)
         })
     }
   }

@@ -93,14 +93,14 @@ export default {
   data () {
     return {
       open: false,
-      vote: false,
-      visible: true,
       current: null,
       fr: fr,
+      selectedModule: [],
       TrophyDescription: '',
       TrophyName: '',
       TrophyValue: '',
-      selectedModule: [],
+      vote: false,
+      visible: false,
       datevisible: '',
       datevote: ''
     }
@@ -133,10 +133,18 @@ export default {
         description: this.TrophyDescription
       })
         .then((res) => {
-          console.log('RESPONSE RECEIVED: ', res)
+          this.toggle()
+          window.alert('Votre trophée a bien été crée !')
+          this.TrophyDescription = ''
+          this.TrophyName = ''
+          this.TrophyValue = ''
+          this.vote = false
+          this.visible = false
+          this.datevisible = ''
+          this.datevote = ''
         })
         .catch((err) => {
-          console.log('AXIOS ERROR: ', err)
+          window.alert('Votre trophée n\'a pas pu être crée à cause de l\'erreur suivante : ' + err)
         })
     }
   }
