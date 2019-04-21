@@ -12,7 +12,7 @@
                 </sui-table-row>
                 <sui-table-row>
                   <sui-table-cell>Valeur</sui-table-cell>
-                  <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + infosTrophee[0].type.charAt(0).toUpperCase() + infosTrophee[0].type.slice(1) + '.png'" /></sui-table-cell>
+                  <sui-table-cell><img width=40 height=40 :src="'../../static/images/imageTrophee' + infosTrophee[0].type.charAt(0).toUpperCase() + infosTrophee[0].type.slice(1) + '.png'" /></sui-table-cell>
                 </sui-table-row>
                 <sui-table-row>
                   <sui-table-cell>Description</sui-table-cell>

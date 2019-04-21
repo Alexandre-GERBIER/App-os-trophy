@@ -25,7 +25,7 @@
           <sui-table-body>
               <sui-table-row v-for="trophy in trophies" :key="trophy.nom">
                   <sui-table-cell>{{trophy.titre}}</sui-table-cell>
-                  <sui-table-cell><img width=40 height=40 :src="'/static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
+                  <sui-table-cell><img width=40 height=40 :src="'../../static/images/imageTrophee' + trophy.type.charAt(0).toUpperCase() + trophy.type.slice(1) + '.png'" /></sui-table-cell>
                   <sui-table-cell class="vue_small"><i class="check icon" v-if="!trophy.vote" ></i></sui-table-cell>
                   <sui-table-cell ><DeliverTrophy :numodule="trophy.numod"/></sui-table-cell>
                   <sui-table-cell text-align="right"><EditTrophy :id="trophy.nutroph"  /></sui-table-cell>

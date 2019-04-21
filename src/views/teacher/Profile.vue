@@ -2,7 +2,7 @@
     <div>
         <div id="infoProfil">
             <h2 is="sui-header" >
-                <sui-image circular bordered src="/static/images/imageUser.png" /> Profil :
+                <sui-image circular bordered src="../../static/images/imageUser.png" /> Profil :
             </h2>
             <sui-divider hidden/>
             <sui-grid class="centered">

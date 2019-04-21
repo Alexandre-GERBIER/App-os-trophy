@@ -124,7 +124,7 @@ p {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
-  background: white url("/static/images/tableauNoir.jpg") center center no-repeat;
+  background: white url("../../static/images/tableauNoir.jpg") center center no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;

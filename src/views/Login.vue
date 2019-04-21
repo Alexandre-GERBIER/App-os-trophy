@@ -2,8 +2,8 @@
 <div id="background" >
     <h1 class="">App'Os Trophy</h1>
     <div class="logos">
-        <img src="/static/images/univ.jpg" alt="univLogo">
-        <img src="/static/images/iutnantes.png" alt="iutLogo">
+        <img src="../../static/images/univ.jpg" alt="univLogo">
+        <img src="../../static/images/iutnantes.png" alt="iutLogo">
     </div>
     <div id="login">
         <h2 is="sui-header" class="inverted">Connexion</h2>
@@ -170,7 +170,7 @@ export default {
     }
 
     #background{
-        background-image:url("/static/images/ecranConnexion1.jpg");
+        background-image:url("../../static/images/ecranConnexion1.jpg");
         background-size:cover;
         background-position: center;
         position: absolute;
@@ -183,7 +183,7 @@ export default {
     }
     @media (max-width: 700px) {
         #background{
-            background-image:url("/static/images/ecranConnexion2.jpg");
+            background-image:url("../../static/images/ecranConnexion2.jpg");
             background-repeat: no-repeat;
         }
     }

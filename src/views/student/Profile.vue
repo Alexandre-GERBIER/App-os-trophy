@@ -2,7 +2,7 @@
     <div>
         <div id="infoProfil">
             <h2 is="sui-header" class="designTitre">
-                <sui-image circular bordered src="/static/images/imageUser.png" />
+                <sui-image circular bordered src="../../static/images/imageUser.png" />
                 <span>Profil :</span>
             </h2>
             <sui-divider hidden/>
@@ -218,8 +218,8 @@ export default {
       tabTrophies: {},
       errors: [],
       textTrophee: [
-        '/static/images/imageTropheeBronze.png', '/static/images/imageTropheeArgent.png',
-        '/static/images/imageTropheeOr.png', '/static/images/imageTropheePlatine.png'
+        '../../static/images/imageTropheeBronze.png', '../../static/images/imageTropheeArgent.png',
+        '../../static/images/imageTropheeOr.png', '../../static/images/imageTropheePlatine.png'
       ]
     }
   },
